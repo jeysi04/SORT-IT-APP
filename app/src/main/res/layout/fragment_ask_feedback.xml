@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+
+    <!-- ScrollView MUST have only ONE child -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <!-- MAIN CONTENT -->
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center_horizontal">
+
+
+            <!-- Green background container -->
+            <LinearLayout
+                android:id="@+id/askfeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rectangle_bg"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center"
+                android:textAlignment="center">
+
+                <!-- Question -->
+                <TextView
+                    android:id="@+id/recycleQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Would you like a feedback?"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginTop="10dp"/>
+                <!-- Button -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="16dp">
+
+                    <Button
+                        android:id="@+id/buttonNo"
+                        android:layout_width="150dp"
+                        android:layout_height="62dp"
+                        android:text="No"
+                        android:textAllCaps="false"
+                        android:textSize="20sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="5dp"
+                        android:backgroundTint="#F0CD6E"
+                        android:fontFamily="@font/montserrat_extrabold"
+                        android:textColor="#467750"/>
+
+                    <Button
+                        android:id="@+id/buttonYes"
+                        android:layout_width="150dp"
+                        android:layout_height="62dp"
+                        android:text="Yes"
+                        android:textAllCaps="false"
+                        android:textSize="20sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="#F0CD6E"
+                        android:fontFamily="@font/montserrat_extrabold"
+                        android:textColor="#467750"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!-- Green background container -->
+            <LinearLayout
+                android:id="@+id/illustration_askf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-150dp"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center"
+                android:textAlignment="center">
+
+                <!-- Icons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/MaterialPhoto1"
+                        android:layout_width="138dp"
+                        android:layout_height="515dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/icon_1_askfeedback"/>
+
+                    <ImageView
+                        android:id="@+id/MaterialPhoto2"
+                        android:layout_width="183dp"
+                        android:layout_height="438dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/icon_2_askfeedback"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

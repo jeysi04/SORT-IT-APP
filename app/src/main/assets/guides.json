@@ -1,0 +1,86 @@
+[
+  {
+    "id": "glass_bottles_cleaning",
+    "category": "glassBottles",
+    "title": "How to Clean Glass Bottles",
+    "image": "coverglassbottle1",
+    "html_file": "recycling_guides/glass/glass_bottles/method1.html"
+  },
+  {
+    "id": "glass_bottles_reuse",
+    "category": "glassBottles",
+    "title": "Recycling Glass Bottles into Drinking Glasses",
+    "image": "coverglassbottle2",
+    "html_file": "recycling_guides/glass/glass_bottles/method2.html"
+  },
+  {
+    "id": "glass_bottles_disposal",
+    "category": "glassBottles",
+    "title": "How to Make Decorative Glass Bottles",
+    "image": "coverglassbottle3",
+    "html_file": "recycling_guides/glass/glass_bottles/method3.html"
+  },
+  {
+    "id": "flat_glass_recycling",
+    "category": "flatGlass",
+    "title": "Recycling Flat Glass at a Collection Facility",
+    "image": "coverflatglass1",
+    "html_file": "recycling_guides/glass/flatGlass/method1.html"
+  },
+  {
+    "id": "flat_glass_recycling",
+    "category": "flatGlass",
+    "title": "Decorative Garden Borders Using Flat Glass",
+    "image": "coverflatglass2",
+    "html_file": "recycling_guides/glass/flatGlass/method2.html"
+  },
+  {
+    "id": "flat_glass_recycling",
+    "category": "flatGlass",
+    "title": "Garden Stepping Stones",
+    "image": "coverflatglass3",
+    "html_file": "recycling_guides/glass/flatGlass/method3.html"
+  },
+  {
+    "id": "cullets_recycle",
+    "category": "cullets",
+    "title": "How to Recycle Cullet Glass",
+    "image": "paperbag",
+    "html_file": "recycling_guides/glass/cullets/method1.html"
+  },
+  {
+    "id": "onp_recycle",
+    "category": "ONP",
+    "title": "Recycle Old/New Paper",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/ONP/method1.html"
+  },
+  {
+    "id": "onp_paper_crafts",
+    "category": "ONP",
+    "title": "Paper Craft Projects",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/ONP/method2.html"
+  },
+  {
+    "id": "aluminum_recycling",
+    "category": "aluminum_tin",
+    "title": "Traditional Recycling of Aluminum Cans",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/aluminum_tin/method1.html"
+  },
+  {
+    "id": "copper_scrap_recycling",
+    "category": "copper",
+    "title": "Recycle at a Scrap Yard or Metal Recycler",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/copper/method1.html"
+  },
+  {
+    "id": "hdpe_storage_containers",
+    "category": "HDPE",
+    "title": "Make Storage Containers from HDPE",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/HDPE/method1.html"
+  }
+]

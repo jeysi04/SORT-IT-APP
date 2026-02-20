@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+
+    <!-- ScrollView MUST have only ONE child -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <!-- MAIN CONTENT -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Recyclable Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/samplePhoto"
+                    android:layout_width="197dp"
+                    android:layout_height="207dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/recyclable"/>
+
+                <TextView
+                    android:id="@+id/ResultText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your waste is recyclable!"
+                    android:textSize="32sp"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:textColor="#000000"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <!-- Material Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/MaterialPhoto"
+                    android:layout_width="120dp"
+                    android:layout_height="135dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/glass_material"/>
+
+                <TextView
+                    android:id="@+id/MaterialText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="It's a glass!"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:textColor="#000000"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Would you like to see the recycling guide?"
+                android:textSize="16dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textColor="#000000"
+                android:gravity="center"/>
+
+
+            <!-- Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="1dp">
+
+                <Button
+                    android:id="@+id/buttonNo"
+                    android:layout_width="160dp"
+                    android:layout_height="62dp"
+                    android:text="No"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:backgroundTint="#F0CD6E"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:textColor="#467750"/>
+
+                <Button
+                    android:id="@+id/buttonYes"
+                    android:layout_width="160dp"
+                    android:layout_height="62dp"
+                    android:text="Yes"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:backgroundTint="#F0CD6E"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:textColor="#467750"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

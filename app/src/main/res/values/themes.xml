@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SortItJSON" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.SortItJSON" parent="Base.Theme.SortItJSON" />
+
+    <!-- SPLASHSCREEN -->
+    <style name="Theme.App.SortItJSON" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.SortItJSON</item>
+    </style>
+
+    <!-- What happens when a button is click: Bottom Nav-->
+    <style name="CustomActiveIndicator">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">0dp</item> <!-- makes it pill / circle -->
+    </style>
+
+    <style name="RecycleShape" parent="">
+        <!-- Make it fully circular (default) -->
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- MAIN ROUNDED CONTAINER (fully stretchable) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#467750"/>
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+
+    <!-- SHADOW LAYER (slightly overlaps upward, fixed height, stretch-safe) -->
+    <item
+        android:gravity="bottom"
+        android:bottom="-4dp">   <!-- overlap amount -->
+        <shape android:shape="rectangle">
+            <size android:height="10dp"/>     <!-- shadow height -->
+            <solid android:color="#315438"/>
+            <corners
+                android:bottomLeftRadius="20dp"
+                android:bottomRightRadius="20dp" />
+        </shape>
+    </item>
+
+</layer-list>

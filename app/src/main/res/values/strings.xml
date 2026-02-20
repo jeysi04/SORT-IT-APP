@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Sort-It</string>
+
+    <!-- Strings for home pages -->
+    <string name="slide1_title">The Problem We Can\'t Ignore</string>
+    <string name="slide1_desc">One of the leading producers of waste in Southeast Asia and a major source of plastic waste contamination in the ocean is the Philippines. Low recycling rates, problems with collection, and inconsistent plastic packaging segregation in many local government units (LGU) are some of the causes of this.</string>
+
+    <string name="slide2_desc1">According to the 2020 World Wildlife Fund report "Extended Producer Responsibility Scheme Assessment for Plastic Packaging Waste in the Philippines," Filipinos consume about 20 kilos of plastic packaging annually, of which 15.43 kilograms end up as waste.</string>
+    <string name="slide2_desc2">Low recycling rates, collection problems, and inconsistent plastic packaging segregation in many local government units (LGU) are some of the causes of this.</string>
+
+    <string name="slide3_desc">This growing waste problem highlights the urgent need for responsible recycling. By properly segregating plastics, reducing unnecessary use, and choosing to recycle correctly, each individual can help lessen pollution and protect our seas. Responsible recycling starts with awareness—and change begins with you.</string>
+
+    <!-- Strings for about pages -->
+    <string name="about_intro">Our application is made to make recycling more intelligent and simple. In a matter of seconds, it classifies items as recyclable or non-recyclable using image recognition technology. We hope to decrease waste, advance sustainability, and promote proper disposal practices by assisting users in correctly identifying recyclable objects. </string>
+    <string name="about_goal">Due to confusion or lack of information, tons of recyclable products wind up in landfills each year. This solution fills that void by providing consumers with a quick and easy option to:</string>
+    <string name="about_developers">A dedicated team of students who believe in combining innovation and environmental responsibility to create real-world impact.</string>
+
+</resources>
