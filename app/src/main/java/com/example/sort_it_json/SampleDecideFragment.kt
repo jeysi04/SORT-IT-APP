@@ -24,13 +24,15 @@ class SampleDecideFragment : Fragment() {
 
         // CATEGORY buttons
         listOf(
-            view.findViewById<Button>(R.id.btnPlastic),
-            view.findViewById<Button>(R.id.btnGlass),
-            view.findViewById<Button>(R.id.btnPaper),
-            view.findViewById<Button>(R.id.btnMetal)
+            view.findViewById<Button>(R.id.Plastic),
+            view.findViewById<Button>(R.id.Glass),
+            view.findViewById<Button>(R.id.Paper),
+            view.findViewById<Button>(R.id.Metal),
+            view.findViewById<Button>(R.id.Residual),
+            view.findViewById<Button>(R.id.NonRec),
         ).forEach { button ->
             button.setOnClickListener {
-                selectedCategory = button.text.toString()
+                selectedCategory = button.tag.toString()
             }
         }
 
@@ -66,38 +68,30 @@ class SampleDecideFragment : Fragment() {
 
         // NEXT button
         view.findViewById<Button>(R.id.btnNext)?.setOnClickListener {
-            // Ensure both are selected
-            if (selectedCategory.isNullOrEmpty() || selectedSubcategory.isNullOrEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    "Please select category and subcategory",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
+
+            // Declare the bundle variable
+            val bundle: Bundle
+
+            // Assign it conditionally
+            bundle = if (selectedCategory == "NonRec") {
+                Bundle().apply {
+                    putString("category", selectedCategory)
+                }
+            } else {
+                Bundle().apply {
+                    putString("category", selectedCategory)
+                    putString("subcategory", selectedSubcategory)
+                }
             }
 
-            // Prepare bundle with subcategory
-            val bundle = Bundle().apply {
-                putString("subcategory", selectedSubcategory)
-            }
 
-            // Navigate based on selected category
-            val fragment = when (selectedCategory) {
-                "Glass" -> RecyclableresultGlassFragment()
-                "Plastic" -> RecyclableresultPlasticFragment()
-                "Paper" -> RecyclableresultPaperFragment()
-                "Metal" -> RecyclableresultMetalFragment()
-                else -> null
-            }
+            val fragment = RecyclableresultFragment()
+            fragment.arguments = bundle
 
-            fragment?.arguments = bundle // ✅ subcategory will now be passed properly
-
-            fragment?.let {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, it)
-                    .addToBackStack(null)
-                    .commit()
-            } ?: Toast.makeText(requireContext(), "Invalid category", Toast.LENGTH_SHORT).show()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         return view
@@ -106,7 +100,7 @@ class SampleDecideFragment : Fragment() {
     private fun openGuideList(category: String) {
         val fragment = GuideListFragment().apply {
             arguments = Bundle().apply {
-                putString("category", category)
+                putString("category", selectedCategory)
             }
         }
 

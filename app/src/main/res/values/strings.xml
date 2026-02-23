@@ -15,4 +15,19 @@
     <string name="about_goal">Due to confusion or lack of information, tons of recyclable products wind up in landfills each year. This solution fills that void by providing consumers with a quick and easy option to:</string>
     <string name="about_developers">A dedicated team of students who believe in combining innovation and environmental responsibility to create real-world impact.</string>
 
+    <!-- Strings for result pages -->
+    <string name="recyclable_result">Your waste is recyclable!</string>
+    <string name="nonrecyclable_result">Your waste is non-recyclable!</string>
+    <string name="plastic_result">It\'s plastic!</string>
+    <string name="paper_result">It\'s paper!</string>
+    <string name="glass_result">It\'s glass!</string>
+    <string name="metal_result">It\'s metal!</string>
+    <string name="residual_result">It\'s residual!</string>
+
+    <!-- Strings for the types in result pages -->
+    <string name="glasstype_glassbotlle">Type: Glass Bottle</string>
+    <string name="glasstype_flatglass">Type: Flat Bottle</string>
+    <string name="glasstype_cullet">Type: Cullets</string>
+
+
 </resources>

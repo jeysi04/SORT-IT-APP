@@ -4,21 +4,12 @@
     <!-- MAIN ROUNDED CONTAINER (fully stretchable) -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#467750"/>
-            <corners android:radius="8dp"/>
-        </shape>
-    </item>
-
-    <!-- SHADOW LAYER (slightly overlaps upward, fixed height, stretch-safe) -->
-    <item
-        android:gravity="bottom"
-        android:bottom="-4dp">   <!-- overlap amount -->
-        <shape android:shape="rectangle">
-            <size android:height="10dp"/>     <!-- shadow height -->
-            <solid android:color="#315438"/>
+            <solid android:color="#FFFFFF"/>
             <corners
-                android:bottomLeftRadius="20dp"
-                android:bottomRightRadius="20dp" />
+                android:topLeftRadius="50dp"
+                android:topRightRadius="50dp"
+                android:bottomLeftRadius="0dp"
+                android:bottomRightRadius="0dp"/>
         </shape>
     </item>
 

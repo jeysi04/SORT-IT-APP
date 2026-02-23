@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/illustration"
+        android:layout_width="match_parent"
+        android:layout_height="273dp"
+        android:src="@drawable/rec_illus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/whitebg"
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
+        android:background="@drawable/rectangle_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/illustration"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="16dp"
+        android:orientation="vertical"
+        android:gravity="top|center_horizontal"
+        android:paddingTop="40dp">
+
+        <LinearLayout
+            android:id="@+id/resultLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/illustresult_subcategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/glass_illus" />
+
+            <TextView
+                android:id="@+id/classification"
+                android:layout_width="286dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:gravity="center"
+                android:text="@string/recyclable_result"
+                android:textColor="#467750"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/glass_result"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/typeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/glasstype_glassbotlle"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Would you like to see the recycling guide?"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <!-- Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="1dp">
+
+            <Button
+                android:id="@+id/buttonNo"
+                android:layout_width="160dp"
+                android:layout_height="62dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#F0CD6E"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:text="No"
+                android:textAllCaps="false"
+                android:textColor="#467750"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/buttonYes"
+                android:layout_width="160dp"
+                android:layout_height="62dp"
+                android:text="Yes"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="#F0CD6E"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:textColor="#467750"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

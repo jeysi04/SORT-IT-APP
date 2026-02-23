@@ -12,17 +12,19 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnGlass"
+            android:id="@+id/Glass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Glass" />
+            android:text="Glass"
+            android:tag="Glass"/>
 
         <Button
-            android:id="@+id/btnNonRec"
+            android:id="@+id/NonRec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Non-Recyclable"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:tag="NonRec"/>
 
         <Button
             android:id="@+id/glassBottles"
@@ -49,11 +51,12 @@
             android:tag="cullets"/>
 
         <Button
-            android:id="@+id/btnMetal"
+            android:id="@+id/Metal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Metal"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:tag="Metal"/>
 
         <Button
             android:id="@+id/aluminum_tin"
@@ -80,11 +83,12 @@
             android:tag="steel"/>
 
         <Button
-            android:id="@+id/btnPaper"
+            android:id="@+id/Paper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Paper"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:tag="Paper"/>
 
         <Button
             android:id="@+id/ONP"
@@ -98,7 +102,7 @@
             android:id="@+id/MP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aluminum Tin"
+            android:text="MP"
             android:layout_marginTop="12dp"
             android:tag="MP"/>
 
@@ -106,7 +110,7 @@
             android:id="@+id/OCC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Copper"
+            android:text="OCC"
             android:layout_marginTop="12dp"
             android:tag="OCC"/>
 
@@ -114,7 +118,7 @@
             android:id="@+id/SWL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Steel"
+            android:text="SWL"
             android:layout_marginTop="12dp"
             android:tag="SWL"/>
 
@@ -122,22 +126,23 @@
             android:id="@+id/UBC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ONP"
+            android:text="UBC"
             android:layout_marginTop="12dp"
             android:tag="UBC"/>
 
         <Button
-            android:id="@+id/btnPlastic"
+            android:id="@+id/Plastic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Plastic"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:tag="Plastic"/>
 
         <Button
             android:id="@+id/HDPE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aluminum Tin"
+            android:text="HDPE"
             android:layout_marginTop="12dp"
             android:tag="HDPE"/>
 
@@ -145,7 +150,7 @@
             android:id="@+id/LDPE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Copper"
+            android:text="LDPE"
             android:layout_marginTop="12dp"
             android:tag="LDPE"/>
 
@@ -153,7 +158,7 @@
             android:id="@+id/others"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Steel"
+            android:text="others"
             android:layout_marginTop="12dp"
             android:tag="others"/>
 
@@ -161,7 +166,7 @@
             android:id="@+id/PET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ONP"
+            android:text="PET"
             android:layout_marginTop="12dp"
             android:tag="PET"/>
 
@@ -169,7 +174,7 @@
             android:id="@+id/PP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aluminum Tin"
+            android:text="PP"
             android:layout_marginTop="12dp"
             android:tag="PP"/>
 
@@ -177,7 +182,7 @@
             android:id="@+id/PS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Copper"
+            android:text="PS"
             android:layout_marginTop="12dp"
             android:tag="PS"/>
 
@@ -185,38 +190,47 @@
             android:id="@+id/PVC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Steel"
+            android:text="PVC"
             android:layout_marginTop="12dp"
             android:tag="PVC"/>
 
         <Button
-            android:id="@+id/CDFP"
+            android:id="@+id/ONP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ONP"
             android:layout_marginTop="12dp"
-            android:tag="CDFP"/>
+            android:tag="ONP"/>
 
         <Button
-            android:id="@+id/btnResidual"
+            android:id="@+id/Residual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Residual"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:tag="Residual"/>
 
         <Button
             android:id="@+id/leather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Copper"
+            android:text="leather"
             android:layout_marginTop="12dp"
             android:tag="leather"/>
+
+        <Button
+            android:id="@+id/CDFP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CDFP"
+            android:layout_marginTop="12dp"
+            android:tag="CDFP"/>
 
         <Button
             android:id="@+id/rubber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Steel"
+            android:text="rubber"
             android:layout_marginTop="12dp"
             android:tag="rubber"/>
 
@@ -224,7 +238,7 @@
             android:id="@+id/textiles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ONP"
+            android:text="textiles"
             android:layout_marginTop="12dp"
             android:tag="textiles"/>
 
