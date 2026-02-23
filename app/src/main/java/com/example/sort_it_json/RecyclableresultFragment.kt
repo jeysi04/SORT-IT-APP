@@ -1,10 +1,12 @@
 package com.example.sort_it_json
 
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -35,14 +37,32 @@ class RecyclableresultFragment : Fragment() {
         val catText = view.findViewById<TextView>(R.id.category)
         val classText = view.findViewById<TextView>(R.id.classification)
         val layoutwhitebg = view.findViewById<LinearLayout>(R.id.whitebg)
+        val illustbg = view.findViewById<ImageView>(R.id.illustration)
+        val illustclass = view.findViewById<ImageView>(R.id.illust_classification)
+        val questbot = view.findViewById<TextView>(R.id.questionText)
 
         // Changes the subcategory text based on the analyzed subcategory
         when (category) {
-            "Metal" -> catText.text = "It's metal!"
-            "Paper" -> catText.text = "It's paper!"
-            "Plastic" -> catText.text = "It's plastic!"
-            "Glass" -> catText.text = "It's glass!"
-            "Residual" -> catText.text = "It's residual!"
+            "Metal" -> {
+                catText.text = "It's metal!"
+                illustclass.setImageResource(R.drawable.metal_illus)
+            }
+            "Paper" -> {
+                catText.text = "It's paper!"
+                illustclass.setImageResource(R.drawable.paper_illus)
+            }
+            "Plastic" -> {
+                catText.text = "It's plastic!"
+                illustclass.setImageResource(R.drawable.plastic_illus)
+            }
+            "Glass" -> {
+                catText.text = "It's glass!"
+                illustclass.setImageResource(R.drawable.glass_illus)
+            }
+            "Residual" -> {
+                catText.text = "It's residual!"
+                illustclass.setImageResource(R.drawable.residual_illus)
+            }
         }
 
 
@@ -51,6 +71,9 @@ class RecyclableresultFragment : Fragment() {
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
             catText.visibility = View.GONE
             typeText.visibility = View.GONE
+            illustbg.setImageResource(R.drawable.nonrec_illus)
+            illustclass.setImageResource(R.drawable.nonrecyclable)
+            questbot.text = "Would you like to leave a feedback?"
 
             val dpHeight = 537 // height in dp
             val scale = resources.displayMetrics.density
@@ -98,18 +121,30 @@ class RecyclableresultFragment : Fragment() {
             else -> typeText.text = "Unknown glass type"
         }
 
-        // ✅ Navigate directly to GuideListFragment on Yes
-        btnYes.setOnClickListener {
-            val fragment = GuideListFragment().apply {
-                arguments = Bundle().apply {
-                    putString("subcategory", subcategory)
-                }
+        if(category == "NonRec"){
+            // ✅ Navigate directly to FeedbackFragment on Yes
+            btnYes.setOnClickListener {
+                val fragment = feedbackFragment()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
             }
+        }
+        else {
+            // ✅ Navigate directly to GuideListFragment on Yes
+            btnYes.setOnClickListener {
+                val fragment = GuideListFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("subcategory", subcategory)
+                    }
+                }
 
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
 
         //If button no is click, go back to home

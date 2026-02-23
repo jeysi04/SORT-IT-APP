@@ -28,6 +28,8 @@
     <string name="glasstype_glassbotlle">Type: Glass Bottle</string>
     <string name="glasstype_flatglass">Type: Flat Bottle</string>
     <string name="glasstype_cullet">Type: Cullets</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
