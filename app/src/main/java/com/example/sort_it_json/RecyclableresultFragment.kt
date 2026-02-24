@@ -106,7 +106,7 @@ class RecyclableresultFragment : Fragment() {
             //Plastic
             "HDPE" -> typeText.text = "Type: High-Density Polyethylene (HDPE)"
             "LDPE" -> typeText.text = "Type: Low-Density Polyethylene (HDPE)"
-            "others" -> typeText.text = "Type: Other Plastics"
+            "others" -> typeText.text = "Type: Others"
             "PET" -> typeText.text = "Type: Polyethylene Terephthalate (PET)"
             "PP" -> typeText.text = "Type: Polypropylene (PP)"
             "PS" -> typeText.text = "Type: Polystyrene (PS)"

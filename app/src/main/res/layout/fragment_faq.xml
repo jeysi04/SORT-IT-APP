@@ -58,12 +58,12 @@
                         android:textColor="#000000"
                         android:fontFamily="@font/montserrat_bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/arrowIcon"
+                        app:layout_constraintEnd_toStartOf="@id/arrowIcon1"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
 
                     <ImageView
-                        android:id="@+id/arrowIcon"
+                        android:id="@+id/arrowIcon1"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/arrow_down"
