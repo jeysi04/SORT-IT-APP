@@ -20,6 +20,8 @@
     "image": "coverglassbottle3",
     "html_file": "recycling_guides/glass/glass_bottles/method3.html"
   },
+
+
   {
     "id": "flat_glass_recycling",
     "category": "flatGlass",
@@ -41,6 +43,8 @@
     "image": "coverflatglass3",
     "html_file": "recycling_guides/glass/flatGlass/method3.html"
   },
+
+
   {
     "id": "cullets_recycle",
     "category": "cullets",
@@ -48,6 +52,137 @@
     "image": "paperbag",
     "html_file": "recycling_guides/glass/cullets/method1.html"
   },
+  {
+    "id": "cullets_recycle",
+    "category": "cullets",
+    "title": "Aggregate Substitute in Concrete",
+    "image": "paperbag",
+    "html_file": "recycling_guides/glass/cullets/method2.html"
+  },
+  {
+    "id": "cullets_recycle",
+    "category": "cullets",
+    "title": "Water Filtration Layers",
+    "image": "paperbag",
+    "html_file": "recycling_guides/glass/cullets/method3.html"
+  },
+
+
+  {
+    "id": "aluminum_recycling",
+    "category": "aluminum_tin",
+    "title": "Traditional Recycling of Aluminum Cans",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/aluminum_tin/method1.html"
+  },
+  {
+    "id": "aluminum_recycling",
+    "category": "aluminum_tin",
+    "title": "How to Make a Candle Holders and Lanterns",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/aluminum_tin/method2.html"
+  },
+  {
+    "id": "aluminum_recycling",
+    "category": "aluminum_tin",
+    "title": "How to Make a Makeup Brush Holder",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/aluminum_tin/method3.html"
+  },
+
+
+  {
+    "id": "copper_scrap_recycling",
+    "category": "copper",
+    "title": "Recycle at a Scrap Yard or Metal Recycler",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/copper/method1.html"
+  },
+  {
+    "id": "copper_scrap_recycling",
+    "category": "copper",
+    "title": "How to Make a Wire Heart Sculpture",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/copper/method2.html"
+  },
+  {
+    "id": "copper_scrap_recycling",
+    "category": "copper",
+    "title": "How to Make a Wire Jewelry Holder",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/copper/method3.html"
+  },
+
+
+  {
+    "id": "steel_scrap_recycling",
+    "category": "steel",
+    "title": "Scrap Metal Recycling (Industrial Recycling)",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/steel/method1.html"
+  },
+  {
+    "id": "steel_scrap_recycling",
+    "category": "steel",
+    "title": "Mini Water Fountains using Old Pots and Pans",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/steel/method2.html"
+  },
+  {
+    "id": "steel_scrap_recycling",
+    "category": "steel",
+    "title": "Garden Tool Storage using Old Pots and Pans",
+    "image": "paperbag",
+    "html_file": "recycling_guides/metal/steel/method3.html"
+  },
+
+
+  {
+    "id": "mp_recycle",
+    "category": "MP",
+    "title": "How to Make an Origami Flower",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/MP/method1.html"
+  },
+  {
+    "id": "mp_recycle",
+    "category": "MP",
+    "title": "How to Make Magazine Paper Baskets",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/MP/method2.html"
+  },
+  {
+    "id": "mp_recycle",
+    "category": "MP",
+    "title": "How to Make a Placemats or Coasters",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/MP/method3.html"
+  },
+
+
+  {
+    "id": "occ_recycle",
+    "category": "OCC",
+    "title": "How to Make a Pet House from Old Corrugated Cardboard",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/OCC/method1.html"
+  },
+  {
+    "id": "occ_recycle",
+    "category": "OCC",
+    "title": "How to Make Picture Frames",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/OCC/method2.html"
+  },
+  {
+    "id": "occ_recycle",
+    "category": "OCC",
+    "title": "How to Make a Lamp from Carton",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/OCC/method3.html"
+  },
+
+
   {
     "id": "onp_recycle",
     "category": "ONP",
@@ -63,24 +198,311 @@
     "html_file": "recycling_guides/paper/ONP/method2.html"
   },
   {
-    "id": "aluminum_recycling",
-    "category": "aluminum_tin",
-    "title": "Traditional Recycling of Aluminum Cans",
+    "id": "onp_paper_crafts",
+    "category": "ONP",
+    "title": "Use Newspapers for Composting",
     "image": "paperbag",
-    "html_file": "recycling_guides/metal/aluminum_tin/method1.html"
+    "html_file": "recycling_guides/paper/ONP/method4.html"
+  },
+
+
+  {
+    "id": "swl_recycle",
+    "category": "SWL",
+    "title": "How to Select White Ledger Paper for Recycling",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/SWL/method1.html"
   },
   {
-    "id": "copper_scrap_recycling",
-    "category": "copper",
-    "title": "Recycle at a Scrap Yard or Metal Recycler",
+    "id": "swl_recycle",
+    "category": "SWL",
+    "title": "How to Make a Small Notebook",
     "image": "paperbag",
-    "html_file": "recycling_guides/metal/copper/method1.html"
+    "html_file": "recycling_guides/paper/SWL/method2.html"
   },
   {
-    "id": "hdpe_storage_containers",
+    "id": "swl_recycle",
+    "category": "SWL",
+    "title": "How to Make Gift Wrapping",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/SWL/method3.html"
+  },
+
+
+  {
+    "id": "ubc_recycle",
+    "category": "UBC",
+    "title": "How to Make a Small Planter or Seed Starter",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/UBC/method1.html"
+  },
+  {
+    "id": "ubc_recycle",
+    "category": "UBC",
+    "title": "How to Make a DIY Bird Feeder",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/UBC/method2.html"
+  },
+  {
+    "id": "ubc_recycle",
+    "category": "UBC",
+    "title": "How to Use Beverage Cartons as Storage or Organize",
+    "image": "paperbag",
+    "html_file": "recycling_guides/paper/UBC/method3.html"
+  },
+
+
+  {
+    "id": "hdpe_recycle",
     "category": "HDPE",
-    "title": "Make Storage Containers from HDPE",
+    "title": "How to Make Storage Containers",
     "image": "paperbag",
     "html_file": "recycling_guides/plastic/HDPE/method1.html"
+  },
+  {
+    "id": "hdpe_recycle",
+    "category": "HDPE",
+    "title": "How to Build a Mini Compost Scoop",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/HDPE/method2.html"
+  },
+  {
+    "id": "hdpe_recycle",
+    "category": "HDPE",
+    "title": "How to Make a DIY Funnel",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/HDPE/method3.html"
+  },
+
+
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "How to Create Stuffing for Cushions or Pet Beds",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/LDPE/method1.html"
+  },
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "How to Make Jump Rope",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/LDPE/method2.html"
+  },
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "How to Make a Garden Weed Barriers",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/LDPE/method3.html"
+  },
+
+
+  {
+    "id": "others_recycle",
+    "category": "others",
+    "title": "Return for Professional Recycling",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/Others/method1.html"
+  },
+  {
+    "id": "others_recycle",
+    "category": "others",
+    "title": "How to Convert Containers into Water Storage (Non-Drinking Use)",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/Others/method2.html"
+  },
+  {
+    "id": "others_recycle",
+    "category": "others",
+    "title": "How to Make DIY Diskette Coasters",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/Others/method3.html"
+  },
+
+
+  {
+    "id": "pet_recycle",
+    "category": "PET",
+    "title": "How to Create a Self-Watering Plant Bottle",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PET/method1.html"
+  },
+  {
+    "id": "pet_recycle",
+    "category": "PET",
+    "title": "How to Create a Hanging Herb Garden",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PET/method2.html"
+  },
+  {
+    "id": "pet_recycle",
+    "category": "PET",
+    "title": "How to Make a Plastic Bottle Lamp",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PET/method3.html"
+  },
+
+
+  {
+    "id": "pp_recycle",
+    "category": "PP",
+    "title": "Reuse as Storage Containers",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PP/method1.html"
+  },
+  {
+    "id": "pp_recycle",
+    "category": "PP",
+    "title": "How to Make a Desk Organizer from Bottle Caps or Containers",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PP/method2.html"
+  },
+  {
+    "id": "pp_recycle",
+    "category": "PP",
+    "title": "How to Create Plant Pots or Seed Starters",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PP/method3.html"
+  },
+
+
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "How to Make Decorative Crafts",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PS/method1.html"
+  },
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "How to Make a Pin Cushion",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PS/method2.html"
+  },
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "How to Make DIY Floatation Devices",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PS/method3.html"
+  },
+
+
+  {
+    "id": "pvc_recycle",
+    "category": "PVC",
+    "title": "How to Make Plant Supports or Trellises",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PVC/method1.html"
+  },
+  {
+    "id": "pvc_recycle",
+    "category": "PVC",
+    "title": "How to Make a Cable or Cord Holder",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PVC/method2.html"
+  },
+  {
+    "id": "pvc_recycle",
+    "category": "PVC",
+    "title": "How to Make DIY Rainwater Diverter",
+    "image": "paperbag",
+    "html_file": "recycling_guides/plastic/PVC/method3.html"
+  },
+
+
+  {
+    "id": "cdfp_recycle",
+    "category": "CDFP",
+    "title": "Reuse as Trash Liners",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/CDFP/method1.html"
+  },
+  {
+    "id": "cdfp_recycle",
+    "category": "CDFP",
+    "title": "How to Create Bags Out of Tarpaulin",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/CDFP/method2.html"
+  },
+  {
+    "id": "cdfp_recycle",
+    "category": "CDFP",
+    "title": "How to Make an Outdoor Covers and Protectors from Tarpaulin",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/CDFP/method3.html"
+  },
+
+
+  {
+    "id": "leather_recycle",
+    "category": "leather",
+    "title": "How to Make Leather Keychains",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/leather/method1.html"
+  },
+  {
+    "id": "leather_recycle",
+    "category": "leather",
+    "title": "How to Make Leather Bracelets",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/leather/method2.html"
+  },
+  {
+    "id": "leather_recycle",
+    "category": "leather",
+    "title": "How to Make Jewelry Holders",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/leather/method3.html"
+  },
+
+
+  {
+    "id": "rubber_recycle",
+    "category": "rubber",
+    "title": "How to Make Rubber Hair Ties",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/rubber/method1.html"
+  },
+  {
+    "id": "rubber_recycle",
+    "category": "rubber",
+    "title": "How to Make Garden Stepping Pads",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/rubber/method2.html"
+  },
+  {
+    "id": "rubber_recycle",
+    "category": "rubber",
+    "title": "How to Make DIY Doorstops",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/rubber/method3.html"
+  },
+
+
+
+  {
+    "id": "textiles_recycle",
+    "category": "textiles",
+    "title": "Donate Usable Clothing",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/textiles/method1.html"
+  },
+  {
+    "id": "textiles_recycle",
+    "category": "textiles",
+    "title": "How to Make DIY Hair Scrunchies from Used Clothes",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/textiles/method2.html"
+  },
+  {
+    "id": "textiles_recycle",
+    "category": "textiles",
+    "title": "How to Turn Used Clothes into Rags",
+    "image": "paperbag",
+    "html_file": "recycling_guides/residual/textiles/method3.html"
   }
+
 ]

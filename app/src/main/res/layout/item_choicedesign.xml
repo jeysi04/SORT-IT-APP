@@ -2,31 +2,48 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:layout_margin="12dp"
-    app:cardElevation="6dp"
-    app:cardCornerRadius="8dp">
+    android:layout_height="130dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="16dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#2A3F3F">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="#F4D03F"
-            android:fontFamily="@font/montserrat_bold"
-            android:textStyle="normal"
-            android:padding="12dp"
-            android:textSize="16sp"
-            android:textColor="#467750"/>
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="#2A3F3F">
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:textColor="#467750"
+                android:textSize="16sp"
+                android:background="@color/white"/>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerCrop" />
+
+        </LinearLayout>
     </FrameLayout>
+
 </com.google.android.material.card.MaterialCardView>

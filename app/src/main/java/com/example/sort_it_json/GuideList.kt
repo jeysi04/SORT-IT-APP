@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import com.google.gson.reflect.TypeToken
 
 class GuideListFragment : Fragment() {
 
-    private var selectedSubcategory: String = "glassBottles"
+    private var subcategory: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,7 +21,7 @@ class GuideListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Get the selected subcategory from arguments
-        selectedSubcategory = arguments?.getString("subcategory") ?: "glassBottles"
+        subcategory = arguments?.getString("subcategory")
 
         // 'fragment_guide_list' should contain the RecyclerView
         val view = inflater.inflate(R.layout.fragment_guide_list, container, false)
@@ -32,9 +33,49 @@ class GuideListFragment : Fragment() {
         // LinearLayoutManager arranges items in a vertical scrolling list
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // Declare a variable to control Title of the page
+        val guideTitle = view.findViewById<TextView>(R.id.titleText)
+
+        // Changes the subcategory text based on the analyzed subcategory
+        when (subcategory) {
+            //Glass
+            "flatGlass" -> guideTitle.text = "Ways to Recycle Flat Glass"
+            "glassBottles" -> guideTitle.text = "Ways to Recycle Glass Bottles"
+            "cullets" -> guideTitle.text = "Ways to Recycle Cullet Glass"
+
+            //Metal
+            "aluminum_tin" -> guideTitle.text = "Ways to Recycle Aluminum Tin"
+            "copper" -> guideTitle.text = "Ways to Recycle Copper"
+            "steel" -> guideTitle.text = "Ways to Recycle Steel"
+
+            //Paper
+            "ONP" -> guideTitle.text = "Ways to Recycle Old Newspaper"
+            "MP" -> guideTitle.text = "Ways to Recycle Mixed Paper"
+            "OCC" -> guideTitle.text = "Ways to Recycle Old Corrugated Cartons"
+            "SWL" -> guideTitle.text = "Ways to Recycle Selected White Ledger"
+            "UBC" -> guideTitle.text = "Ways to Recycle Used Beverage Cartons"
+
+            //Plastic
+            "HDPE" -> guideTitle.text = "Ways to Recycle High-Density Polyethylene"
+            "LDPE" -> guideTitle.text = "Ways to Recycle  Low-Density Polyethylene"
+            "others" -> guideTitle.text = "Ways to Recycle Other Plastics"
+            "PET" -> guideTitle.text = "Ways to Recycle Polyethylene Terephthalate"
+            "PP" -> guideTitle.text = "Ways to Recycle Polypropylene"
+            "PS" -> guideTitle.text = "Ways to Recycle Polystyrene"
+            "PVC" -> guideTitle.text = "Ways to Recycle Polyvinyl Chloride"
+
+            //Residuals
+            "CDFP" -> guideTitle.text = "Ways to Recycle Clean and Dry Flexible Plastics"
+            "leather" -> guideTitle.text = "Ways to Recycle Leather"
+            "rubber" -> guideTitle.text = "Ways to Recycle Rubber"
+            "textiles" -> guideTitle.text = "Ways to Recycle Textile"
+
+            else -> guideTitle.text = "Ways to Recycle Unknown Type"
+        }
+
         // Load guides from JSON
         val allGuides = loadGuidesFromAssets()
-        val filteredList = allGuides.filter { it.category == selectedSubcategory }
+        val filteredList = allGuides.filter { it.category == subcategory }
 
         // Set adapter
         recyclerView.adapter = GuideAdapter(filteredList) { guideItem ->

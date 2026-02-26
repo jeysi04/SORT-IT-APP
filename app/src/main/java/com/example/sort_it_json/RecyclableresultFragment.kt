@@ -105,7 +105,7 @@ class RecyclableresultFragment : Fragment() {
 
             //Plastic
             "HDPE" -> typeText.text = "Type: High-Density Polyethylene (HDPE)"
-            "LDPE" -> typeText.text = "Type: Low-Density Polyethylene (HDPE)"
+            "LDPE" -> typeText.text = "Type: Low-Density Polyethylene (LDPE)"
             "others" -> typeText.text = "Type: Others"
             "PET" -> typeText.text = "Type: Polyethylene Terephthalate (PET)"
             "PP" -> typeText.text = "Type: Polypropylene (PP)"
@@ -118,7 +118,7 @@ class RecyclableresultFragment : Fragment() {
             "rubber" -> typeText.text = "Type: Rubber"
             "textiles" -> typeText.text = "Type: Textiles"
 
-            else -> typeText.text = "Unknown glass type"
+            else -> typeText.text = "Unknown type"
         }
 
         if(category == "NonRec"){
