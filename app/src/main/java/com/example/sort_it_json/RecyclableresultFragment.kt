@@ -10,11 +10,14 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 
 
 class RecyclableresultFragment : Fragment() {
 
     private var subcategory: String? = null
+    private var hasShownDialog = false
     private var category: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +43,7 @@ class RecyclableresultFragment : Fragment() {
         val illustbg = view.findViewById<ImageView>(R.id.illustration)
         val illustclass = view.findViewById<ImageView>(R.id.illust_classification)
         val questbot = view.findViewById<TextView>(R.id.questionText)
+        val buttonNo = view.findViewById<TextView>(R.id.buttonNo)
 
         // Changes the subcategory text based on the analyzed subcategory
         when (category) {
@@ -156,6 +160,43 @@ class RecyclableresultFragment : Fragment() {
                 .commit()
         }
 
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showFeedbackDialog {
+                    isEnabled = false
+                    hasShownDialog = true
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+        buttonNo.setOnClickListener {
+            showFeedbackDialog()
+            hasShownDialog = true
+
+            val fragment = SampleDecideFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
         return view
+    }
+
+    private fun showFeedbackDialog(onLeave: (() -> Unit)? = null) {
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("We'd Love Your Feedback")
+            .setMessage("Would you like to share your experience with us?")
+            .setPositiveButton("Give Feedback") { _, _ ->
+                // Navigate to feedback screen here
+            }
+            .setNegativeButton("Maybe Later") { _, _ ->
+                onLeave?.invoke()
+            }
+            .show()
     }
 }

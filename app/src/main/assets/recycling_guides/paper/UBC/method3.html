@@ -1,128 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Recycle Old/New Paper</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Used Beverage Cartons Recycling Guide 3</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --app-bg: #f4f4f4;
+        --card-bg: #ffffff;
+        --content-box-bg: #FBFBFB; 
+        --primary-text: #000000; 
+        --secondary-text: #999999;
+        --heading-gray: #666666; 
+        --btn-bg: #eed077;
+        --btn-text: #456b4d;
+    }
+
+    body {
+        margin: 0;
+        background-color: var(--app-bg);
+        display: flex;
+        justify-content: center;
+        padding: 30px; 
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .phone-container {
+        width: 100%;
+        max-width: 375px; 
+        background-color: var(--card-bg);
+        padding: 40px 25px 25px 25px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        box-sizing: border-box; 
+    }
+
+    h1 {
+        font-weight: 800;
+        font-size: 20px;
+        color: #000;
+        margin-top: 0; 
+        margin-bottom: 2px;
+    }
+
+    .subtitle {
+        font-weight: 400;
+        font-size: 14px;
+        font-style: italic;
+        color: var(--secondary-text);
+        margin-bottom: 12px; 
+    }
+
+    .content-box {
+        background-color: var(--content-box-bg); 
+        padding: 20px; 
+        border-radius: 12px;
+    }
+
+    .description {
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--primary-text);
+        margin-bottom: 40px; 
+        text-align: justify;
+    }
+
+    h2 {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--heading-gray); 
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    ul {
+        padding-left: 18px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--primary-text);
+        margin-bottom: 40px; 
+    }
+
+    ol {
+        padding-left: 18px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--primary-text);
+        margin-bottom: 0; 
+    }
+
+    ul li {
+        margin-bottom: 6px; 
+    }
+
+    ol li {
+        margin-bottom: 12px; 
+        padding-left: 5px;
+        text-align: justify;
+    }
+
+    .finish-btn {
+        width: 100%;
+        margin-top: 15px; 
+        padding: 16px;
+        background-color: var(--btn-bg);
+        border: none;
+        border-radius: 8px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--btn-text);
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .finish-btn:hover {
+        opacity: 0.9;
+    }
+
+    @media (max-width: 480px) {
         body {
-            font-family: sans-serif;
-            padding: 16px;
-            line-height: 1.6;
-            background-color: #ffffff;
-            color: #333333;
+            padding: 0; 
+            background-color: var(--card-bg); 
         }
+        
+        .phone-container {
+            max-width: 100%; 
+            box-shadow: none; 
+            border-radius: 0; 
+            padding: 20px; 
+        }
+    }
 
-        h1 {
-            color: #2E7D32;
-        }
-
-        h2 {
-            margin-top: 24px;
-            color: #388E3C;
-        }
-
-        img {
-            width: 100%;
-            margin: 12px 0;
-            border-radius: 8px;
-        }
-
-        ul, ol {
-            padding-left: 20px;
-        }
-
-        .step-image {
-            display: block;
-            max-width: 69px;      /* controls image size */
-            width: 100%;
-            margin: 30px auto;    /* centers the image */
-        }
-
-        ol {
-            padding: 0;
-        }
-
-        .content-box {
-            background-color: #467750;      /* green box */
-            color: #ffffff;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 0 #315438;     /* dark green bottom shadow only */
-            margin: 16px 0;
-        }
-
-        /* Keep headings readable inside the box */
-        .content-box h2 {
-            color: #E8F5E9;
-        }
-
-        /* Images spacing inside box */
-        .content-box img {
-            background: #ffffff;
-            padding: 6px;
-            border-radius: 8px;
-        }
-
-        .content-box ol {
-            list-style-position: inside;
-            padding-left: 0;
-        }
-
-        .content-box li {
-            margin-bottom: 12px;
-        }
-    </style>
+</style>
 </head>
+
 <body>
 
-<h1>How to Use Beverage Cartons as Storage or Organize</h1>
+<div class="phone-container">
 
-<div class="content-box">
-    <p>
-        Used beverage cartons can be transformed into practical storage containers for small items around the house.
-        They’re perfect for organizing craft supplies, office materials, hardware, or even small toys.
-        This is a simple, eco-friendly way to reuse cartons while keeping your space tidy.
-    </p>
+    <h1>Use Beverage Cartons as Storage or Organize</h1>
+    <div class="subtitle">Used Beverage Cartons</div>
 
-    <h2>Materials Needed:</h2>
-    <ul>
-        <li>Beverage cartons (clean and dry)</li>
-        <li>Scissors</li>
-        <li>Glue or tape (optional, for reinforcement or joining multiple cartons)</li>
-        <li>Optional: markers, stickers, or paint for decoration</li>
-    </ul>
+    <div class="content-box">
 
-    <h2>Steps:</h2>
-    <ol>
-        <li>
-            <img src="method1_step1.png" alt="Rinsing the glass bottle" class="step-image">
-            Clean the cartons.
-            Rinse the inside of the beverage cartons thoroughly and allow them to dry completely. This ensures your storage remains clean and hygienic.
-        </li>
-        <li>
-            Decide on the opening.
-            Depending on the size of the items you want to store, you can leave the top open, cut it lower, or cut a side opening for easier access.
-            Use scissors carefully to make smooth edges.
-        </li>
-        <li>
-            Use individual cartons for storage.
-            Place small items like buttons, beads, screws, office supplies, or craft materials into each carton. Each carton can hold a different type of item for easy organization.
-        </li>
-        <li>
-            Create a larger organizer (optional).
-            Group multiple cartons together by gluing or taping the sides to create a multi-compartment organizer. This works well for desks, drawers, or craft tables.
-        </li>
-        <li>
-            Decorate (optional).
-            Personalize your storage cartons with markers, stickers, or paint to make them colorful and visually appealing.
-        </li>
-        <li>
-            Arrange and use.
-            Place your organized cartons on shelves, inside drawers, or on your desk. Refill and rearrange as needed for efficient storage.
-        </li>
+        <div class="description">
+            Used beverage cartons can be transformed into practical storage containers for small items around the house. They’re perfect for organizing craft supplies, office materials, hardware, or even small toys. This is a simple, eco-friendly way to reuse cartons while keeping your space tidy.
+        </div>
 
-    </ol>
-</div>
+        <h2>Materials Needed</h2>
+        <ul>
+            <li>Beverage cartons (clean and dry)</li>
+            <li>Scissors</li>
+            <li>Glue or tape (optional, for reinforcement or joining multiple cartons)</li>
+            <li>Optional: markers, stickers, or paint for decoration</li>
+        </ul>
+
+        <h2>Steps:</h2>
+        <ol>
+            <li>Clean the cartons. Rinse the inside of the beverage cartons thoroughly and allow them to dry completely. This ensures your storage remains clean and hygienic.</li>
+            <li>Decide on the opening. Depending on the size of the items you want to store, you can leave the top open, cut it lower, or cut a side opening for easier access. Use scissors carefully to make smooth edges.</li>
+            <li>Use individual cartons for storage. Place small items like buttons, beads, screws, office supplies, or craft materials into each carton. Each carton can hold a different type of item for easy organization.</li>
+            <li>Create a larger organizer (optional). Group multiple cartons together by gluing or taping the sides to create a multi-compartment organizer. This works well for desks, drawers, or craft tables.</li>
+            <li>Decorate (optional). Personalize your storage cartons with markers, stickers, or paint to make them colorful and visually appealing.</li>
+            <li>Arrange and use. Place your organized cartons on shelves, inside drawers, or on your desk. Refill and rearrange as needed for efficient storage.</li>
+        </ol>
+
+    </div>
+
+    </div>
 
 </body>
 </html>

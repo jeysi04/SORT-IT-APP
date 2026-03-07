@@ -1,138 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Create Plant Pots or Seed Starters</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PP Recycling Guide 3</title>
 
-    <style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --app-bg: #f4f4f4;
+        --card-bg: #ffffff;
+        --content-box-bg: #FBFBFB; 
+        --primary-text: #000000; 
+        --secondary-text: #999999;
+        --heading-gray: #666666; 
+        --btn-bg: #eed077;
+        --btn-text: #456b4d;
+    }
+
+    body {
+        margin: 0;
+        background-color: var(--app-bg);
+        display: flex;
+        justify-content: center;
+        padding: 30px; 
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .phone-container {
+        width: 100%;
+        max-width: 375px; 
+        background-color: var(--card-bg);
+        padding: 40px 25px 25px 25px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        box-sizing: border-box; 
+    }
+
+    h1 {
+        font-weight: 800;
+        font-size: 20px;
+        color: #000;
+        margin-top: 0; 
+        margin-bottom: 2px;
+    }
+
+    .subtitle {
+        font-weight: 400;
+        font-size: 14px;
+        font-style: italic;
+        color: var(--secondary-text);
+        margin-bottom: 12px; 
+    }
+
+    .content-box {
+        background-color: var(--content-box-bg); 
+        padding: 20px; 
+        border-radius: 12px;
+    }
+
+    .description {
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--primary-text);
+        margin-bottom: 40px; 
+        text-align: justify;
+    }
+
+    h2 {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--heading-gray); 
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    ul {
+        padding-left: 18px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--primary-text);
+        margin-bottom: 40px; 
+    }
+
+    ol {
+        padding-left: 18px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--primary-text);
+        margin-bottom: 0; 
+    }
+
+    ul li {
+        margin-bottom: 6px; 
+    }
+
+    ol li {
+        margin-bottom: 12px; 
+        padding-left: 5px;
+        text-align: justify;
+    }
+
+    .finish-btn {
+        width: 100%;
+        margin-top: 15px; 
+        padding: 16px;
+        background-color: var(--btn-bg);
+        border: none;
+        border-radius: 8px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--btn-text);
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .finish-btn:hover {
+        opacity: 0.9;
+    }
+
+    @media (max-width: 480px) {
         body {
-            font-family: sans-serif;
-            padding: 16px;
-            line-height: 1.6;
-            background-color: #ffffff;
-            color: #333333;
+            padding: 0; 
+            background-color: var(--card-bg); 
         }
+        
+        .phone-container {
+            max-width: 100%; 
+            box-shadow: none; 
+            border-radius: 0; 
+            padding: 20px; 
+        }
+    }
 
-        h1 {
-            color: #2E7D32;
-        }
-
-        h2 {
-            margin-top: 24px;
-            color: #388E3C;
-        }
-
-        img {
-            width: 100%;
-            margin: 12px 0;
-            border-radius: 8px;
-        }
-
-        ul, ol {
-            padding-left: 20px;
-        }
-
-        .step-image {
-            display: block;
-            max-width: 69px;      /* controls image size */
-            width: 100%;
-            margin: 30px auto;    /* centers the image */
-        }
-
-        ol {
-            padding: 0;
-        }
-
-        .content-box {
-            background-color: #467750;      /* green box */
-            color: #ffffff;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 0 #315438;     /* dark green bottom shadow only */
-            margin: 16px 0;
-        }
-
-        /* Keep headings readable inside the box */
-        .content-box h2 {
-            color: #E8F5E9;
-        }
-
-        /* Images spacing inside box */
-        .content-box img {
-            background: #ffffff;
-            padding: 6px;
-            border-radius: 8px;
-        }
-
-        .content-box ol {
-            list-style-position: inside;
-            padding-left: 0;
-        }
-
-        .content-box li {
-            margin-bottom: 12px;
-        }
-    </style>
+</style>
 </head>
+
 <body>
 
-<h1>How to Create Plant Pots or Seed Starters</h1>
+<div class="phone-container">
 
-<div class="content-box">
-    <p>
-        Polypropylene (PP) containers such as cups or small tubs are sturdy and lightweight, making them ideal for reuse as plant pots or seed starters.
-        This simple gardening project supports sustainability while giving plants a healthy start.
-    </p>
+    <h1>Create Plant Pots or Seed Starters</h1>
+    <div class="subtitle">PP (Polypropylene) Plastic</div>
 
-    <h2>Materials Needed:</h2>
-    <ul>
-        <li>Clean PP cups or tubs</li>
-        <li>Nail, screwdriver, or heated metal tool (for drainage holes)</li>
-        <li>Soil or potting mix</li>
-        <li>Seeds or small seedlings</li>
-    </ul>
+    <div class="content-box">
 
-    <h2>Steps:</h2>
-    <ol>
-        <li>
-            <img src="method1_step1.png" alt="Rinsing the glass bottle" class="step-image">
-            Clean the containers.
-            Wash the PP cups or tubs thoroughly with soap and water.
-            Rinse well and allow them to dry completely.
-        </li>
-        <li>
-            Create drainage holes.
-            Use a nail or screwdriver to carefully make several small holes at the bottom of each container.
-            These holes allow excess water to drain and prevent root rot.
-        </li>
-        <li>
-            Prepare the soil.
-            Fill the container with soil or potting mix, leaving about 1–2 cm of space at the top.
-            Lightly press the soil to remove air pockets.
-        </li>
+        <div class="description">
+           Polypropylene (PP) containers such as cups or small tubs are sturdy and lightweight, making them ideal for reuse as plant pots or seed starters. This simple gardening project supports sustainability while giving plants a healthy start.
+        </div>
 
-        <li>
-            Plant the seeds.
-            Place seeds into the soil according to the recommended depth.
-            Cover gently with soil.
-        </li>
-        <li>
-            Water lightly.
-            Water the soil until it is moist but not soaked.
-            Make sure water can drain through the holes at the bottom.
-        </li>
+        <h2>Materials Needed</h2>
+        <ul>
+            <li>Clean PP cups or tubs</li>
+            <li>Nail, screwdriver, or heated metal tool (for drainage holes)</li>
+            <li>Soil or potting mix</li>
+            <li>Seeds or small seedlings</li>
+        </ul>
 
-        <li>
-            Place in a sunny area.
-            Put the containers in a bright location such as a windowsill, balcony, or garden area where plants can receive enough sunlight.
-        </li>
+        <h2>Steps:</h2>
+        <ol>
+            <li>Clean the containers. Wash the PP cups or tubs thoroughly with soap and water. Rinse well and allow them to dry completely.</li>
+            <li>Create drainage holes. Use a nail or screwdriver to carefully make several small holes at the bottom of each container. These holes allow excess water to drain and prevent root rot.</li>
+            <li>Prepare the soil. Fill the container with soil or potting mix, leaving about 1–2 cm of space at the top. Lightly press the soil to remove air pockets.</li>
+            <li>Plant the seeds. Place seeds into the soil according to the recommended depth. Cover gently with soil.</li>
+            <li>Water lightly. Water the soil until it is moist but not soaked. Make sure water can drain through the holes at the bottom.</li>
+            <li>Place in a sunny area. Put the containers in a bright location such as a windowsill, balcony, or garden area where plants can receive enough sunlight.</li>
+            <li>Monitor growth. Check regularly for moisture and growth. Once seedlings are strong enough, they can be transferred to larger pots or directly into the ground.</li>
+        </ol>
 
-        <li>
-            Monitor growth.
-            Check regularly for moisture and growth. Once seedlings are strong enough, they can be transferred to larger pots or directly into the ground.
-        </li>
-    </ol>
-</div>
+    </div>
+
+    </div>
 
 </body>
 </html>

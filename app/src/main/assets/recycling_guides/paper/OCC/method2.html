@@ -1,150 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Recycle Old/New Paper</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old Corrugated Cartons Recycling Guide 2</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --app-bg: #f4f4f4;
+        --card-bg: #ffffff;
+        --content-box-bg: #FBFBFB; 
+        --primary-text: #000000; 
+        --secondary-text: #999999;
+        --heading-gray: #666666; 
+        --btn-bg: #eed077;
+        --btn-text: #456b4d;
+    }
+
+    body {
+        margin: 0;
+        background-color: var(--app-bg);
+        display: flex;
+        justify-content: center;
+        padding: 30px; 
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .phone-container {
+        width: 100%;
+        max-width: 375px; 
+        background-color: var(--card-bg);
+        padding: 40px 25px 25px 25px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        box-sizing: border-box; 
+    }
+
+    h1 {
+        font-weight: 800;
+        font-size: 20px;
+        color: #000;
+        margin-top: 0; 
+        margin-bottom: 2px;
+    }
+
+    .subtitle {
+        font-weight: 400;
+        font-size: 14px;
+        font-style: italic;
+        color: var(--secondary-text);
+        margin-bottom: 12px; 
+    }
+
+    .content-box {
+        background-color: var(--content-box-bg); 
+        padding: 20px; 
+        border-radius: 12px;
+    }
+
+    .description {
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--primary-text);
+        margin-bottom: 40px; 
+        text-align: justify;
+    }
+
+    h2 {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--heading-gray); 
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    ul {
+        padding-left: 18px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--primary-text);
+        margin-bottom: 40px; 
+    }
+
+    ol {
+        padding-left: 18px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--primary-text);
+        margin-bottom: 0; 
+    }
+
+    ul li {
+        margin-bottom: 6px; 
+    }
+
+    ol li {
+        margin-bottom: 12px; 
+        padding-left: 5px;
+        text-align: justify;
+    }
+
+    .finish-btn {
+        width: 100%;
+        margin-top: 15px; 
+        padding: 16px;
+        background-color: var(--btn-bg);
+        border: none;
+        border-radius: 8px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--btn-text);
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .finish-btn:hover {
+        opacity: 0.9;
+    }
+
+    @media (max-width: 480px) {
         body {
-            font-family: sans-serif;
-            padding: 16px;
-            line-height: 1.6;
-            background-color: #ffffff;
-            color: #333333;
+            padding: 0; 
+            background-color: var(--card-bg); 
         }
+        
+        .phone-container {
+            max-width: 100%; 
+            box-shadow: none; 
+            border-radius: 0; 
+            padding: 20px; 
+        }
+    }
 
-        h1 {
-            color: #2E7D32;
-        }
-
-        h2 {
-            margin-top: 24px;
-            color: #388E3C;
-        }
-
-        img {
-            width: 100%;
-            margin: 12px 0;
-            border-radius: 8px;
-        }
-
-        ul, ol {
-            padding-left: 20px;
-        }
-
-        .step-image {
-            display: block;
-            max-width: 69px;      /* controls image size */
-            width: 100%;
-            margin: 30px auto;    /* centers the image */
-        }
-
-        ol {
-            padding: 0;
-        }
-
-        .content-box {
-            background-color: #467750;      /* green box */
-            color: #ffffff;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 0 #315438;     /* dark green bottom shadow only */
-            margin: 16px 0;
-        }
-
-        /* Keep headings readable inside the box */
-        .content-box h2 {
-            color: #E8F5E9;
-        }
-
-        /* Images spacing inside box */
-        .content-box img {
-            background: #ffffff;
-            padding: 6px;
-            border-radius: 8px;
-        }
-
-        .content-box ol {
-            list-style-position: inside;
-            padding-left: 0;
-        }
-
-        .content-box li {
-            margin-bottom: 12px;
-        }
-    </style>
+</style>
 </head>
+
 <body>
 
-<h1>How to Make Picture Frames</h1>
+<div class="phone-container">
 
-<div class="content-box">
-    <p>
-        Recycle old cardboard boxes into custom picture frames.
-        This project is eco-friendly, easy, and allows you to create frames in any size or design.
-    </p>
+    <h1>How to Make Picture Frames from Old Cardboard</h1>
+    <div class="subtitle">Old Corrugated Cartons</div>
 
-    <h2>Materials Needed:</h2>
-    <ul>
-        <li>Old corrugated cardboard (sturdy and clean)</li>
-        <li>Scissors or box cutter</li>
-        <li>Ruler</li>
-        <li>Pencil or marker</li>
-        <li>Glue or double-sided tape</li>
-        <li>Decorative materials (optional: paint, markers, fabric, washi tape)</li>
-        <li>Photo or print to frame</li>
-    </ul>
+    <div class="content-box">
 
-    <h2>Steps:</h2>
-    <ol>
-        <li>
-            <img src="method1_step1.png" alt="Rinsing the glass bottle" class="step-image">
-            Select the cardboard.
-            Check the box for sturdiness and cleanliness. Avoid boxes that are bent, water-damaged, torn, or moldy.
-            Use a thick piece for the frame’s base to ensure it holds its shape.
-        </li>
-        <li>
-            Measure your photo.
-            Measure the width and height of your photo or artwork.
-            Decide on the size of the frame border (e.g., 1–2 inches wide).
-        </li>
-        <li>
-            Cut the frame base.
-            Using scissors or a box cutter, cut a rectangle from the cardboard slightly larger than the photo, leaving space for the border.
-        </li>
-        <li>
-            Cut out the frame opening.
-            Draw a smaller rectangle in the center for the photo to show. Cut it out carefully, keeping the edges straight and neat.
-            This becomes the window of your frame.
-        </li>
-        <li>
-            Reinforce the frame (optional).
-            For extra strength, cut a second frame of the same size and glue it to the back of the first frame.
-            This prevents bending and gives the frame a sturdy feel.
-        </li>
-        <li>
-            Decorate the frame.
-            Use paint, markers, fabric, or tape to decorate the front and edges of the frame.
-            Get creative with patterns or colors that match your décor.
-        </li>
-        <li>
-            Attach the photo.
-            Place your photo behind the frame opening. Use glue, double-sided tape, or small corner tabs to hold the photo in place.
-        </li>
-        <li>
-            Create a stand or hanging option.
-            For a tabletop frame, cut a small strip of cardboard, fold it into a triangle, and glue it to the back as a stand.
-            For a wall frame, attach a loop of string or ribbon at the top.
-        </li>
-        <li>
-            Check stability.
-            Ensure the frame holds the photo securely and stands upright or hangs properly before use.
-        </li>
-        <li>
-            Display.
-            Place your recycled cardboard frame on a desk, shelf, or wall and enjoy your eco-friendly décor.
-        </li>
-    </ol>
-</div>
+        <div class="description">
+           Recycle old cardboard boxes into custom picture frames. This project is eco-friendly, easy, and allows you to create frames in any size or design.
+        </div>
+
+        <h2>Materials Needed</h2>
+        <ul>
+            <li>Old corrugated cardboard (sturdy and clean)</li>
+            <li>Scissors or box cutter</li>
+            <li>Ruler</li>
+            <li>Pencil or marker</li>
+            <li>Glue or double-sided tape</li>
+            <li>Decorative materials (optional: paint, markers, fabric, washi tape)</li>
+            <li>Photo or print to frame</li>
+        </ul>
+
+        <h2>Steps:</h2>
+        <ol>
+            <li>Select the cardboard. Check the box for sturdiness and cleanliness. Avoid boxes that are bent, water-damaged, torn, or moldy. Use a thick piece for the frame’s base to ensure it holds its shape.</li>
+            <li>Measure your photo. Measure the width and height of your photo or artwork. Decide on the size of the frame border (e.g., 1–2 inches wide).</li>
+            <li>Cut the frame base. Using scissors or a box cutter, cut a rectangle from the cardboard slightly larger than the photo, leaving space for the border.</li>
+            <li>Cut out the frame opening. Draw a smaller rectangle in the center for the photo to show. Cut it out carefully, keeping the edges straight and neat. This becomes the window of your frame.</li>
+            <li>Reinforce the frame (optional). For extra strength, cut a second frame of the same size and glue it to the back of the first frame. This prevents bending and gives the frame a sturdy feel.</li>
+            <li>Decorate the frame. Use paint, markers, fabric, or tape to decorate the front and edges of the frame. Get creative with patterns or colors that match your décor.</li>
+            <li>Attach the photo. Place your photo behind the frame opening. Use glue, double-sided tape, or small corner tabs to hold the photo in place.</li>
+            <li>Create a stand or hanging option. For a tabletop frame, cut a small strip of cardboard, fold it into a triangle, and glue it to the back as a stand. For a wall frame, attach a loop of string or ribbon at the top.</li>
+            <li>Check stability. Ensure the frame holds the photo securely and stands upright or hangs properly before use.</li>
+            <li>Display. Place your recycled cardboard frame on a desk, shelf, or wall and enjoy your eco-friendly décor.</li>
+        </ol>
+
+    </div>
+
+    </div>
 
 </body>
 </html>

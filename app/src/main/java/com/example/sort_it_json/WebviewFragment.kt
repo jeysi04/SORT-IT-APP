@@ -10,10 +10,13 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
+import android.widget.Button
 
 class WebViewFragment : Fragment() {
 
     private var htmlFile: String? = null
+
+    private var hasShownDialog = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +49,13 @@ class WebViewFragment : Fragment() {
 
         // Basic WebView settings
         webView.settings.apply {
-            javaScriptEnabled = false        // safer for local HTML
+            javaScriptEnabled = true        // For Finish Button
             domStorageEnabled = true         // required for HTML5 local storage
             allowFileAccess = true           // allows access to assets
             cacheMode = WebSettings.LOAD_DEFAULT
         }
+
+        webView.addJavascriptInterface(WebAppInterface(), "Android")
 
         // Disable system forced dark mode
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
@@ -99,5 +104,35 @@ class WebViewFragment : Fragment() {
         }
     }
 
+    inner class WebAppInterface {
 
+        @android.webkit.JavascriptInterface
+        fun goToNextFragment() {
+
+            requireActivity().runOnUiThread {
+
+                // Show feedback dialog first
+                androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                    .setTitle("We'd Love Your Feedback")
+                    .setMessage("Would you like to share your experience with us?")
+                    .setPositiveButton("Give Feedback") { _, _ ->
+
+                        // Navigate to feedback fragment
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, feedbackFragment())
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                    .setNegativeButton("Maybe Later") { _, _ ->
+
+                        // Navigate to Home Fragment
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, HomeFragment())
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                    .show()
+            }
+        }
+    }
 }
