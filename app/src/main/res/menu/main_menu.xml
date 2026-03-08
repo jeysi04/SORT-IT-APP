@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-
         <item
             android:id="@+id/nav_home"
             android:title="Home"
@@ -16,9 +14,8 @@
             android:icon="@drawable/aboutmenu"/>
 
         <item
-            android:id="@+id/nav_recycle"
-            android:title="Recycle"
-            android:icon="@drawable/recyclemenu" />
+            android:id="@+id/nav_rec"
+            android:title=""/>
 
         <item
             android:id="@+id/nav_faq"
@@ -29,7 +26,5 @@
             android:id="@+id/nav_feedback"
             android:title="Feedback"
             android:icon="@drawable/feedbackmenu"/>
-
-    </group>
 
 </menu>

@@ -73,7 +73,7 @@ class RecyclableresultFragment : Fragment() {
         if (category == "NonRec"){
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
-            catText.visibility = View.GONE
+            catText.text = "Please dispose this item in the general waste bin."
             typeText.visibility = View.GONE
             illustbg.setImageResource(R.drawable.nonrec_illus)
             illustclass.setImageResource(R.drawable.nonrecyclable)

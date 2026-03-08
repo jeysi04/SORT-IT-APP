@@ -1,22 +1,25 @@
 package com.example.sort_it_json
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
+import androidx.core.view.ViewCompat
+import android.content.res.ColorStateList
+import androidx.core.widget.ImageViewCompat
+
 
 class MainActivity : AppCompatActivity() {
 
-
+    lateinit var homeBtn: ImageButton
+    lateinit var aboutBtn: ImageButton
+    lateinit var recycleBtn: ImageButton
+    lateinit var faqBtn: ImageButton
+    lateinit var feedbackBtn: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Handle Splash Screen before setContentView
@@ -24,78 +27,99 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.itemIconTintList = null  // keep original icon colors
+        //FOR THE MENU TO BE ABOVE APP BUTTONS
+        val root = findViewById<View>(R.id.rootLayout)
 
-        // Set Home as default selection on startup
-        if (savedInstanceState == null) {
-            bottomNav.selectedItemId = R.id.nav_home
-            loadFragment(HomeFragment())
+        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
+
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.setPadding(
+                systemBars.left,
+                0,
+                systemBars.right,
+                systemBars.bottom
+            )
+            insets
         }
 
-        //Finds the button on the MainActivity fragment
-        val logoButton = findViewById<ImageButton>(R.id.logoButton)
 
-        // Setting the logo icon to go to home page
-        //Setting a click listener
-        logoButton.setOnClickListener {
-            // Start a fragment transaction using the Activity's FragmentManager
-            supportFragmentManager.beginTransaction()
-                // Replace whatever fragment is currently inside fragment_container
-                // with a new instance of HomeFragment
-                .replace(R.id.fragment_container, HomeFragment())
+            //Finds the button on the MainActivity fragment
+            val logoButton = findViewById<ImageButton>(R.id.logoButton)
 
-                // This allows the user to press the back button
-                .addToBackStack(null)
-                .commit()
-        }
+            // Setting the logo icon to go to home page
+            //Setting a click listener
+            logoButton.setOnClickListener {
+                // Start a fragment transaction using the Activity's FragmentManager
+                supportFragmentManager.beginTransaction()
+                    // Replace whatever fragment is currently inside fragment_container
+                    // with a new instance of HomeFragment
+                    .replace(R.id.fragment_container, HomeFragment())
 
-        // Set a listener that triggers when a BottomNavigationView item is selected
-        bottomNav.setOnItemSelectedListener { item ->
-
-            // Determine which menu item was clicked using its ID
-            // Create the corresponding Fragment based on the selected item
-            val fragment = when(item.itemId) {
-
-                // If "Home" is clicked, create a new HomeFragment
-                R.id.nav_home -> HomeFragment()
-
-                // If "About" is clicked, create a new AboutFragment
-                R.id.nav_about -> AboutFragment()
-
-                // If "Recycle" is clicked, create a new SampleDecideFragment
-                R.id.nav_recycle -> SampleDecideFragment()
-
-                // If "FAQ" is clicked, create a new FaqFragment
-                R.id.nav_faq -> FaqFragment()
-
-                // If none of the IDs match, return null
-                else -> null
+                    // This allows the user to press the back button
+                    .addToBackStack(null)
+                    .commit()
             }
 
-            // Check if a valid fragment was created
-            if (fragment != null) {
+        // Buttons
+        homeBtn = findViewById<ImageButton>(R.id.nav_home)
+        aboutBtn = findViewById<ImageButton>(R.id.nav_about)
+        recycleBtn = findViewById<ImageButton>(R.id.nav_rec)
+        faqBtn = findViewById<ImageButton>(R.id.nav_faq)
+        feedbackBtn = findViewById<ImageButton>(R.id.nav_feedback)
 
-                // Call your custom function to load/replace the fragment
-                loadFragment(fragment)
+        // Default fragment
+        replaceFragment(HomeFragment())
 
-                // Return true to indicate the selection was handled successfully
-                true
-            } else {
-
-                // Return false if no fragment matched (selection not handled)
-                false
-            }
+        // Button Click Listeners
+        homeBtn.setOnClickListener {
+            resetNavColors()
+            ImageViewCompat.setImageTintList(homeBtn, ColorStateList.valueOf(getColor(R.color.yellow)))
+            replaceFragment(HomeFragment())
         }
 
+        aboutBtn.setOnClickListener {
+            resetNavColors()
+            ImageViewCompat.setImageTintList(aboutBtn, ColorStateList.valueOf(getColor(R.color.yellow)))
+            replaceFragment(AboutFragment())
+        }
+
+        recycleBtn.setOnClickListener {
+            resetNavColors()
+            ImageViewCompat.setImageTintList(recycleBtn, ColorStateList.valueOf(getColor(R.color.yellow)))
+            replaceFragment(SampleDecideFragment())
+        }
+
+        faqBtn.setOnClickListener {
+            resetNavColors()
+            ImageViewCompat.setImageTintList(faqBtn, ColorStateList.valueOf(getColor(R.color.yellow)))
+            replaceFragment(FaqFragment())
+        }
+
+        feedbackBtn.setOnClickListener {
+            resetNavColors()
+            ImageViewCompat.setImageTintList(feedbackBtn, ColorStateList.valueOf(getColor(R.color.yellow)))
+            replaceFragment(feedbackFragment())
+        }
+
+
+
+        }
+
+    //Function to reset colors of buttons to white
+    fun resetNavColors() {
+        ImageViewCompat.setImageTintList(homeBtn, ColorStateList.valueOf(getColor(R.color.white)))
+        ImageViewCompat.setImageTintList(aboutBtn, ColorStateList.valueOf(getColor(R.color.white)))
+        ImageViewCompat.setImageTintList(recycleBtn, ColorStateList.valueOf(getColor(R.color.white)))
+        ImageViewCompat.setImageTintList(faqBtn, ColorStateList.valueOf(getColor(R.color.white)))
+        ImageViewCompat.setImageTintList(feedbackBtn, ColorStateList.valueOf(getColor(R.color.white)))
     }
 
-    //Function to replace the existing fragment with the fragment on the parameter
-    fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)  // optional, allows back navigation
-            .commit()
+    // Function to change fragment
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 
     fun finishOnboarding() {
@@ -111,4 +135,5 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, SampleDecideFragment())
             .commit()
     }
+
 }
