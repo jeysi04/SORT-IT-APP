@@ -5,12 +5,12 @@
     android:layout_height="130dp"
     android:layout_margin="5dp"
     app:cardCornerRadius="16dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="#2A3F3F">
+    app:cardElevation="10dp"
+    android:translationZ="4dp"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    android:backgroundTint="@android:color/white">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,6 +44,5 @@
                 android:scaleType="centerCrop" />
 
         </LinearLayout>
-    </FrameLayout>
 
 </com.google.android.material.card.MaterialCardView>
