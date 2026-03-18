@@ -14,8 +14,7 @@
             android:icon="@drawable/aboutmenu"/>
 
         <item
-            android:id="@+id/nav_rec"
-            android:title=""/>
+            android:id="@+id/nav_recycle" />
 
         <item
             android:id="@+id/nav_faq"

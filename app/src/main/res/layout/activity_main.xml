@@ -1,25 +1,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:elevation="0dp">
 
-    <!-- Fragment Container -->
+    <!-- Fragment container -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:elevation="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_menu"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"/>
 
-    <!-- Top Right Logo -->
+    <!-- Logo button at top right -->
     <ImageButton
         android:id="@+id/logoButton"
         android:layout_width="wrap_content"
@@ -29,103 +29,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="23dp"
-        android:layout_marginEnd="16dp"
-        />
+        android:layout_marginEnd="16dp"/>
 
     <!-- Bottom Navigation -->
-
-        <LinearLayout
-        android:id="@+id/bottom_menu"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
         android:background="#2A3F3F"
-        android:gravity="center"
-        android:orientation="horizontal"
+        app:itemIconSize="24dp"
+        app:itemIconTint="@null"
+        app:labelVisibilityMode="unlabeled"
+        app:itemBackground="@android:color/transparent"
+        app:itemActiveIndicatorStyle="@style/CustomActiveIndicator"
+        app:itemRippleColor="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/main_menu" />
+
+    <!-- Center FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_center"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_marginBottom="56dp"
+        android:src="@drawable/recyclemenu"
+        app:backgroundTint="#467750"
+        app:tint="@android:color/white"
+        android:scaleType="centerInside"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/nav_home"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:src="@drawable/homemenu"
-                app:tint="@android:color/white"
-                android:scaleType="centerInside"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/nav_about"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:src="@drawable/aboutmenu"
-                app:tint="@android:color/white"
-                android:scaleType="centerInside"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/recycle_button_bg">
-
-            <ImageButton
-                android:id="@+id/nav_rec"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:src="@drawable/recyclemenu"
-                app:tint="@android:color/white"
-                android:scaleType="centerInside"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/nav_faq"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:src="@drawable/faqmenu"
-                app:tint="@android:color/white"
-                android:scaleType="centerInside"/>
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/nav_feedback"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:src="@drawable/feedbackmenu"
-                app:tint="@android:color/white"
-                android:scaleType="centerInside"/>
-        </FrameLayout>
-
-    </LinearLayout>
+        app:fabSize="normal"
+        app:shapeAppearanceOverlay="@style/RecycleShape"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
