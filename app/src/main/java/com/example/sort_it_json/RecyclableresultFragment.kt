@@ -2,6 +2,8 @@ package com.example.sort_it_json
 
 import android.media.Image
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +45,6 @@ class RecyclableresultFragment : Fragment() {
         val illustbg = view.findViewById<ImageView>(R.id.illustration)
         val illustclass = view.findViewById<ImageView>(R.id.illust_classification)
         val questbot = view.findViewById<TextView>(R.id.questionText)
-        val buttonNo = view.findViewById<TextView>(R.id.buttonNo)
 
         // Changes the subcategory text based on the analyzed subcategory
         when (category) {
@@ -153,30 +154,10 @@ class RecyclableresultFragment : Fragment() {
 
         //If button no is click, go back to home
         btnNo.setOnClickListener {
-            val fragment = HomeFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
-
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                showFeedbackDialog {
-                    isEnabled = false
-                    hasShownDialog = true
-                    requireActivity().onBackPressedDispatcher.onBackPressed()
-                }
-            }
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-
-        buttonNo.setOnClickListener {
             showFeedbackDialog()
             hasShownDialog = true
 
-            val fragment = SampleDecideFragment()
+            val fragment = HomeFragment()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
@@ -188,15 +169,46 @@ class RecyclableresultFragment : Fragment() {
 
     private fun showFeedbackDialog(onLeave: (() -> Unit)? = null) {
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("We'd Love Your Feedback")
-            .setMessage("Would you like to share your experience with us?")
+        val title = SpannableString("We'd Love Your Feedback").apply {
+            setSpan(
+                ForegroundColorSpan(requireContext().getColor(R.color.black)),
+                0, length, 0
+            )
+        }
+
+        val message = SpannableString("Would you like to share your experience with us?").apply {
+            setSpan(
+                ForegroundColorSpan(requireContext().getColor(R.color.black)),
+                0, length, 0
+            )
+        }
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
             .setPositiveButton("Give Feedback") { _, _ ->
-                // Navigate to feedback screen here
+                val fragment = feedbackFragment()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
             }
             .setNegativeButton("Maybe Later") { _, _ ->
                 onLeave?.invoke()
             }
-            .show()
+            .create()
+
+        dialog.show()
+
+        // 🎨 Change button colors
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(requireContext().getColor(R.color.darkgreen)) // example
+
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(requireContext().getColor(R.color.black)) // example
+
+        // 🎨 Change background color
+        dialog.window?.setBackgroundDrawableResource(R.color.white)
     }
+
 }
