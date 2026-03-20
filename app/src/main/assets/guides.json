@@ -27,21 +27,21 @@
     "category": "flatGlass",
     "title": "Recycling Flat Glass at a Collection Facility",
     "image": "coverflatglass1",
-    "html_file": "recycling_guides/glass/flatGlass/method1.html"
+    "html_file": "recycling_guides/glass/flat_glass/method1.html"
   },
   {
     "id": "flat_glass_recycling",
     "category": "flatGlass",
     "title": "Decorative Garden Borders Using Flat Glass",
     "image": "coverflatglass2",
-    "html_file": "recycling_guides/glass/flatGlass/method2.html"
+    "html_file": "recycling_guides/glass/flat_glass/method2.html"
   },
   {
     "id": "flat_glass_recycling",
     "category": "flatGlass",
     "title": "Garden Stepping Stones",
     "image": "coverflatglass3",
-    "html_file": "recycling_guides/glass/flatGlass/method3.html"
+    "html_file": "recycling_guides/glass/flat_glass/method3.html"
   },
 
 
@@ -49,21 +49,21 @@
     "id": "cullets_recycle",
     "category": "cullets",
     "title": "How to Recycle Cullet Glass",
-    "image": "paperbag",
+    "image": "coverculletglass1",
     "html_file": "recycling_guides/glass/cullets/method1.html"
   },
   {
     "id": "cullets_recycle",
     "category": "cullets",
     "title": "Aggregate Substitute in Concrete",
-    "image": "paperbag",
+    "image": "coverculletglass2",
     "html_file": "recycling_guides/glass/cullets/method2.html"
   },
   {
     "id": "cullets_recycle",
     "category": "cullets",
     "title": "Water Filtration Layers",
-    "image": "paperbag",
+    "image": "coverculletglass3",
     "html_file": "recycling_guides/glass/cullets/method3.html"
   },
 
@@ -72,21 +72,21 @@
     "id": "aluminum_recycling",
     "category": "aluminum_tin",
     "title": "Traditional Recycling of Aluminum Cans",
-    "image": "paperbag",
+    "image": "coveraluminumtin1",
     "html_file": "recycling_guides/metal/aluminum_tin/method1.html"
   },
   {
     "id": "aluminum_recycling",
     "category": "aluminum_tin",
     "title": "How to Make a Candle Holders and Lanterns",
-    "image": "paperbag",
+    "image": "coveraluminumtin2",
     "html_file": "recycling_guides/metal/aluminum_tin/method2.html"
   },
   {
     "id": "aluminum_recycling",
     "category": "aluminum_tin",
     "title": "How to Make a Makeup Brush Holder",
-    "image": "paperbag",
+    "image": "coveraluminumtin3",
     "html_file": "recycling_guides/metal/aluminum_tin/method3.html"
   },
 
@@ -95,21 +95,21 @@
     "id": "copper_scrap_recycling",
     "category": "copper",
     "title": "Recycle at a Scrap Yard or Metal Recycler",
-    "image": "paperbag",
+    "image": "covercopper1",
     "html_file": "recycling_guides/metal/copper/method1.html"
   },
   {
     "id": "copper_scrap_recycling",
     "category": "copper",
     "title": "How to Make a Wire Heart Sculpture",
-    "image": "paperbag",
+    "image": "covercopper2",
     "html_file": "recycling_guides/metal/copper/method2.html"
   },
   {
     "id": "copper_scrap_recycling",
     "category": "copper",
     "title": "How to Make a Wire Jewelry Holder",
-    "image": "paperbag",
+    "image": "covercopper3",
     "html_file": "recycling_guides/metal/copper/method3.html"
   },
 
@@ -118,21 +118,21 @@
     "id": "steel_scrap_recycling",
     "category": "steel",
     "title": "Scrap Metal Recycling (Industrial Recycling)",
-    "image": "paperbag",
+    "image": "coversteel1",
     "html_file": "recycling_guides/metal/steel/method1.html"
   },
   {
     "id": "steel_scrap_recycling",
     "category": "steel",
     "title": "Mini Water Fountains using Old Pots and Pans",
-    "image": "paperbag",
+    "image": "coversteel2",
     "html_file": "recycling_guides/metal/steel/method2.html"
   },
   {
     "id": "steel_scrap_recycling",
     "category": "steel",
     "title": "Garden Tool Storage using Old Pots and Pans",
-    "image": "paperbag",
+    "image": "coversteel3",
     "html_file": "recycling_guides/metal/steel/method3.html"
   },
 
