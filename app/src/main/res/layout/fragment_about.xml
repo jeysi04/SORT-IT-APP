@@ -28,7 +28,7 @@
                 android:id="@+id/yellowlogoicon"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="90dp"
                 android:contentDescription="logo_yellow_icon_desc"
                 android:src="@drawable/about_applogo" />
 
@@ -309,8 +309,8 @@
                     android:padding="8dp">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:contentDescription="gmail_icon_desc"
                         android:src="@drawable/gmaillogo" />
 
