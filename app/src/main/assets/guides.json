@@ -141,21 +141,21 @@
     "id": "mp_recycle",
     "category": "MP",
     "title": "How to Make an Origami Flower",
-    "image": "paperbag",
+    "image": "covermp1",
     "html_file": "recycling_guides/paper/MP/method1.html"
   },
   {
     "id": "mp_recycle",
     "category": "MP",
     "title": "How to Make Magazine Paper Baskets",
-    "image": "paperbag",
+    "image": "covermp2",
     "html_file": "recycling_guides/paper/MP/method2.html"
   },
   {
     "id": "mp_recycle",
     "category": "MP",
     "title": "How to Make a Placemats or Coasters",
-    "image": "paperbag",
+    "image": "covermp3",
     "html_file": "recycling_guides/paper/MP/method3.html"
   },
 
@@ -164,21 +164,21 @@
     "id": "occ_recycle",
     "category": "OCC",
     "title": "How to Make a Pet House from Old Corrugated Cardboard",
-    "image": "paperbag",
+    "image": "coverocc1",
     "html_file": "recycling_guides/paper/OCC/method1.html"
   },
   {
     "id": "occ_recycle",
     "category": "OCC",
     "title": "How to Make Picture Frames",
-    "image": "paperbag",
+    "image": "coverocc2",
     "html_file": "recycling_guides/paper/OCC/method2.html"
   },
   {
     "id": "occ_recycle",
     "category": "OCC",
     "title": "How to Make a Lamp from Carton",
-    "image": "paperbag",
+    "image": "coverocc3",
     "html_file": "recycling_guides/paper/OCC/method3.html"
   },
 
@@ -187,21 +187,21 @@
     "id": "onp_recycle",
     "category": "ONP",
     "title": "Recycle Old/New Paper",
-    "image": "paperbag",
+    "image": "coveronp1",
     "html_file": "recycling_guides/paper/ONP/method1.html"
   },
   {
     "id": "onp_paper_crafts",
     "category": "ONP",
     "title": "Paper Craft Projects",
-    "image": "paperbag",
+    "image": "coveronp2",
     "html_file": "recycling_guides/paper/ONP/method2.html"
   },
   {
     "id": "onp_paper_crafts",
     "category": "ONP",
     "title": "Use Newspapers for Composting",
-    "image": "paperbag",
+    "image": "coveronp3",
     "html_file": "recycling_guides/paper/ONP/method4.html"
   },
 
