@@ -37,12 +37,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#2A3F3F"
+        app:itemActiveIndicatorStyle="@style/CustomActiveIndicator"
+        app:itemBackground="@android:color/transparent"
         app:itemIconSize="24dp"
         app:itemIconTint="@null"
-        app:labelVisibilityMode="unlabeled"
-        app:itemBackground="@android:color/transparent"
-        app:itemActiveIndicatorStyle="@style/CustomActiveIndicator"
         app:itemRippleColor="@null"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_menu" />
 
@@ -51,17 +51,17 @@
         android:id="@+id/fab_center"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="8dp"
+        android:padding="10dp"
+        android:scaleType="centerInside"
         android:src="@drawable/recyclemenu"
         app:backgroundTint="#467750"
-        app:tint="@android:color/white"
-        android:scaleType="centerInside"
-        android:padding="10dp"
-        app:fabSize="normal"
-        app:shapeAppearanceOverlay="@style/RecycleShape"
         app:elevation="6dp"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:shapeAppearanceOverlay="@style/RecycleShape"
+        app:tint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

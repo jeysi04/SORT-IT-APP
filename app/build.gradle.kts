@@ -9,6 +9,7 @@ android {
         version = release(36)
     }
 
+
     defaultConfig {
         applicationId = "com.example.sort_it_json"
         minSdk = 24

@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.itemIconTintList = null  // keep original icon colors
+
 
         // Set Home as default selection on startup
         if (savedInstanceState == null) {
@@ -63,6 +63,22 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
+        ViewCompat.setOnApplyWindowInsetsListener(bottomNav) { _, insets ->
+            val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            bottomNav.setPadding(0, 0, 0, navBarInsets.bottom)
+            fabCenter.translationY = -navBarInsets.bottom.toFloat()
+
+            insets
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(fabCenter) { _, insets ->
+            val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            fabCenter.translationY = -navBarInsets.bottom.toFloat()
+
+            insets
+        }
 
         // Set a listener that triggers when a BottomNavigationView item is selected
         bottomNav.setOnItemSelectedListener { item ->
