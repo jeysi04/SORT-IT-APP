@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 // Replace whatever fragment is currently inside fragment_container
                 // with a new instance of HomeFragment
-                .replace(R.id.fragment_container, SampleDecideFragment())
+                .replace(R.id.fragment_container, CameraFragment())
 
                 // This allows the user to press the back button
                 .addToBackStack(null)
@@ -95,6 +95,9 @@ class MainActivity : AppCompatActivity() {
 
                 // If "FAQ" is clicked, create a new FaqFragment
                 R.id.nav_faq -> FaqFragment()
+
+                // If "Feedback" is clicked, create a new Feedback Fragment
+                R.id.nav_feedback -> feedbackFragment()
 
                 // If none of the IDs match, return null
                 else -> null
