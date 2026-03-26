@@ -210,21 +210,21 @@
     "id": "swl_recycle",
     "category": "SWL",
     "title": "How to Select White Ledger Paper for Recycling",
-    "image": "paperbag",
+    "image": "coverswl1",
     "html_file": "recycling_guides/paper/SWL/method1.html"
   },
   {
     "id": "swl_recycle",
     "category": "SWL",
     "title": "How to Make a Small Notebook",
-    "image": "paperbag",
+    "image": "coverswl2",
     "html_file": "recycling_guides/paper/SWL/method2.html"
   },
   {
     "id": "swl_recycle",
     "category": "SWL",
     "title": "How to Make Gift Wrapping",
-    "image": "paperbag",
+    "image": "coverswl3",
     "html_file": "recycling_guides/paper/SWL/method3.html"
   },
 
@@ -233,21 +233,21 @@
     "id": "ubc_recycle",
     "category": "UBC",
     "title": "How to Make a Small Planter or Seed Starter",
-    "image": "paperbag",
+    "image": "coverubc1",
     "html_file": "recycling_guides/paper/UBC/method1.html"
   },
   {
     "id": "ubc_recycle",
     "category": "UBC",
     "title": "How to Make a DIY Bird Feeder",
-    "image": "paperbag",
+    "image": "coverubc2",
     "html_file": "recycling_guides/paper/UBC/method2.html"
   },
   {
     "id": "ubc_recycle",
     "category": "UBC",
     "title": "How to Use Beverage Cartons as Storage or Organize",
-    "image": "paperbag",
+    "image": "coverubc3",
     "html_file": "recycling_guides/paper/UBC/method3.html"
   },
 
@@ -256,21 +256,21 @@
     "id": "hdpe_recycle",
     "category": "HDPE",
     "title": "How to Make Storage Containers",
-    "image": "paperbag",
+    "image": "coverhdpe1",
     "html_file": "recycling_guides/plastic/HDPE/method1.html"
   },
   {
     "id": "hdpe_recycle",
     "category": "HDPE",
     "title": "How to Build a Mini Compost Scoop",
-    "image": "paperbag",
+    "image": "coverhdpe2",
     "html_file": "recycling_guides/plastic/HDPE/method2.html"
   },
   {
     "id": "hdpe_recycle",
     "category": "HDPE",
     "title": "How to Make a DIY Funnel",
-    "image": "paperbag",
+    "image": "coverhdpe3",
     "html_file": "recycling_guides/plastic/HDPE/method3.html"
   },
 
@@ -279,21 +279,21 @@
     "id": "ldpe_recycle",
     "category": "LDPE",
     "title": "How to Create Stuffing for Cushions or Pet Beds",
-    "image": "paperbag",
+    "image": "coverldpe1",
     "html_file": "recycling_guides/plastic/LDPE/method1.html"
   },
   {
     "id": "ldpe_recycle",
     "category": "LDPE",
     "title": "How to Make Jump Rope",
-    "image": "paperbag",
+    "image": "coverldpe2",
     "html_file": "recycling_guides/plastic/LDPE/method2.html"
   },
   {
     "id": "ldpe_recycle",
     "category": "LDPE",
     "title": "How to Make a Garden Weed Barriers",
-    "image": "paperbag",
+    "image": "coverldpe3",
     "html_file": "recycling_guides/plastic/LDPE/method3.html"
   },
 
@@ -302,21 +302,21 @@
     "id": "others_recycle",
     "category": "others",
     "title": "Return for Professional Recycling",
-    "image": "paperbag",
+    "image": "coverothers1",
     "html_file": "recycling_guides/plastic/Others/method1.html"
   },
   {
     "id": "others_recycle",
     "category": "others",
     "title": "How to Convert Containers into Water Storage (Non-Drinking Use)",
-    "image": "paperbag",
+    "image": "coverothers2",
     "html_file": "recycling_guides/plastic/Others/method2.html"
   },
   {
     "id": "others_recycle",
     "category": "others",
     "title": "How to Make DIY Diskette Coasters",
-    "image": "paperbag",
+    "image": "coverothers3",
     "html_file": "recycling_guides/plastic/Others/method3.html"
   },
 
@@ -325,21 +325,21 @@
     "id": "pet_recycle",
     "category": "PET",
     "title": "How to Create a Self-Watering Plant Bottle",
-    "image": "paperbag",
+    "image": "coverpet1",
     "html_file": "recycling_guides/plastic/PET/method1.html"
   },
   {
     "id": "pet_recycle",
     "category": "PET",
     "title": "How to Create a Hanging Herb Garden",
-    "image": "paperbag",
+    "image": "coverpet2",
     "html_file": "recycling_guides/plastic/PET/method2.html"
   },
   {
     "id": "pet_recycle",
     "category": "PET",
     "title": "How to Make a Plastic Bottle Lamp",
-    "image": "paperbag",
+    "image": "coverpet3",
     "html_file": "recycling_guides/plastic/PET/method3.html"
   },
 
@@ -348,21 +348,21 @@
     "id": "pp_recycle",
     "category": "PP",
     "title": "Reuse as Storage Containers",
-    "image": "paperbag",
+    "image": "coverpp1",
     "html_file": "recycling_guides/plastic/PP/method1.html"
   },
   {
     "id": "pp_recycle",
     "category": "PP",
     "title": "How to Make a Desk Organizer from Bottle Caps or Containers",
-    "image": "paperbag",
+    "image": "coverpp2",
     "html_file": "recycling_guides/plastic/PP/method2.html"
   },
   {
     "id": "pp_recycle",
     "category": "PP",
     "title": "How to Create Plant Pots or Seed Starters",
-    "image": "paperbag",
+    "image": "coverpp3",
     "html_file": "recycling_guides/plastic/PP/method3.html"
   },
 
@@ -371,21 +371,21 @@
     "id": "ps_recycle",
     "category": "PS",
     "title": "How to Make Decorative Crafts",
-    "image": "paperbag",
+    "image": "coverps1",
     "html_file": "recycling_guides/plastic/PS/method1.html"
   },
   {
     "id": "ps_recycle",
     "category": "PS",
     "title": "How to Make a Pin Cushion",
-    "image": "paperbag",
+    "image": "coverps2",
     "html_file": "recycling_guides/plastic/PS/method2.html"
   },
   {
     "id": "ps_recycle",
     "category": "PS",
     "title": "How to Make DIY Floatation Devices",
-    "image": "paperbag",
+    "image": "coverps3",
     "html_file": "recycling_guides/plastic/PS/method3.html"
   },
 
