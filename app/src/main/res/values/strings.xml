@@ -28,8 +28,22 @@
     <string name="glasstype_glassbotlle">Type: Glass Bottle</string>
     <string name="glasstype_flatglass">Type: Flat Bottle</string>
     <string name="glasstype_cullet">Type: Cullets</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Feedback Strings -->
+    <string name="rate_experience">Rate your Experience</string>
+    <string name="improve_suggestion">Select what we can improve on:</string>
+    <string name="feedback_hint">Tell us more about your experience...</string>
+    <string name="send_feedback">Send Feedback</string>
+
+    <!-- Feedback Tag Strings -->
+    <string name="tag_accuracy">Accuracy of\nobject recognition</string>
+    <string name="tag_sorting">Sorting suggestions</string>
+    <string name="tag_design">Visual design</string>
+    <string name="tag_reliability">Reliability of results</string>
+    <string name="tag_response">Response time</string>
+    <string name="tag_ease">Ease of use</string>
+
+
 
 
 </resources>

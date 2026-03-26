@@ -394,21 +394,21 @@
     "id": "pvc_recycle",
     "category": "PVC",
     "title": "How to Make Plant Supports or Trellises",
-    "image": "paperbag",
+    "image": "coverpvc1",
     "html_file": "recycling_guides/plastic/PVC/method1.html"
   },
   {
     "id": "pvc_recycle",
     "category": "PVC",
     "title": "How to Make a Cable or Cord Holder",
-    "image": "paperbag",
+    "image": "coverpvc2",
     "html_file": "recycling_guides/plastic/PVC/method2.html"
   },
   {
     "id": "pvc_recycle",
     "category": "PVC",
     "title": "How to Make DIY Rainwater Diverter",
-    "image": "paperbag",
+    "image": "coverpvc3",
     "html_file": "recycling_guides/plastic/PVC/method3.html"
   },
 
