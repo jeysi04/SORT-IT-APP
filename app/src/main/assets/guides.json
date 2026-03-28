@@ -417,21 +417,21 @@
     "id": "cdfp_recycle",
     "category": "CDFP",
     "title": "Reuse as Trash Liners",
-    "image": "paperbag",
+    "image": "covercdfp1",
     "html_file": "recycling_guides/residual/CDFP/method1.html"
   },
   {
     "id": "cdfp_recycle",
     "category": "CDFP",
     "title": "How to Create Bags Out of Tarpaulin",
-    "image": "paperbag",
+    "image": "covercdfp2",
     "html_file": "recycling_guides/residual/CDFP/method2.html"
   },
   {
     "id": "cdfp_recycle",
     "category": "CDFP",
     "title": "How to Make an Outdoor Covers and Protectors from Tarpaulin",
-    "image": "paperbag",
+    "image": "covercdfp3",
     "html_file": "recycling_guides/residual/CDFP/method3.html"
   },
 
@@ -440,21 +440,21 @@
     "id": "leather_recycle",
     "category": "leather",
     "title": "How to Make Leather Keychains",
-    "image": "paperbag",
+    "image": "coverleather1",
     "html_file": "recycling_guides/residual/leather/method1.html"
   },
   {
     "id": "leather_recycle",
     "category": "leather",
     "title": "How to Make Leather Bracelets",
-    "image": "paperbag",
+    "image": "coverleather2",
     "html_file": "recycling_guides/residual/leather/method2.html"
   },
   {
     "id": "leather_recycle",
     "category": "leather",
     "title": "How to Make Jewelry Holders",
-    "image": "paperbag",
+    "image": "coverleather3",
     "html_file": "recycling_guides/residual/leather/method3.html"
   },
 
@@ -463,21 +463,21 @@
     "id": "rubber_recycle",
     "category": "rubber",
     "title": "How to Make Rubber Hair Ties",
-    "image": "paperbag",
+    "image": "coverrubber1",
     "html_file": "recycling_guides/residual/rubber/method1.html"
   },
   {
     "id": "rubber_recycle",
     "category": "rubber",
     "title": "How to Make Garden Stepping Pads",
-    "image": "paperbag",
+    "image": "coverrubber2",
     "html_file": "recycling_guides/residual/rubber/method2.html"
   },
   {
     "id": "rubber_recycle",
     "category": "rubber",
     "title": "How to Make DIY Doorstops",
-    "image": "paperbag",
+    "image": "coverrubber3",
     "html_file": "recycling_guides/residual/rubber/method3.html"
   },
 
@@ -487,21 +487,21 @@
     "id": "textiles_recycle",
     "category": "textiles",
     "title": "Donate Usable Clothing",
-    "image": "paperbag",
+    "image": "covertextiles1",
     "html_file": "recycling_guides/residual/textiles/method1.html"
   },
   {
     "id": "textiles_recycle",
     "category": "textiles",
     "title": "How to Make DIY Hair Scrunchies from Used Clothes",
-    "image": "paperbag",
+    "image": "covertextiles2",
     "html_file": "recycling_guides/residual/textiles/method2.html"
   },
   {
     "id": "textiles_recycle",
     "category": "textiles",
     "title": "How to Turn Used Clothes into Rags",
-    "image": "paperbag",
+    "image": "covertextiles3",
     "html_file": "recycling_guides/residual/textiles/method3.html"
   }
 
