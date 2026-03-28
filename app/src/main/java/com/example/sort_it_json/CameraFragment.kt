@@ -7,7 +7,7 @@ import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -20,7 +20,7 @@ import java.util.concurrent.Executors
 
 class CameraFragment : Fragment() {
 
-    private lateinit var captureButton: Button
+    private lateinit var captureButton: ImageButton
     private lateinit var previewView: PreviewView
     private lateinit var cameraExecutor: ExecutorService
     private var imageCapture: ImageCapture? = null
