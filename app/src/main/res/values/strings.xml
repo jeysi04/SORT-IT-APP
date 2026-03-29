@@ -42,8 +42,8 @@
     <string name="tag_reliability">Reliability of results</string>
     <string name="tag_response">Response time</string>
     <string name="tag_ease">Ease of use</string>
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

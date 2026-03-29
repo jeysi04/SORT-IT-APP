@@ -2,36 +2,27 @@ package com.example.sort_it_json
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import java.io.File
 
-// CODE TO DISPLAY PICTURE TAKEN
+class ConfirmImageFragment : Fragment(R.layout.fragment_confirm_image) {
 
-class ConfirmImageFragment : Fragment() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    private lateinit var imageView: ImageView
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_confirm_image, container, false)
-
-        imageView = view.findViewById(R.id.imageView)
+        val imageView = view.findViewById<ImageView>(R.id.imageView)
 
         val photoPath = arguments?.getString("photo_path")
-        if (photoPath != null) {
-            // Load bitmap from file
-            val bitmap = BitmapFactory.decodeFile(photoPath)
 
-            if (bitmap != null) {
-                imageView.setImageBitmap(bitmap) // Display the image
+        photoPath?.let {
+            val file = File(it)
+
+            if (file.exists()) {
+                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                imageView.setImageBitmap(bitmap)
             }
         }
-
-        return view
     }
 }
