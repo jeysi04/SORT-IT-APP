@@ -263,7 +263,7 @@
                         android:layout_height="53dp"
                         android:layout_marginTop="10dp"
                         android:contentDescription="logo_yellow_icon_desc"
-                        android:src="@drawable/member" />
+                        android:src="@drawable/member_melrick" />
 
                     <TextView
                         android:layout_width="match_parent"
