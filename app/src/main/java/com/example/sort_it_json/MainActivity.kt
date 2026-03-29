@@ -25,18 +25,28 @@ class MainActivity : AppCompatActivity() {
             val photoPath = result.data?.getStringExtra("photo_path")
 
             if (!photoPath.isNullOrEmpty()) {
-                val fragment = ConfirmImageFragment()
-                fragment.arguments = Bundle().apply {
+                val confirmFragment = ConfirmImageFragment()
+                confirmFragment.arguments = Bundle().apply {
                     putString("photo_path", photoPath)
                 }
 
+                // Hide the current fragment and show ConfirmImageFragment on top
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
+                    .hide(activeFragment)
+                    .add(R.id.fragment_container, confirmFragment, "confirm_image")
                     .addToBackStack(null)
                     .commit()
             }
         }
     }
+
+    // Keep references to fragments
+    private val homeFragment = HomeFragment()
+    private val aboutFragment = AboutFragment()
+    private val faqFragment = FaqFragment()
+    private val feedbackFragment = feedbackFragment()
+
+    private var activeFragment: Fragment = homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Handle Splash Screen before setContentView
@@ -47,26 +57,26 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.itemIconTintList = null  // Keep original icon colors
 
-        // Set Home as default selection on startup
-        if (savedInstanceState == null) {
-            bottomNav.selectedItemId = R.id.nav_home
-            loadFragment(HomeFragment())
-        }
+        // Add all fragments once, hide all except home
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, feedbackFragment, "feedback").hide(feedbackFragment)
+            .add(R.id.fragment_container, faqFragment, "faq").hide(faqFragment)
+            .add(R.id.fragment_container, aboutFragment, "about").hide(aboutFragment)
+            .add(R.id.fragment_container, homeFragment, "home")
+            .commit()
 
         // Logo button to go home
         val logoButton = findViewById<ImageButton>(R.id.logoButton)
         logoButton.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, HomeFragment())
-                .addToBackStack(null)
-                .commit()
+            switchFragment(homeFragment)
+            bottomNav.selectedItemId = R.id.nav_home
         }
 
         // FAB button to open camera
         val fabCenter = findViewById<FloatingActionButton>(R.id.fab_center)
         fabCenter.setOnClickListener {
             val intent = Intent(this, CameraActivity::class.java)
-            cameraLauncher.launch(intent) // launch camera and receive result
+            cameraLauncher.launch(intent)
         }
 
         // Adjust bottom nav and FAB for system bars
@@ -86,15 +96,15 @@ class MainActivity : AppCompatActivity() {
         // Bottom navigation listener
         bottomNav.setOnItemSelectedListener { item ->
             val fragment: Fragment? = when (item.itemId) {
-                R.id.nav_home -> HomeFragment()
-                R.id.nav_about -> AboutFragment()
-                R.id.nav_faq -> FaqFragment()
-                R.id.nav_feedback -> feedbackFragment()
+                R.id.nav_home -> homeFragment
+                R.id.nav_about -> aboutFragment
+                R.id.nav_faq -> faqFragment
+                R.id.nav_feedback -> feedbackFragment
                 else -> null
             }
 
             if (fragment != null) {
-                loadFragment(fragment)
+                switchFragment(fragment)
                 true
             } else {
                 false
@@ -102,12 +112,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Function to load/replace fragments
-    private fun loadFragment(fragment: Fragment) {
+    // Switch fragments without recreating
+    private fun switchFragment(target: Fragment) {
+        if (activeFragment == target) return
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
+            .hide(activeFragment)
+            .show(target)
             .commit()
+
+        activeFragment = target
     }
 
     // Optional onboarding finish function
@@ -118,8 +132,6 @@ class MainActivity : AppCompatActivity() {
         val dots = findViewById<View>(R.id.dots_indicator)
         dots.visibility = View.GONE
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, SampleDecideFragment())
-            .commit()
+        switchFragment(SampleDecideFragment())
     }
 }

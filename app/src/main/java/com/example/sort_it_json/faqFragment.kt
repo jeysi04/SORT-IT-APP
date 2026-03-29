@@ -49,6 +49,9 @@ class FaqFragment : Fragment() {
                     tvAnswer.animate().alpha(0f).setDuration(300).withEndAction {
                         //Else, set the answer's visibility to GONE
                         tvAnswer.visibility = View.GONE
+
+                        //Change the arrow when it is clicked
+                        arrow.setImageResource(R.drawable.arrow_down)
                     }.start()
                 }
             }
