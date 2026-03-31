@@ -1,24 +1,26 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
 }
+
 
 android {
     namespace = "com.example.sort_it_json"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36 // Changed from 36 to stable 35
 
 
     defaultConfig {
         applicationId = "com.example.sort_it_json"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 36 // Changed from 36 to stable 35
         versionCode = 1
         versionName = "1.0"
 
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -30,25 +32,24 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
+
 
     //Renaming apk file
     applicationVariants.all {
         outputs.all {
-            // Cast required to access outputFileName property
             val outputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-
-            val appName = "Sort-It" // <-- NAME
-
+            val appName = "Sort-It"
             outputImpl.outputFileName = "${appName}.apk"
         }
     }
 }
+
 
 dependencies {
         // Gson for JSON parsing
@@ -84,4 +85,22 @@ dependencies {
 
         // Optional: CameraX Extensions (HDR, Night Mode)
         implementation ("androidx.camera:camera-extensions:$camerax_version")
-    }
+
+        // Retrofit
+        implementation("com.squareup.retrofit2:retrofit:2.9.0")
+        implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+        // OkHttp logging interceptor
+        implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
+
+        // Coroutines
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-auth")
+
+}

@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 
 
@@ -21,6 +20,8 @@ class RecyclableresultFragment : Fragment() {
     private var subcategory: String? = null
     private var hasShownDialog = false
     private var category: String? = null
+
+    private var classification: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +41,20 @@ class RecyclableresultFragment : Fragment() {
         val btnNo = view.findViewById<Button>(R.id.buttonNo)
         val typeText = view.findViewById<TextView>(R.id.typeText)
         val catText = view.findViewById<TextView>(R.id.category)
-        val classText = view.findViewById<TextView>(R.id.classification)
+        var classText = view.findViewById<TextView>(R.id.classification)
         val layoutwhitebg = view.findViewById<LinearLayout>(R.id.whitebg)
         val illustbg = view.findViewById<ImageView>(R.id.illustration)
         val illustclass = view.findViewById<ImageView>(R.id.illust_classification)
         val questbot = view.findViewById<TextView>(R.id.questionText)
+
+        /**
+        val response = arguments?.getSerializable("predict_response") as? PredictResponse
+            ?: return inflater.inflate(R.layout.fragment_recyclableresult, container, false)
+
+        classification = response.stage1.label
+        category = response.stage2?.label ?: "N/A"
+        subcategory = response.stage3?.label ?: "N/A"
+         */
 
         // Changes the subcategory text based on the analyzed subcategory
         when (category) {
@@ -71,7 +81,7 @@ class RecyclableresultFragment : Fragment() {
         }
 
 
-        if (category == "NonRec"){
+        if (classification == "non_recyclable"){
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
             catText.text = "Please dispose this item in the general waste bin."
@@ -126,8 +136,8 @@ class RecyclableresultFragment : Fragment() {
             else -> typeText.text = "Unknown type"
         }
 
-        if(category == "NonRec"){
-            // ✅ Navigate directly to FeedbackFragment on Yes
+        if(classification == "non_recyclable"){
+            // Navigate directly to FeedbackFragment on Yes
             btnYes.setOnClickListener {
                 val fragment = feedbackFragment()
                 parentFragmentManager.beginTransaction()
@@ -137,7 +147,7 @@ class RecyclableresultFragment : Fragment() {
             }
         }
         else {
-            // ✅ Navigate directly to GuideListFragment on Yes
+            //
             btnYes.setOnClickListener {
                 val fragment = GuideListFragment().apply {
                     arguments = Bundle().apply {

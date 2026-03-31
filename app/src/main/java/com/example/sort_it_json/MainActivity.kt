@@ -10,9 +10,11 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,6 +58,9 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.itemIconTintList = null  // Keep original icon colors
+
+        // Initialize Feedback Logic
+        setupFeedbackLogic(bottomNav)
 
         // Add all fragments once, hide all except home
         supportFragmentManager.beginTransaction()
@@ -124,6 +129,14 @@ class MainActivity : AppCompatActivity() {
         activeFragment = target
     }
 
+    // Standard Navigation Helper
+    fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     // Optional onboarding finish function
     fun finishOnboarding() {
         val pager = findViewById<ViewPager>(R.id.pager)
@@ -133,5 +146,38 @@ class MainActivity : AppCompatActivity() {
         dots.visibility = View.GONE
 
         switchFragment(SampleDecideFragment())
+    }
+
+    // # Feedback Section - Copy everything below this line for feedback integration
+
+    private fun setupFeedbackLogic(bottomNav: BottomNavigationView) {
+        val globalOverlay = findViewById<View>(R.id.global_success_overlay)
+        val closeGlobalButton = findViewById<MaterialButton>(R.id.close_global_success_button)
+
+        closeGlobalButton?.setOnClickListener {
+            hideSuccessOverlay()
+            // Redirect to Home
+            bottomNav.selectedItemId = R.id.nav_home
+            loadFragment(HomeFragment())
+        }
+    }
+
+    private fun canNavigate(): Boolean {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (currentFragment is feedbackFragment) {
+            if (currentFragment.isFeedbackInProgress()) {
+                Toast.makeText(this, "Please finish or send your feedback before leaving!", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+        return true
+    }
+
+    fun showSuccessOverlay() {
+        findViewById<View>(R.id.global_success_overlay)?.visibility = View.VISIBLE
+    }
+
+    fun hideSuccessOverlay() {
+        findViewById<View>(R.id.global_success_overlay)?.visibility = View.GONE
     }
 }

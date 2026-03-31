@@ -1,8 +1,6 @@
 package com.example.sort_it_json
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Size
@@ -14,6 +12,13 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -31,11 +36,10 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_camera) // ✅ use activity layout
+        setContentView(R.layout.fragment_camera)
 
         previewView = findViewById(R.id.previewView)
         captureButton = findViewById(R.id.capture_button)
-
         cameraExecutor = Executors.newSingleThreadExecutor()
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -57,16 +61,12 @@ class CameraActivity : AppCompatActivity() {
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
         cameraProviderFuture.addListener({
-
             val cameraProvider = cameraProviderFuture.get()
 
             val preview = Preview.Builder()
                 .build()
-                .also {
-                    it.setSurfaceProvider(previewView.surfaceProvider)
-                }
+                .also { it.setSurfaceProvider(previewView.surfaceProvider) }
 
             imageCapture = ImageCapture.Builder()
                 .setTargetResolution(Size(224, 224))
@@ -83,7 +83,6 @@ class CameraActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Toast.makeText(this, "Camera failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-
         }, ContextCompat.getMainExecutor(this))
     }
 
@@ -101,17 +100,9 @@ class CameraActivity : AppCompatActivity() {
             outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
-
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     Toast.makeText(this@CameraActivity, "Photo saved!", Toast.LENGTH_SHORT).show()
-
-                    // SEND RESULT BACK
-                    val resultIntent = Intent().apply {
-                        putExtra("photo_path", photoFile.absolutePath)
-                    }
-
-                    setResult(Activity.RESULT_OK, resultIntent)
-                    finish()
+                    analyzePhoto(photoFile)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -125,11 +116,37 @@ class CameraActivity : AppCompatActivity() {
         )
     }
 
+    private fun analyzePhoto(file: File) {
+        lifecycleScope.launch {
+            try {
+                // Convert photo to multipart
+                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
+                val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+
+                // Pass to ResultFragment
+                val fragment = RecyclableresultFragment().apply {
+                    /**
+                    arguments = Bundle().apply {
+                        putSerializable("predict_response", response)
+                    }
+                     */
+                }
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+
+            } catch (e: Exception) {
+                Toast.makeText(this@CameraActivity, "Analyze failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startCamera()
