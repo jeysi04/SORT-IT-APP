@@ -54,9 +54,7 @@ class CameraActivity : AppCompatActivity() {
             )
         }
 
-        captureButton.setOnClickListener {
-            takePhoto()
-        }
+        captureButton.setOnClickListener { takePhoto() }
     }
 
     private fun startCamera() {
@@ -117,28 +115,34 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun analyzePhoto(file: File) {
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Convert photo to multipart
                 val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
                 val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
-                // Pass to ResultFragment
-                val fragment = RecyclableresultFragment().apply {
-                    /**
-                    arguments = Bundle().apply {
-                        putSerializable("predict_response", response)
+                val response: PredictResponse = ApiClient.service.predict(body)
+
+                withContext(Dispatchers.Main) {
+                    if (!isFinishing) {
+                        val fragment = RecyclableresultFragment().apply {
+                            arguments = Bundle().apply {
+                                putParcelable("predict_response", response)
+                            }
+                        }
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .addToBackStack(null)
+                            .commit()
                     }
-                     */
                 }
-
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
-                    .commit()
-
             } catch (e: Exception) {
-                Toast.makeText(this@CameraActivity, "Analyze failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@CameraActivity,
+                        "Analyze failed: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }
