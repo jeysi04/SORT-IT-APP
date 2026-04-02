@@ -29,7 +29,7 @@
         tools:layout_editor_absoluteX="16dp"
         android:orientation="vertical"
         android:gravity="top|center_horizontal"
-        android:paddingTop="40dp"
+        android:paddingTop="50dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 

@@ -24,6 +24,7 @@ import okhttp3.RequestBody
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlinx.coroutines.*
 
 class CameraActivity : AppCompatActivity() {
 
@@ -123,24 +124,22 @@ class CameraActivity : AppCompatActivity() {
                 val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
                 val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
+                // Wait a bit (important)
+                delay(3000)
+
                 // Call API
                 val response: PredictResponse = ApiClient.service.predict(body)
 
                 // === CHECK LOGS ===
-                Log.d("RAW_JSON", response.toString())
+                //Log.d("RAW_JSON", response.toString())
 
-                Log.d("AnalyzePhoto", "Received PredictResponse: $response")
-                Log.d("AnalyzePhoto", "Stage1: ${response.stage1.label}, ${response.stage1.probability}")
-                Log.d("AnalyzePhoto", "Stage2: ${response.stage2?.label}, ${response.stage2?.probability}")
-                Log.d("AnalyzePhoto", "Stage3: ${response.stage3?.label}, ${response.stage3?.probability}")
+                //Log.d("AnalyzePhoto", "Received PredictResponse: $response")
+                //Log.d("AnalyzePhoto", "Stage1: ${response.stage1.label}, ${response.stage1.probability}")
+                //Log.d("AnalyzePhoto", "Stage2: ${response.stage2?.label}, ${response.stage2?.probability}")
+                //Log.d("AnalyzePhoto", "Stage3: ${response.stage3?.label}, ${response.stage3?.probability}")
 
                 // Return result to MainActivity via Intent
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        this@CameraActivity,
-                        "Prediction received: ${response.stage1.label}",
-                        Toast.LENGTH_SHORT
-                    ).show()
 
                     // Create Intent to send result back
                     val intent = Intent().apply {

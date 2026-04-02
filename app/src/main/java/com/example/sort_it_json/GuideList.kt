@@ -39,36 +39,36 @@ class GuideListFragment : Fragment() {
         // Changes the subcategory text based on the analyzed subcategory
         when (subcategory) {
             //Glass
-            "flatGlass" -> guideTitle.text = "Ways to Recycle Flat Glass"
-            "glassBottles" -> guideTitle.text = "Ways to Recycle Glass Bottles"
-            "cullets" -> guideTitle.text = "Ways to Recycle Cullet Glass"
+            "Flat Glass" -> guideTitle.text = "Ways to Recycle Flat Glass"
+            "Glass Bottles" -> guideTitle.text = "Ways to Recycle Glass Bottles"
+            "Glass Cullet" -> guideTitle.text = "Ways to Recycle Cullet Glass"
 
             //Metal
-            "aluminum_tin" -> guideTitle.text = "Ways to Recycle Aluminum Tin"
-            "copper" -> guideTitle.text = "Ways to Recycle Copper"
-            "steel" -> guideTitle.text = "Ways to Recycle Steel"
+            "Aluminum_Tin" -> guideTitle.text = "Ways to Recycle Aluminum Tin"
+            "Copper" -> guideTitle.text = "Ways to Recycle Copper"
+            "Steel" -> guideTitle.text = "Ways to Recycle Steel"
 
             //Paper
-            "ONP" -> guideTitle.text = "Ways to Recycle Old Newspaper"
-            "MP" -> guideTitle.text = "Ways to Recycle Mixed Paper"
-            "OCC" -> guideTitle.text = "Ways to Recycle Old Corrugated Cartons"
-            "SWL" -> guideTitle.text = "Ways to Recycle Selected White Ledger"
-            "UBC" -> guideTitle.text = "Ways to Recycle Used Beverage Cartons"
+            "Old Newspaper" -> guideTitle.text = "Ways to Recycle Old Newspaper"
+            "Mixed Paper" -> guideTitle.text = "Ways to Recycle Mixed Paper"
+            "Old Corrugated Cartons" -> guideTitle.text = "Ways to Recycle Old Corrugated Cartons"
+            "Selected White Ledger" -> guideTitle.text = "Ways to Recycle Selected White Ledger"
+            "Used Beverage Cartons" -> guideTitle.text = "Ways to Recycle Used Beverage Cartons"
 
             //Plastic
             "HDPE" -> guideTitle.text = "Ways to Recycle High-Density Polyethylene"
             "LDPE" -> guideTitle.text = "Ways to Recycle  Low-Density Polyethylene"
-            "others" -> guideTitle.text = "Ways to Recycle Other Plastics"
+            "Other Plastic" -> guideTitle.text = "Ways to Recycle Other Plastics"
             "PET" -> guideTitle.text = "Ways to Recycle Polyethylene Terephthalate"
             "PP" -> guideTitle.text = "Ways to Recycle Polypropylene"
             "PS" -> guideTitle.text = "Ways to Recycle Polystyrene"
             "PVC" -> guideTitle.text = "Ways to Recycle Polyvinyl Chloride"
 
             //Residuals
-            "CDFP" -> guideTitle.text = "Ways to Recycle Clean and Dry Flexible Plastics"
-            "leather" -> guideTitle.text = "Ways to Recycle Leather"
-            "rubber" -> guideTitle.text = "Ways to Recycle Rubber"
-            "textiles" -> guideTitle.text = "Ways to Recycle Textile"
+            "Clean and Dry Flexible Plastic" -> guideTitle.text = "Ways to Recycle Clean and Dry Flexible Plastics"
+            "Leather" -> guideTitle.text = "Ways to Recycle Leather"
+            "Rubber" -> guideTitle.text = "Ways to Recycle Rubber"
+            "Textiles" -> guideTitle.text = "Ways to Recycle Textile"
 
             else -> guideTitle.text = "Ways to Recycle Unknown Type"
         }
