@@ -6,5 +6,5 @@ object Constants {
     const val BASE_URL_EMULATOR = "http://10.0.2.2:8000"
 
     // For a physical device on the same Wi-Fi
-    const val BASE_URL_DEVICE = "http://192.168.56.1:8000" // replace with your PC's LAN IP
+    const val BASE_URL_DEVICE = "http://192.168.1.19:8000" // replace with your PC's LAN IP
 }

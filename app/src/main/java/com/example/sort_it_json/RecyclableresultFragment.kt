@@ -1,6 +1,7 @@
 package com.example.sort_it_json
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
@@ -13,12 +14,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 
+
 class RecyclableresultFragment : Fragment() {
 
     private var predictResponse: PredictResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Safe retrieval of Parcelable
         predictResponse = arguments?.getParcelable("predict_response")
     }
 
@@ -45,21 +48,10 @@ class RecyclableresultFragment : Fragment() {
             return view
         }
 
-        val classification = response.stage1.label
-        val category = response.stage2?.label ?: "N/A"
-        val subcategory = response.stage3?.label ?: "N/A"
+        val stage1Label = response.stage1.label
 
-        // Set category and illustration
-        when (category) {
-            "Metal" -> { catText.text = "It's metal!"; illustclass.setImageResource(R.drawable.metal_illus) }
-            "Paper" -> { catText.text = "It's paper!"; illustclass.setImageResource(R.drawable.paper_illus) }
-            "Plastic" -> { catText.text = "It's plastic!"; illustclass.setImageResource(R.drawable.plastic_illus) }
-            "Glass" -> { catText.text = "It's glass!"; illustclass.setImageResource(R.drawable.glass_illus) }
-            "Residual" -> { catText.text = "It's residual!"; illustclass.setImageResource(R.drawable.residual_illus) }
-            else -> { catText.text = "Unknown category" }
-        }
-
-        if (classification == "non_recyclable") {
+        if (stage1Label == "non_recyclable") {
+            // Non-recyclable UI
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
             catText.text = "Please dispose this item in the general waste bin."
@@ -71,25 +63,59 @@ class RecyclableresultFragment : Fragment() {
             val dpHeight = 537
             val scale = resources.displayMetrics.density
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
-        } else {
-            typeText.visibility = View.VISIBLE
-            typeText.text = mapSubcategoryToText(subcategory)
-        }
 
-        btnYes.setOnClickListener {
-            val fragment = if (classification == "non_recyclable") {
-                feedbackFragment()
-            } else {
-                GuideListFragment().apply {
-                    arguments = Bundle().apply { putString("subcategory", subcategory) }
+            btnYes.setOnClickListener {
+                val fragment = feedbackFragment()
+                if (isAdded) {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit()
                 }
             }
-            if (isAdded) {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
-                    .commit()
+
+        } else if (stage1Label == "recyclable") {
+            // Recyclable UI
+            classText.text = "Your waste is recyclable!"
+            classText.setTextColor(android.graphics.Color.parseColor("#007700"))
+
+            val categoryLabel = response.stage2?.label ?: "Unknown"
+            val subcategoryLabel = response.stage3?.label ?: "Unknown"
+
+            catText.text = "Material: $categoryLabel"
+            typeText.visibility = View.VISIBLE
+            typeText.text = "Type: ${mapSubcategoryToText(subcategoryLabel)}"
+
+            // Illustrations
+            illustclass.setImageResource(
+                when (categoryLabel) {
+                    "metal" -> R.drawable.metal_illus
+                    "paper" -> R.drawable.paper_illus
+                    "plastic" -> R.drawable.plastic_illus
+                    "glass" -> R.drawable.glass_illus
+                    "residual" -> R.drawable.residual_illus
+                    else -> R.drawable.unknown_illus
+                }
+            )
+
+            illustbg.setImageResource(R.drawable.rec_illus)
+            questbot.text = "Would you like to see recycling guides?"
+
+            btnYes.setOnClickListener {
+                val fragment = GuideListFragment().apply {
+                    arguments = Bundle().apply { putString("subcategory", subcategoryLabel) }
+                }
+                if (isAdded) {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                }
             }
+        } else {
+            // Unknown label
+            classText.text = "Error: Unexpected result"
+            typeText.visibility = View.GONE
         }
 
         btnNo.setOnClickListener {
@@ -105,31 +131,31 @@ class RecyclableresultFragment : Fragment() {
         return view
     }
 
-    private fun mapSubcategoryToText(subcategory: String?): String {
+    private fun mapSubcategoryToText(subcategory: String): String {
         return when (subcategory) {
-            "flatGlass" -> "Type: Flat Glass"
-            "glassBottles" -> "Type: Glass Bottle"
-            "cullets" -> "Type: Cullet"
-            "aluminum_tin" -> "Type: Aluminum Tin"
-            "copper" -> "Type: Copper"
-            "steel" -> "Type: Steel"
-            "ONP" -> "Type: Old Newspaper"
-            "MP" -> "Type: Mixed Paper"
-            "OCC" -> "Type: Old Corrugated Cartons (OCC)"
-            "SWL" -> "Type: Selected White Ledger (SWL)"
-            "UBC" -> "Type: Used Beverage Cartons (UBC)"
-            "HDPE" -> "Type: High-Density Polyethylene (HDPE)"
-            "LDPE" -> "Type: Low-Density Polyethylene (LDPE)"
-            "others" -> "Type: Others"
-            "PET" -> "Type: Polyethylene Terephthalate (PET)"
-            "PP" -> "Type: Polypropylene (PP)"
-            "PS" -> "Type: Polystyrene (PS)"
-            "PVC" -> "Type: Polyvinyl Chloride (PVC)"
-            "CDFP" -> "Type: Clean and Dry Flexible Plastics"
-            "leather" -> "Type: Leather"
-            "rubber" -> "Type: Rubber"
-            "textiles" -> "Type: Textiles"
-            else -> "Unknown type"
+            "flatGlass" -> "Flat Glass"
+            "glassBottles" -> "Glass Bottle"
+            "cullets" -> "Cullet"
+            "aluminum_tin" -> "Aluminum Tin"
+            "copper" -> "Copper"
+            "steel" -> "Steel"
+            "ONP" -> "Old Newspaper"
+            "MP" -> "Mixed Paper"
+            "OCC" -> "Old Corrugated Cartons (OCC)"
+            "SWL" -> "Selected White Ledger (SWL)"
+            "UBC" -> "Used Beverage Cartons (UBC)"
+            "HDPE" -> "High-Density Polyethylene (HDPE)"
+            "LDPE" -> "Low-Density Polyethylene (LDPE)"
+            "others" -> "Others"
+            "PET" -> "Polyethylene Terephthalate (PET)"
+            "PP" -> "Polypropylene (PP)"
+            "PS" -> "Polystyrene (PS)"
+            "PVC" -> "Polyvinyl Chloride (PVC)"
+            "CDFP" -> "Clean and Dry Flexible Plastics"
+            "leather" -> "Leather"
+            "rubber" -> "Rubber"
+            "textiles" -> "Textiles"
+            else -> "Unknown"
         }
     }
 
@@ -157,10 +183,8 @@ class RecyclableresultFragment : Fragment() {
             .create()
 
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(resources.getColor(R.color.darkgreen, null))
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-            .setTextColor(resources.getColor(R.color.black, null))
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.darkgreen, null))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.black, null))
         dialog.window?.setBackgroundDrawableResource(R.color.white)
     }
 }

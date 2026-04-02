@@ -1,8 +1,10 @@
 package com.example.sort_it_json
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.util.Size
 import android.widget.ImageButton
 import android.widget.Toast
@@ -117,24 +119,37 @@ class CameraActivity : AppCompatActivity() {
     private fun analyzePhoto(file: File) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
+                // Prepare file for API
                 val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
                 val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
+                // Call API
                 val response: PredictResponse = ApiClient.service.predict(body)
 
+                // === CHECK LOGS ===
+                Log.d("RAW_JSON", response.toString())
+
+                Log.d("AnalyzePhoto", "Received PredictResponse: $response")
+                Log.d("AnalyzePhoto", "Stage1: ${response.stage1.label}, ${response.stage1.probability}")
+                Log.d("AnalyzePhoto", "Stage2: ${response.stage2?.label}, ${response.stage2?.probability}")
+                Log.d("AnalyzePhoto", "Stage3: ${response.stage3?.label}, ${response.stage3?.probability}")
+
+                // Return result to MainActivity via Intent
                 withContext(Dispatchers.Main) {
-                    if (!isFinishing) {
-                        val fragment = RecyclableresultFragment().apply {
-                            arguments = Bundle().apply {
-                                putParcelable("predict_response", response)
-                            }
-                        }
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .addToBackStack(null)
-                            .commit()
+                    Toast.makeText(
+                        this@CameraActivity,
+                        "Prediction received: ${response.stage1.label}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    // Create Intent to send result back
+                    val intent = Intent().apply {
+                        putExtra("predict_response", response) // PredictResponse must implement Parcelable
                     }
+                    setResult(RESULT_OK, intent) // Set the result
+                    finish() // Close CameraActivity and return to MainActivity
                 }
+
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
@@ -142,6 +157,7 @@ class CameraActivity : AppCompatActivity() {
                         "Analyze failed: ${e.message}",
                         Toast.LENGTH_LONG
                     ).show()
+                    Log.e("AnalyzePhoto", "Error analyzing photo", e)
                 }
             }
         }

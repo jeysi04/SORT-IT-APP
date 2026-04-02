@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
 
     // Choose which BASE_URL to use
-    private const val BASE_URL = Constants.BASE_URL_EMULATOR
+    private const val BASE_URL = Constants.BASE_URL_DEVICE
 
     private val client = OkHttpClient.Builder().build()
 

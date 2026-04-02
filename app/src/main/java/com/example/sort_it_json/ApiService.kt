@@ -18,6 +18,3 @@ interface ApiService {
         @Part file: MultipartBody.Part
     ): PredictResponse
 }
-
-
-

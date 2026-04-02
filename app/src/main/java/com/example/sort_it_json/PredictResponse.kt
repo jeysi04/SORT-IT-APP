@@ -1,7 +1,7 @@
 package com.example.sort_it_json
 
-import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class StageResult(

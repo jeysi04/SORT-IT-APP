@@ -18,26 +18,15 @@ import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
-    // Camera launcher to receive photo path from CameraActivity
+    // Camera launcher to receive PredictResponse from CameraActivity
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-
         if (result.resultCode == RESULT_OK) {
-            val photoPath = result.data?.getStringExtra("photo_path")
-
-            if (!photoPath.isNullOrEmpty()) {
-                val confirmFragment = ConfirmImageFragment()
-                confirmFragment.arguments = Bundle().apply {
-                    putString("photo_path", photoPath)
-                }
-
-                // Hide the current fragment and show ConfirmImageFragment on top
-                supportFragmentManager.beginTransaction()
-                    .hide(activeFragment)
-                    .add(R.id.fragment_container, confirmFragment, "confirm_image")
-                    .addToBackStack(null)
-                    .commit()
+            val response = result.data?.getParcelableExtra<PredictResponse>("predict_response")
+            if (response != null) {
+                // Show the result fragment on top of current fragment
+                showAnalysisResult(response)
             }
         }
     }
@@ -160,6 +149,20 @@ class MainActivity : AppCompatActivity() {
             bottomNav.selectedItemId = R.id.nav_home
             loadFragment(HomeFragment())
         }
+    }
+
+    // === New: Show analysis result fragment on top ===
+    private fun showAnalysisResult(response: PredictResponse) {
+        val resultFragment = RecyclableresultFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable("predict_response", response)
+            }
+        }
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, resultFragment, "predict_result")
+            .addToBackStack("predict_result")
+            .commit()
     }
 
     private fun canNavigate(): Boolean {
