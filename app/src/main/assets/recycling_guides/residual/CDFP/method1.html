@@ -167,8 +167,15 @@
         </ol>
 
     </div>
+    <button class="finish-btn" type="button" onclick="goNext()">Finish</button>
+</div>
 
-    </div>
+<script>
+    function goNext() {
+        // Call the Kotlin function via the JS interface
+        Android.goToNextFragment();
+    }
+</script>
 
 </body>
 </html>

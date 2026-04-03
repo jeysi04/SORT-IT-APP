@@ -295,7 +295,7 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:justificationMode="inter_word"
                     android:text="CONTACT US:"
-                    android:textColor="#000000"
+                    android:textColor="#467750"
                     android:textSize="14sp" />
 
                 <LinearLayout

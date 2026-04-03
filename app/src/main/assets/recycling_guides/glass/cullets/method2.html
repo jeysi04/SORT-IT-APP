@@ -48,7 +48,7 @@
 
     .subtitle {
         font-weight: 400;
-        font-size: 14px;
+        font-size: 16px;
         font-style: italic;
         color: var(--secondary-text);
         margin-bottom: 12px; 
@@ -61,7 +61,7 @@
     }
 
     .description {
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.6;
         color: var(--primary-text);
         margin-bottom: 40px; 
@@ -69,27 +69,27 @@
     }
 
     h2 {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 800;
-        color: var(--heading-gray); 
+        color: var(--heading-gray);
         margin-top: 0;
         margin-bottom: 12px;
     }
 
     ul {
         padding-left: 18px;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.5;
         color: var(--primary-text);
-        margin-bottom: 40px; 
+        margin-bottom: 40px;
     }
 
     ol {
         padding-left: 18px;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.5;
         color: var(--primary-text);
-        margin-bottom: 0; 
+        margin-bottom: 0;
     }
 
     ul li {
@@ -104,7 +104,8 @@
 
     .finish-btn {
         width: 100%;
-        margin-top: 15px; 
+        /* Increased margin to add space before the button */
+        margin-top: 25px;
         padding: 16px;
         background-color: var(--btn-bg);
         border: none;
@@ -114,7 +115,8 @@
         font-weight: 800;
         color: var(--btn-text);
         cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        /* Box-shadow with 4px x, 4px y, 4px blur, at 25% black */
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
     .finish-btn:hover {
@@ -162,7 +164,7 @@
             <li>Protective gloves, goggles, and mask.</li>
         </ul>
 
-        <h2>Steps:</h2>
+        <h2>Steps</h2>
         <ol>
             <li>Prepare the glass cullet. Clean the glass thoroughly to remove labels and residues. Crush the glass into small particles similar in size to sand or fine gravel.</li>
             <li>Sort by particle size. Sieve the crushed glass if possible. Use fine glass for sand replacement and coarser pieces for gravel replacement.</li>
@@ -172,8 +174,14 @@
         </ol>
 
     </div>
+    <button class="finish-btn" type="button" onclick="goNext()">Finish</button>
+</div>
 
-    </div>
-
+<script>
+    function goNext() {
+        // Call the Kotlin function via the JS interface
+        Android.goToNextFragment();
+    }
+</script>
 </body>
 </html>

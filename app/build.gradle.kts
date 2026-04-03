@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.sort_it_json"
-    compileSdk = 36 // Changed from 36 to stable 35
+    compileSdk = 36 // hChanged from 36 to stable 35
 
 
     defaultConfig {

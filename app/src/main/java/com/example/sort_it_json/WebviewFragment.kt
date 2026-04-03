@@ -1,6 +1,8 @@
 package com.example.sort_it_json
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 
 class WebViewFragment : Fragment() {
 
@@ -104,6 +107,7 @@ class WebViewFragment : Fragment() {
         }
     }
 
+
     inner class WebAppInterface {
 
         @android.webkit.JavascriptInterface
@@ -111,27 +115,40 @@ class WebViewFragment : Fragment() {
 
             requireActivity().runOnUiThread {
 
-                // Show feedback dialog first
-                androidx.appcompat.app.AlertDialog.Builder(requireContext())
-                    .setTitle("We'd Love Your Feedback")
-                    .setMessage("Would you like to share your experience with us?")
-                    .setPositiveButton("Give Feedback") { _, _ ->
+                val title = SpannableString("We'd Love Your Feedback").apply {
+                    setSpan(ForegroundColorSpan(resources.getColor(R.color.black, null)), 0, length, 0)
+                }
+                val message = SpannableString("Would you like to share your experience with us?").apply {
+                    setSpan(ForegroundColorSpan(resources.getColor(R.color.black, null)), 0, length, 0)
+                }
 
-                        // Navigate to feedback fragment
-                        parentFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, feedbackFragment())
-                            .addToBackStack(null)
-                            .commit()
+                val dialog = AlertDialog.Builder(requireContext())
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton("Give Feedback") { _, _ ->
+                        val fragment = feedbackFragment()
+                        if (isAdded) {
+                            parentFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack(null)
+                                .commit()
+                        }
                     }
                     .setNegativeButton("Maybe Later") { _, _ ->
-
-                        // Navigate to Home Fragment
-                        parentFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, HomeFragment())
-                            .addToBackStack(null)
-                            .commit()
+                        val fragment = HomeFragment()
+                        if (isAdded) {
+                            parentFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack(null)
+                                .commit()
+                        }
                     }
-                    .show()
+                    .create()
+
+                dialog.show()
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.darkgreen, null))
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.black, null))
+                dialog.window?.setBackgroundDrawableResource(R.color.white)
             }
         }
     }

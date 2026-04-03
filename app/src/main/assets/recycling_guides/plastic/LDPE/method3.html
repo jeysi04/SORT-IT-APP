@@ -48,7 +48,7 @@ h1 {
 
 .subtitle {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     font-style: italic;
     color: var(--secondary-text);
     margin-bottom: 12px; 
@@ -61,7 +61,7 @@ h1 {
 }
 
 .description {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.6;
     color: var(--primary-text);
     margin-bottom: 40px; 
@@ -69,7 +69,7 @@ h1 {
 }
 
 h2 {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 800;
     color: var(--heading-gray); 
     margin-top: 0;
@@ -78,7 +78,7 @@ h2 {
 
 ul {
     padding-left: 18px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5;
     color: var(--primary-text);
     margin-bottom: 40px; 
@@ -86,7 +86,7 @@ ul {
 
 ol {
     padding-left: 18px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5;
     color: var(--primary-text);
     margin-bottom: 0; 
@@ -102,20 +102,20 @@ ol li {
     text-align: justify;
 }
 
-.finish-btn {
-    width: 100%;
-    margin-top: 15px; 
-    padding: 16px;
-    background-color: var(--btn-bg);
-    border: none;
-    border-radius: 8px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--btn-text);
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
+    .finish-btn {
+        width: 100%;
+        margin-top: 25px;
+        padding: 16px;
+        background-color: var(--btn-bg);
+        border: none;
+        border-radius: 8px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--btn-text);
+        cursor: pointer;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    }
 
 .finish-btn:hover {
     opacity: 0.9;
@@ -158,7 +158,7 @@ ol li {
             <li>Warm water and soap</li>
         </ul>
 
-        <h2>Steps:</h2>
+        <h2>Steps</h2>
         <ol>
             <li>Inspect the bottle for cracks or blockages. Ensure the tip is fully intact and that the cap seals tightly so your glue won't dry out in storage.</li>
             <li>Wash the bottle thoroughly to remove any old residue or oils. Let dry completely.</li>
@@ -167,8 +167,15 @@ ol li {
         </ol>
 
     </div>
-
+    <button class="finish-btn" type="button" onclick="goNext()">Finish</button>
 </div>
+
+<script>
+    function goNext() {
+        // Call the Kotlin function via the JS interface
+        Android.goToNextFragment();
+    }
+</script>
 
 </body>
 </html>

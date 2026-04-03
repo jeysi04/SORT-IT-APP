@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mixed Paper Recycling Guide 5</title>
+<title>HDPE Recycling Guide 1</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -48,7 +48,7 @@
 
     .subtitle {
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         font-style: italic;
         color: var(--secondary-text);
         margin-bottom: 12px; 
@@ -61,7 +61,7 @@
     }
 
     .description {
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.6;
         color: var(--primary-text);
         margin-bottom: 40px; 
@@ -69,7 +69,7 @@
     }
 
     h2 {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 800;
         color: var(--heading-gray); 
         margin-top: 0;
@@ -78,7 +78,7 @@
 
     ul {
         padding-left: 18px;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.5;
         color: var(--primary-text);
         margin-bottom: 40px; 
@@ -86,7 +86,7 @@
 
     ol {
         padding-left: 18px;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.5;
         color: var(--primary-text);
         margin-bottom: 0; 
@@ -104,7 +104,7 @@
 
     .finish-btn {
         width: 100%;
-        margin-top: 15px; 
+        margin-top: 25px;
         padding: 16px;
         background-color: var(--btn-bg);
         border: none;
@@ -114,7 +114,7 @@
         font-weight: 800;
         color: var(--btn-text);
         cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
     .finish-btn:hover {
@@ -142,38 +142,44 @@
 
 <div class="phone-container">
 
-    <h1>How to Make a Flashcards Out of Old Folders</h1>
-    <div class="subtitle">Mixed Paper</div>
+    <h1>Make Storage Containers</h1>
+    <div class="subtitle">HDPE (High-Density Polyethylene) Plastic</div>
 
     <div class="content-box">
 
         <div class="description">
-           Study flashcards made from old folders are sturdy, reusable, and perfect for reviewing lessons, definitions, formulas, or key concepts. Since folder paper is thicker than regular paper, these flashcards last longer and are ideal for frequent studying.
+            HDPE bottles and jugs (like milk jugs or detergent containers) are durable and can be repurposed into practical storage containers. This simple recycling project helps organize small household items, craft supplies, or tools, while keeping plastic out of the landfill.
         </div>
 
         <h2>Materials Needed</h2>
         <ul>
-            <li>Old folder (clean and flat)</li>
-            <li>Scissors</li>
-            <li>Marker or pen</li>
-            <li>Ruler and pencil (optional)</li>
-            <li>Rubber band or small box (optional, for storage)</li>
+            <li>HDPE bottles or jugs (clean and intact)</li>
+            <li>Scissors or utility knife</li>
+            <li>Glue or tape (optional, for reinforcement or stacking)</li>
+            <li>Marker or labels (optional, for organization)</li>
         </ul>
 
-        <h2>Steps:</h2>
+        <h2>Steps</h2>
         <ol>
-            <li>Prepare the folder. Lay the folder flat on a table. Make sure it is clean and free from heavy creases or tears.</li>
-            <li>Measure the flashcard size. Lightly mark rectangles on the folder. A good size is about 7 × 10 cm, but you may adjust depending on your preference.</li>
-            <li>Cut the flashcards. Carefully cut along the marked lines to create evenly sized rectangles.</li>
-            <li>Round the corners. Trim the corners slightly to make them rounded. This helps prevent bending and makes the cards easier to handle.</li>
-            <li>Write study content. Front: write a term, question, or topic Back: write the definition, explanation, or answer</li>
-            <li>Organize the flashcards. Group flashcards by subject or topic. Secure them with a rubber band or place them in a small box or envelope.</li>
-            <li>Use for studying. Review the flashcards regularly to test your memory and improve recall.</li>
+           <li>Inspect the container. Check the HDPE bottle or jug for cracks, holes, or damage. Only use containers that are structurally sound to ensure your storage is sturdy.</li>
+           <li>Clean thoroughly. Wash the bottle or jug inside and out with soap and water. Remove any labels if desired. Let it dry completely.</li>
+           <li>Cut to size (if needed). If you want an open-top container, use scissors or a utility knife to carefully cut off the top portion. Smooth any sharp edges to prevent injury.</li>
+           <li>Optional reinforcement. For extra stability, you can tape the edges or use glue to attach multiple containers together for modular storage.  </li>
+           <li>Use for storage. Fill the container with small household items, craft supplies, screws, nails, or other tools.</li>
+           <li>Optional labeling. Use markers, stickers, or printed labels to mark what each container holds. This makes it easy to find items quickly.</li>
+           <li>Organize multiple containers. Stack containers if the design allows, or line them up on shelves to create an organized workspace or storage area.</li>
         </ol>
 
     </div>
+    <button class="finish-btn" type="button" onclick="goNext()">Finish</button>
+</div>
 
-    </div>
+<script>
+    function goNext() {
+        // Call the Kotlin function via the JS interface
+        Android.goToNextFragment();
+    }
+</script>
 
 </body>
 </html>

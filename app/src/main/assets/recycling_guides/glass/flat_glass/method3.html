@@ -48,7 +48,7 @@
 
     .subtitle {
         font-weight: 400;
-        font-size: 14px;
+        font-size: 16px;
         font-style: italic;
         color: var(--secondary-text);
         margin-bottom: 12px; 
@@ -61,7 +61,7 @@
     }
 
     .description {
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.6;
         color: var(--primary-text);
         margin-bottom: 40px; 
@@ -69,7 +69,7 @@
     }
 
     h2 {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 800;
         color: var(--heading-gray); 
         margin-top: 0;
@@ -78,7 +78,7 @@
 
     ul {
         padding-left: 18px;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.5;
         color: var(--primary-text);
         margin-bottom: 40px; 
@@ -86,7 +86,7 @@
 
     ol {
         padding-left: 18px;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.5;
         color: var(--primary-text);
         margin-bottom: 0; 
@@ -104,7 +104,7 @@
 
     .finish-btn {
         width: 100%;
-        margin-top: 15px; 
+        margin-top: 25px;
         padding: 16px;
         background-color: var(--btn-bg);
         border: none;
@@ -114,8 +114,9 @@
         font-weight: 800;
         color: var(--btn-text);
         cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     }
+    
 
     .finish-btn:hover {
         opacity: 0.9;
@@ -162,7 +163,7 @@
             
         </ul>
 
-        <h2>Steps:</h2>
+        <h2>Steps</h2>
         <ol>
             <li>Prepare the materials. Clean all glass or tile pieces. Smooth sharp edges with sandpaper or a stone. Wear gloves for safety.</li>
             <li>Mix the concrete. Combine concrete mix with water following package instructions until it reaches a thick, workable consistency.</li>
@@ -174,8 +175,15 @@
         </ol>
 
     </div>
+    <button class="finish-btn" type="button" onclick="goNext()">Finish</button>
+</div>
 
-    </div>
+<script>
+    function goNext() {
+        // Call the Kotlin function via the JS interface
+        Android.goToNextFragment();
+    }
+</script>
 
 </body>
 </html>
