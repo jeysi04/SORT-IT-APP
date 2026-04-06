@@ -133,8 +133,6 @@ class MainActivity : AppCompatActivity() {
 
         val dots = findViewById<View>(R.id.dots_indicator)
         dots.visibility = View.GONE
-
-        switchFragment(SampleDecideFragment())
     }
 
     // # Feedback Section - Copy everything below this line for feedback integration

@@ -25,6 +25,9 @@ import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import kotlinx.coroutines.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import java.io.ByteArrayOutputStream
 
 class CameraActivity : AppCompatActivity() {
 
@@ -120,9 +123,31 @@ class CameraActivity : AppCompatActivity() {
     private fun analyzePhoto(file: File) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Prepare file for API
-                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
-                val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                // Decode file to Bitmap
+                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+
+                // Resize (VERY IMPORTANT)
+                val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
+
+                // Compress to JPEG (reduce size)
+                val outputStream = ByteArrayOutputStream()
+                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
+
+                // Convert to byte array
+                val compressedBytes = outputStream.toByteArray()
+
+                // Create RequestBody from compressed image
+                val requestFile = RequestBody.create(
+                    "image/jpeg".toMediaTypeOrNull(),
+                    compressedBytes
+                )
+
+// Multipart body
+                val body = MultipartBody.Part.createFormData(
+                    "file",
+                    "compressed.jpg",
+                    requestFile
+                )
 
                 // Wait a bit (important)
                 delay(3000)
@@ -130,16 +155,18 @@ class CameraActivity : AppCompatActivity() {
                 // Call API
                 val response: PredictResponse = ApiClient.service.predict(body)
 
-                // === CHECK LOGS ===
-                //Log.d("RAW_JSON", response.toString())
 
-                //Log.d("AnalyzePhoto", "Received PredictResponse: $response")
-                //Log.d("AnalyzePhoto", "Stage1: ${response.stage1.label}, ${response.stage1.probability}")
-                //Log.d("AnalyzePhoto", "Stage2: ${response.stage2?.label}, ${response.stage2?.probability}")
-                //Log.d("AnalyzePhoto", "Stage3: ${response.stage3?.label}, ${response.stage3?.probability}")
+                // === CHECK LOGS ===
+                Log.d("RAW_JSON", response.toString())
+
+                Log.d("AnalyzePhoto", "Received PredictResponse: $response")
+                Log.d("AnalyzePhoto", "Stage1: ${response.stage1.label}, ${response.stage1.probability}")
+                Log.d("AnalyzePhoto", "Stage2: ${response.stage2?.label}, ${response.stage2?.probability}")
+                Log.d("AnalyzePhoto", "Stage3: ${response.stage3?.label}, ${response.stage3?.probability}")
 
                 // Return result to MainActivity via Intent
                 withContext(Dispatchers.Main) {
+                    Toast.makeText(this@CameraActivity, "Prediction Received!", Toast.LENGTH_SHORT).show()
 
                     // Create Intent to send result back
                     val intent = Intent().apply {
@@ -147,6 +174,12 @@ class CameraActivity : AppCompatActivity() {
                     }
                     setResult(RESULT_OK, intent) // Set the result
                     finish() // Close CameraActivity and return to MainActivity
+                }
+
+                // After receiving response successfully
+                if (file.exists()) {
+                    val deleted = file.delete()
+                    Log.d("FileCleanup", "Deleted: $deleted")
                 }
 
             } catch (e: Exception) {
