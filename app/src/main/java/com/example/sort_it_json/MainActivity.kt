@@ -2,15 +2,15 @@ package com.example.sort_it_json
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,20 +18,16 @@ import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
-    // Camera launcher to receive PredictResponse from CameraActivity
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val response = result.data?.getParcelableExtra<PredictResponse>("predict_response")
-            if (response != null) {
-                // Show the result fragment on top of current fragment
-                showAnalysisResult(response)
-            }
+            response?.let { showAnalysisResult(it) }
         }
     }
 
-    // Keep references to fragments
+    // Main fragments (ONLY these are persistent)
     private val homeFragment = HomeFragment()
     private val aboutFragment = AboutFragment()
     private val faqFragment = FaqFragment()
@@ -40,18 +36,17 @@ class MainActivity : AppCompatActivity() {
     private var activeFragment: Fragment = homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Handle Splash Screen before setContentView
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.itemIconTintList = null  // Keep original icon colors
+        val fabCenter = findViewById<FloatingActionButton>(R.id.fab_center)
+        bottomNav.itemIconTintList = null
 
-        // Initialize Feedback Logic
         setupFeedbackLogic(bottomNav)
 
-        // Add all fragments once, hide all except home
+        // Add base fragments ONCE
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, feedbackFragment, "feedback").hide(feedbackFragment)
             .add(R.id.fragment_container, faqFragment, "faq").hide(faqFragment)
@@ -59,21 +54,19 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_container, homeFragment, "home")
             .commit()
 
-        // Logo button to go home
-        val logoButton = findViewById<ImageButton>(R.id.logoButton)
-        logoButton.setOnClickListener {
+        // Logo → Home
+        findViewById<ImageButton>(R.id.logoButton).setOnClickListener {
             switchFragment(homeFragment)
             bottomNav.selectedItemId = R.id.nav_home
         }
 
-        // FAB button to open camera
-        val fabCenter = findViewById<FloatingActionButton>(R.id.fab_center)
+        // FAB → Camera Activity
         fabCenter.setOnClickListener {
             val intent = Intent(this, CameraActivity::class.java)
             cameraLauncher.launch(intent)
         }
 
-        // Adjust bottom nav and FAB for system bars
+        // Insets
         ViewCompat.setOnApplyWindowInsetsListener(bottomNav) { _, insets ->
             val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             bottomNav.setPadding(0, 0, 0, navBarInsets.bottom)
@@ -87,9 +80,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Bottom navigation listener
+        // Bottom nav
         bottomNav.setOnItemSelectedListener { item ->
-            val fragment: Fragment? = when (item.itemId) {
+            if (!canNavigate()) return@setOnItemSelectedListener false
+
+            // IMPORTANT: clear result fragment if open
+            supportFragmentManager.popBackStack()
+
+            val target = when (item.itemId) {
                 R.id.nav_home -> homeFragment
                 R.id.nav_about -> aboutFragment
                 R.id.nav_faq -> faqFragment
@@ -97,16 +95,14 @@ class MainActivity : AppCompatActivity() {
                 else -> null
             }
 
-            if (fragment != null) {
-                switchFragment(fragment)
+            target?.let {
+                switchFragment(it)
                 true
-            } else {
-                false
-            }
+            } ?: false
         }
     }
 
-    // Switch fragments without recreating
+    // ✅ SAFE fragment switching (tabs only)
     private fun switchFragment(target: Fragment) {
         if (activeFragment == target) return
 
@@ -118,38 +114,7 @@ class MainActivity : AppCompatActivity() {
         activeFragment = target
     }
 
-    // Standard Navigation Helper
-    fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
-    // Optional onboarding finish function
-    fun finishOnboarding() {
-        val pager = findViewById<ViewPager>(R.id.pager)
-        pager.visibility = View.GONE
-
-        val dots = findViewById<View>(R.id.dots_indicator)
-        dots.visibility = View.GONE
-    }
-
-    // # Feedback Section - Copy everything below this line for feedback integration
-
-    private fun setupFeedbackLogic(bottomNav: BottomNavigationView) {
-        val globalOverlay = findViewById<View>(R.id.global_success_overlay)
-        val closeGlobalButton = findViewById<MaterialButton>(R.id.close_global_success_button)
-
-        closeGlobalButton?.setOnClickListener {
-            hideSuccessOverlay()
-            // Redirect to Home
-            bottomNav.selectedItemId = R.id.nav_home
-            loadFragment(HomeFragment())
-        }
-    }
-
-    // === New: Show analysis result fragment on top ===
+    // ✅ RESULT SCREEN (temporary)
     private fun showAnalysisResult(response: PredictResponse) {
         val resultFragment = RecyclableresultFragment().apply {
             arguments = Bundle().apply {
@@ -158,18 +123,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
+            .hide(activeFragment) // hide current tab
             .add(R.id.fragment_container, resultFragment, "predict_result")
-            .addToBackStack("predict_result")
+            .addToBackStack("predict_result") // allow back
             .commit()
     }
 
+    // Slider
+    fun finishOnboarding() {
+        val intent = Intent(this, CameraActivity::class.java)
+        cameraLauncher.launch(intent)
+    }
+
+    // Feedback
+    private fun setupFeedbackLogic(bottomNav: BottomNavigationView) {
+        val closeGlobalButton = findViewById<MaterialButton>(R.id.close_global_success_button)
+
+        closeGlobalButton?.setOnClickListener {
+            hideSuccessOverlay()
+            bottomNav.selectedItemId = R.id.nav_home
+            switchFragment(homeFragment)
+        }
+    }
+
     private fun canNavigate(): Boolean {
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if (currentFragment is feedbackFragment) {
-            if (currentFragment.isFeedbackInProgress()) {
-                Toast.makeText(this, "Please finish or send your feedback before leaving!", Toast.LENGTH_SHORT).show()
-                return false
-            }
+        val current = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (current is feedbackFragment && current.isFeedbackInProgress()) {
+            Toast.makeText(this, "Finish feedback first!", Toast.LENGTH_SHORT).show()
+            return false
         }
         return true
     }

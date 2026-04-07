@@ -142,7 +142,7 @@ class CameraActivity : AppCompatActivity() {
                     compressedBytes
                 )
 
-// Multipart body
+                // Multipart body
                 val body = MultipartBody.Part.createFormData(
                     "file",
                     "compressed.jpg",
