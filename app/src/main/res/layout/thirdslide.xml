@@ -23,7 +23,7 @@
         android:justificationMode="inter_word"
         android:text="@string/slide3_desc"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

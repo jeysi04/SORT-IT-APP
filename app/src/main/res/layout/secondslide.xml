@@ -22,7 +22,7 @@
         android:justificationMode="inter_word"
         android:text="@string/slide2_desc1"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.833"
@@ -40,7 +40,7 @@
         android:text="@string/slide2_desc2"
         android:textColor="@color/white"
         android:justificationMode="inter_word"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

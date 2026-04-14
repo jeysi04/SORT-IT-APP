@@ -105,7 +105,7 @@ class CameraActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    Toast.makeText(this@CameraActivity, "Photo saved!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CameraActivity, "Photo captured!", Toast.LENGTH_SHORT).show()
                     analyzePhoto(photoFile)
                 }
 
@@ -155,6 +155,12 @@ class CameraActivity : AppCompatActivity() {
                 // Call API
                 val response: PredictResponse = ApiClient.service.predict(body)
 
+                // Clean up memory
+                bitmap.recycle()
+                resizedBitmap.recycle()
+
+                // Optional but good practice
+                outputStream.close()
 
                 // === CHECK LOGS ===
                 Log.d("RAW_JSON", response.toString())
