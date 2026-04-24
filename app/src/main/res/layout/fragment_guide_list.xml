@@ -39,7 +39,7 @@
                 android:fontFamily="@font/montserrat_extrabold"
                 android:text="Ways to Recycle Glass Bottles"
                 android:textColor="#000000"
-                android:textSize="32sp" />
+                android:textSize="30sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -47,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
-            android:padding="16dp" />
+            android:layout_marginTop="15dp"
+            android:padding="3dp" />
 
     </LinearLayout>
 

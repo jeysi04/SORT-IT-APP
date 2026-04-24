@@ -46,6 +46,15 @@ class NewHomeFragment : Fragment() {
             recentTime.text = time
             recentDifficulty.text = difficulty
 
+            //Change the background of the difficulty component
+            difficulty?.lowercase()?.let {
+                when (it) {
+                    "easy" -> recentDifficulty.setBackgroundResource(R.drawable.difficulty_easy_bg)
+                    "moderate" -> recentDifficulty.setBackgroundResource(R.drawable.difficulty_moderate_bg)
+                    "advanced" -> recentDifficulty.setBackgroundResource(R.drawable.difficulty_advanced_bg)
+                }
+            }
+
             if (imageName != null) {
                 val resId = resources.getIdentifier(
                     imageName,

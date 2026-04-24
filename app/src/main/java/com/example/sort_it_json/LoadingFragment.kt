@@ -127,7 +127,7 @@ class LoadingFragment : Fragment() {
 
         timeoutJob = lifecycleScope.launch {
 
-            delay(60000) // 60 seconds
+            delay(5000) // 5 seconds
 
             if (!isAdded) return@launch
 
