@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,11 +37,14 @@ class GuideListFragment : Fragment() {
         // Declare a variable to control Title of the page
         val guideTitle = view.findViewById<TextView>(R.id.titleText)
 
+        //Declare back button
+        val btnTopLeft = view.findViewById<ImageButton>(R.id.btnTopLeft)
+
         // Changes the subcategory text based on the analyzed subcategory
         when (subcategory) {
             //Glass
             "Flat Glass" -> guideTitle.text = "Ways to Recycle Flat Glass"
-            "Glass Bottles" -> guideTitle.text = "Ways to Recycle Glass Bottles"
+            "Glass Bottle" -> guideTitle.text = "Ways to Recycle Glass Bottles"
             "Glass Cullet" -> guideTitle.text = "Ways to Recycle Cullet Glass"
 
             //Metal
@@ -80,6 +84,12 @@ class GuideListFragment : Fragment() {
         // Set adapter
         recyclerView.adapter = GuideAdapter(filteredList) { guideItem ->
             openGuide(guideItem.html_file)
+        }
+
+        btnTopLeft.setOnClickListener {
+            if (isAdded) {
+                parentFragmentManager.popBackStack()
+            }
         }
 
         return view

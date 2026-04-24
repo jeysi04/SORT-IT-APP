@@ -2,6 +2,9 @@
     <string name="app_name">Sort-It</string>
 
     <!-- Strings for home pages -->
+    <string name="Home_Desc1">Identify recyclable waste and learn how to dispose of it properly.</string>
+    <string name="Home_Desc2">Capture an item to begin.</string>
+
     <string name="slide1_title">The Problem We Can\'t Ignore</string>
     <string name="slide1_desc">One of the leading producers of waste in Southeast Asia and a major source of plastic waste contamination in the ocean is the Philippines. Low recycling rates, problems with collection, and inconsistent plastic packaging segregation in many local government units (LGU) are some of the causes of this.</string>
 
@@ -44,5 +47,7 @@
     <string name="tag_ease">Ease of use</string>
     <string name="feedback_success_msg">Thank you for sharing your \nthoughts. We appreciate \nyour feedback !</string>
     <string name="action_close">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -135,13 +135,6 @@ class WebViewFragment : Fragment() {
                         }
                     }
                     .setNegativeButton("Maybe Later") { _, _ ->
-                        val fragment = HomeFragment()
-                        if (isAdded) {
-                            parentFragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
-                                .addToBackStack(null)
-                                .commit()
-                        }
                     }
                     .create()
 

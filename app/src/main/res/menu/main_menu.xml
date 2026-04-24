@@ -9,11 +9,12 @@
             android:icon="@drawable/homemenu"/>
 
         <item
-            android:id="@+id/nav_about"
-            android:title="About"
-            android:icon="@drawable/aboutmenu"/>
+            android:id="@+id/nav_bookmark"
+            android:title="Bookmark"
+            android:icon="@drawable/bookmarkmenu"/>
 
         <item
+            android:title="Recycle"
             android:id="@+id/nav_recycle" />
 
         <item

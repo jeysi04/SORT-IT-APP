@@ -1,5 +1,6 @@
 package com.example.sort_it_json
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.SpannableString
@@ -8,11 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
+
 
 
 class RecyclableresultFragment : Fragment() {
@@ -41,6 +45,7 @@ class RecyclableresultFragment : Fragment() {
         val illustbg = view.findViewById<ImageView>(R.id.illustration)
         val illustclass = view.findViewById<ImageView>(R.id.illust_classification)
         val questbot = view.findViewById<TextView>(R.id.questionText)
+        val btnTopLeft = view.findViewById<ImageButton>(R.id.btnTopLeft)
 
         val response = predictResponse
         if (response == null) {
@@ -49,6 +54,9 @@ class RecyclableresultFragment : Fragment() {
         }
 
         val stage1Label = response.stage1.label
+
+        //TEST
+        //Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
 
         if (stage1Label == "non_recyclable") {
             // Non-recyclable UI
@@ -65,11 +73,14 @@ class RecyclableresultFragment : Fragment() {
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
-                val fragment = feedbackFragment()
                 if (isAdded) {
+
+                    val fragment = feedbackFragment()
+
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null)
+                        .add(R.id.fragment_container, fragment)
+                        .hide(this@RecyclableresultFragment)
+                        .addToBackStack("guide")
                         .commit()
                 }
             }
@@ -82,7 +93,11 @@ class RecyclableresultFragment : Fragment() {
             val categoryLabel = response.stage2?.label ?: "Unknown"
             val subcategoryLabel = response.stage3?.label ?: "Unknown"
 
-            catText.text = "Material: $categoryLabel"
+            //TEST
+            //Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
+
+            catText.text = "It's $categoryLabel!"
             typeText.visibility = View.VISIBLE
             typeText.text = "Type: ${mapSubcategoryToText(subcategoryLabel)}"
 
@@ -102,6 +117,7 @@ class RecyclableresultFragment : Fragment() {
             questbot.text = "Would you like to see recycling guides?"
 
             btnYes.setOnClickListener {
+
                 val fragment = GuideListFragment().apply {
                     arguments = Bundle().apply { putString("subcategory", subcategoryLabel) }
                 }
@@ -120,12 +136,11 @@ class RecyclableresultFragment : Fragment() {
 
         btnNo.setOnClickListener {
             showFeedbackDialog()
-            if (isAdded) {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, HomeFragment())
-                    .addToBackStack(null)
-                    .commit()
-            }
+            parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+
+        btnTopLeft.setOnClickListener {
+            showExitDialog()
         }
 
         return view
@@ -134,7 +149,7 @@ class RecyclableresultFragment : Fragment() {
     private fun mapSubcategoryToText(subcategory: String): String {
         return when (subcategory) {
             "Flat Glass" -> "Flat Glass"
-            "Glass Bottles" -> "Glass Bottle"
+            "Glass Bottle" -> "Glass Bottle"
             "Glass Cullet" -> "Cullet"
             "Aluminum_Tin" -> "Aluminum Tin"
             "Copper" -> "Copper"
@@ -161,7 +176,7 @@ class RecyclableresultFragment : Fragment() {
 
     private fun showFeedbackDialog() {
         val title = SpannableString("We'd Love Your Feedback").apply {
-            setSpan(ForegroundColorSpan(resources.getColor(R.color.black, null)), 0, length, 0)
+            setSpan(ForegroundColorSpan(resources.getColor(R.color.darkgreen, null)), 0, length, 0)
         }
         val message = SpannableString("Would you like to share your experience with us?").apply {
             setSpan(ForegroundColorSpan(resources.getColor(R.color.black, null)), 0, length, 0)
@@ -171,20 +186,70 @@ class RecyclableresultFragment : Fragment() {
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("Give Feedback") { _, _ ->
-                val fragment = feedbackFragment()
                 if (isAdded) {
+
+                    val fragment = feedbackFragment()
+
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null)
+                        .add(R.id.fragment_container, fragment)
+                        .hide(this@RecyclableresultFragment)
+                        .addToBackStack("guide")
                         .commit()
                 }
             }
-            .setNegativeButton("Maybe Later") { _, _ -> }
+            .setNegativeButton("Maybe Later") { _, _ ->
+            }
             .create()
 
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.darkgreen, null))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.black, null))
+        dialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
+    private fun showExitDialog() {
+
+        val title = SpannableString("Exit Result Page").apply {
+            setSpan(
+                ForegroundColorSpan(resources.getColor(R.color.darkgreen, null)),
+                0,
+                length,
+                0
+            )
+        }
+
+        val message = SpannableString(
+            "Are you sure you want to exit? Your progress will be lost."
+        ).apply {
+            setSpan(
+                ForegroundColorSpan(resources.getColor(R.color.black, null)),
+                0,
+                length,
+                0
+            )
+        }
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Yes") { _, _ ->
+                parentFragmentManager.popBackStack(
+                    null,
+                    androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+                )
+                startActivity(Intent(requireContext(), CameraActivity::class.java))
+            }
+            .setNegativeButton("No", null)
+            .create()
+
+        dialog.show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(resources.getColor(R.color.black, null))
+
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(resources.getColor(R.color.black, null))
+
         dialog.window?.setBackgroundDrawableResource(R.color.white)
     }
 }

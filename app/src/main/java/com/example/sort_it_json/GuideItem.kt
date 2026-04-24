@@ -5,6 +5,9 @@ data class GuideItem(
     val id: String,
     val category: String,
     val title: String,
+    val time: String,
+    val difficulty: String,
     val image: String,      // String name of drawable
-    val html_file: String
+    val html_file: String,
+    var isBookmarked: Boolean = false
 )

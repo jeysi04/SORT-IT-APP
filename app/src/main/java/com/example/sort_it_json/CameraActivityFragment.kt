@@ -4,8 +4,8 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.util.Size
+import android.view.ScaleGestureDetector
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,27 +14,24 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlinx.coroutines.*
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import java.io.ByteArrayOutputStream
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.content.Context
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 
 class CameraActivity : AppCompatActivity() {
 
     private lateinit var previewView: PreviewView
     private lateinit var captureButton: ImageButton
     private lateinit var cameraExecutor: ExecutorService
+
     private var imageCapture: ImageCapture? = null
+    private var camera: Camera? = null
 
     companion object {
         private const val CAMERA_PERMISSION_CODE = 100
@@ -42,12 +39,26 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContentView(R.layout.fragment_camera)
+
+        val root = findViewById<android.view.View>(android.R.id.content)
+
+        ViewCompat.setOnApplyWindowInsetsListener(root) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            view.setPadding(0, 0, 0, systemBars.bottom)
+            insets
+        }
 
         previewView = findViewById(R.id.previewView)
         captureButton = findViewById(R.id.capture_button)
+
         cameraExecutor = Executors.newSingleThreadExecutor()
 
+        // Permission check
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             == PackageManager.PERMISSION_GRANTED
         ) {
@@ -61,16 +72,41 @@ class CameraActivity : AppCompatActivity() {
         }
 
         captureButton.setOnClickListener { takePhoto() }
+
+        // =========================
+        // PINCH TO ZOOM FEATURE
+        // =========================
+        val scaleGestureDetector = ScaleGestureDetector(this,
+            object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+                override fun onScale(detector: ScaleGestureDetector): Boolean {
+                    val currentZoom =
+                        camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
+
+                    val newZoom = currentZoom * detector.scaleFactor
+
+                    camera?.cameraControl?.setZoomRatio(newZoom)
+                    return true
+                }
+            }
+        )
+
+        previewView.setOnTouchListener { _, event ->
+            scaleGestureDetector.onTouchEvent(event)
+            true
+        }
     }
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
 
             val preview = Preview.Builder()
                 .build()
-                .also { it.setSurfaceProvider(previewView.surfaceProvider) }
+                .also {
+                    it.setSurfaceProvider(previewView.surfaceProvider)
+                }
 
             imageCapture = ImageCapture.Builder()
                 .setTargetResolution(Size(224, 224))
@@ -81,9 +117,15 @@ class CameraActivity : AppCompatActivity() {
 
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture
+
+                // IMPORTANT: store camera reference for zoom
+                camera = cameraProvider.bindToLifecycle(
+                    this,
+                    cameraSelector,
+                    preview,
+                    imageCapture
                 )
+
             } catch (e: Exception) {
                 Toast.makeText(this, "Camera failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
@@ -91,6 +133,12 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
+
+        if (!isInternetAvailable()) {
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val imageCapture = imageCapture ?: return
 
         val photoFile = File(
@@ -105,8 +153,14 @@ class CameraActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    Toast.makeText(this@CameraActivity, "Photo captured!", Toast.LENGTH_SHORT).show()
-                    analyzePhoto(photoFile)
+                    Toast.makeText(this@CameraActivity, "Image captured!", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this@CameraActivity, MainActivity::class.java).apply {
+                        putExtra("file_path", photoFile.absolutePath)
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    }
+                    startActivity(intent)
+                    finish()
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -120,91 +174,13 @@ class CameraActivity : AppCompatActivity() {
         )
     }
 
-    private fun analyzePhoto(file: File) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                // Decode file to Bitmap
-                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-
-                // Resize (VERY IMPORTANT)
-                val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
-
-                // Compress to JPEG (reduce size)
-                val outputStream = ByteArrayOutputStream()
-                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
-
-                // Convert to byte array
-                val compressedBytes = outputStream.toByteArray()
-
-                // Create RequestBody from compressed image
-                val requestFile = RequestBody.create(
-                    "image/jpeg".toMediaTypeOrNull(),
-                    compressedBytes
-                )
-
-                // Multipart body
-                val body = MultipartBody.Part.createFormData(
-                    "file",
-                    "compressed.jpg",
-                    requestFile
-                )
-
-                // Wait a bit (important)
-                delay(3000)
-
-                // Call API
-                val response: PredictResponse = ApiClient.service.predict(body)
-
-                // Clean up memory
-                bitmap.recycle()
-                resizedBitmap.recycle()
-
-                // Optional but good practice
-                outputStream.close()
-
-                // === CHECK LOGS ===
-                Log.d("RAW_JSON", response.toString())
-
-                Log.d("AnalyzePhoto", "Received PredictResponse: $response")
-                Log.d("AnalyzePhoto", "Stage1: ${response.stage1.label}, ${response.stage1.probability}")
-                Log.d("AnalyzePhoto", "Stage2: ${response.stage2?.label}, ${response.stage2?.probability}")
-                Log.d("AnalyzePhoto", "Stage3: ${response.stage3?.label}, ${response.stage3?.probability}")
-
-                // Return result to MainActivity via Intent
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@CameraActivity, "Prediction Received!", Toast.LENGTH_SHORT).show()
-
-                    // Create Intent to send result back
-                    val intent = Intent().apply {
-                        putExtra("predict_response", response) // PredictResponse must implement Parcelable
-                    }
-                    setResult(RESULT_OK, intent) // Set the result
-                    finish() // Close CameraActivity and return to MainActivity
-                }
-
-                // After receiving response successfully
-                if (file.exists()) {
-                    val deleted = file.delete()
-                    Log.d("FileCleanup", "Deleted: $deleted")
-                }
-
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        this@CameraActivity,
-                        "Analyze failed: ${e.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    Log.e("AnalyzePhoto", "Error analyzing photo", e)
-                }
-            }
-        }
-    }
-
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startCamera()
@@ -212,6 +188,22 @@ class CameraActivity : AppCompatActivity() {
                 Toast.makeText(this, "Camera permission required", Toast.LENGTH_SHORT).show()
                 finish()
             }
+        }
+    }
+
+    private fun isInternetAvailable(): Boolean {
+
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
         }
     }
 

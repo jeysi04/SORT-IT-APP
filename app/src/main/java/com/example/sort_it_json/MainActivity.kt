@@ -5,35 +5,33 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
+
         if (result.resultCode == RESULT_OK) {
-            val response = result.data?.getParcelableExtra<PredictResponse>("predict_response")
-            response?.let { showAnalysisResult(it) }
+
+            val filePath = result.data?.getStringExtra("file_path")
+
+            if (filePath != null) {
+
+                // FORCE LOADING SCREEN
+                showLoadingFragment(filePath)
+            }
         }
     }
-
-    // Main fragments (ONLY these are persistent)
-    private val homeFragment = HomeFragment()
-    private val aboutFragment = AboutFragment()
-    private val faqFragment = FaqFragment()
-    private val feedbackFragment = feedbackFragment()
-
-    private var activeFragment: Fragment = homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -42,23 +40,17 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         val fabCenter = findViewById<FloatingActionButton>(R.id.fab_center)
+
         bottomNav.itemIconTintList = null
 
         setupFeedbackLogic(bottomNav)
 
-        // Add base fragments ONCE
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, feedbackFragment, "feedback").hide(feedbackFragment)
-            .add(R.id.fragment_container, faqFragment, "faq").hide(faqFragment)
-            .add(R.id.fragment_container, aboutFragment, "about").hide(aboutFragment)
-            .add(R.id.fragment_container, homeFragment, "home")
-            .commit()
-
-        // Logo → Home
-        findViewById<ImageButton>(R.id.logoButton).setOnClickListener {
-            switchFragment(homeFragment)
-            bottomNav.selectedItemId = R.id.nav_home
+        // Load default fragment
+        if (savedInstanceState == null) {
+            switchFragment(NewHomeFragment())
         }
+
+        handleIncomingIntent(intent)
 
         // FAB → Camera Activity
         fabCenter.setOnClickListener {
@@ -80,69 +72,75 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Bottom nav
+        // Bottom Navigation (REPLACE MODE)
         bottomNav.setOnItemSelectedListener { item ->
+
             if (!canNavigate()) return@setOnItemSelectedListener false
 
-            // IMPORTANT: clear result fragment if open
-            supportFragmentManager.popBackStack()
-
-            val target = when (item.itemId) {
-                R.id.nav_home -> homeFragment
-                R.id.nav_about -> aboutFragment
-                R.id.nav_faq -> faqFragment
-                R.id.nav_feedback -> feedbackFragment
-                else -> null
+            when (item.itemId) {
+                R.id.nav_home -> switchFragment(NewHomeFragment())
+                R.id.nav_bookmark -> switchFragment(BookmarkFragment())
+                R.id.nav_faq -> switchFragment(FaqFragment())
+                R.id.nav_feedback -> switchFragment(feedbackFragment())
             }
 
-            target?.let {
-                switchFragment(it)
-                true
-            } ?: false
+            true
         }
     }
 
-    // ✅ SAFE fragment switching (tabs only)
-    private fun switchFragment(target: Fragment) {
-        if (activeFragment == target) return
-
+    // REPLACE FRAGMENT (DESTROYS OLD ONE)
+    private fun switchFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .hide(activeFragment)
-            .show(target)
+            .replace(R.id.fragment_container, fragment)
             .commit()
-
-        activeFragment = target
     }
 
-    // ✅ RESULT SCREEN (temporary)
-    private fun showAnalysisResult(response: PredictResponse) {
-        val resultFragment = RecyclableresultFragment().apply {
+    // Show loading screen with file
+    public fun showLoadingFragment(filePath: String) {
+        val fragment = LoadingFragment().apply {
             arguments = Bundle().apply {
-                putParcelable("predict_response", response)
+                putString("file_path", filePath)
             }
         }
 
         supportFragmentManager.beginTransaction()
-            .hide(activeFragment) // hide current tab
-            .add(R.id.fragment_container, resultFragment, "predict_result")
-            .addToBackStack("predict_result") // allow back
+            .replace(R.id.fragment_container, fragment)
             .commit()
     }
 
-    // Slider
-    fun finishOnboarding() {
-        val intent = Intent(this, CameraActivity::class.java)
-        cameraLauncher.launch(intent)
+    override fun onResume() {
+        super.onResume()
+
+        val current = supportFragmentManager.findFragmentById(R.id.fragment_container)
+
+        // DO NOT override loading fragment
+        if (current !is LoadingFragment && current == null) {
+            switchFragment(NewHomeFragment())
+        }
     }
 
-    // Feedback
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleIncomingIntent(intent)
+    }
+
+    private fun handleIncomingIntent(intent: Intent) {
+
+        val filePath = intent.getStringExtra("file_path")
+
+        if (filePath != null) {
+            showLoadingFragment(filePath)
+        }
+    }
+
+    // Feedback logic
     private fun setupFeedbackLogic(bottomNav: BottomNavigationView) {
         val closeGlobalButton = findViewById<MaterialButton>(R.id.close_global_success_button)
 
         closeGlobalButton?.setOnClickListener {
             hideSuccessOverlay()
             bottomNav.selectedItemId = R.id.nav_home
-            switchFragment(homeFragment)
+            switchFragment(NewHomeFragment())
         }
     }
 

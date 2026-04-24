@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 
 class FaqFragment : Fragment() {
@@ -17,6 +18,16 @@ class FaqFragment : Fragment() {
     ): View? {
         //Set the fragment view to fragment_faq fragment
         val view = inflater.inflate(R.layout.fragment_faq, container, false)
+
+        val btnBack = view.findViewById<ImageButton>(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            if (isAdded) {
+                parentFragmentManager.beginTransaction()
+                    .remove(FaqFragment())
+                    .commit()
+            }
+        }
 
         // List of all question layouts and corresponding answer TextViews
         val faqTriple = listOf(
