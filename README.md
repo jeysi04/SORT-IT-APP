@@ -61,7 +61,7 @@ The prototype allows users to:
 ## Project Team
 This project was developed by a group of BS Computer Science students from Bicol University College of Science.
 | **Name**                | **Role(s)**                                       |
-|----------------         |--------                                           |
+|-------------------------|---------------------------------------------------|
 | A Z Rain L. Espinas     | Project Manager, Developer Support                |
 | Ginno L. Buenaobra      | Quality Assurance, Developer Support              |
 | Janna Carla R. Morcozo  | Backend Developer, Requirements Analyst, Marketer |
