@@ -1,17 +1,25 @@
-# **SORT-IT** (A Machine Learning-Based Recyclable Waste Recognition Application)
+<!-- PROJECT TITLE -->
+<div align="center">
 
-SORT-IT is a mobile application designed to assist users in identifying recyclable waste materials and providing appropriate recycling instructions to support proper solid waste management.
+<h1>SORT-IT</h1>
+<h3><em>Smart Object Recognition Technology for Intelligent Trash Management</em></h3>
+
+<p>
+SORT-IT is a mobile application designed to help users identify recyclable waste materials and provide appropriate recycling instructions, supporting proper solid waste management.
+</p>
+
+</div>
 
 ## Publicly Accessible Link
 Click here: https://www.figma.com/proto/0GlVO0l6U9LTIGEcBC1uNT/SORT-IT--Final-?node-id=1-2&t=bpQW1regw3MDpgnF-1
 
 ## Tasks
 1. **Determine the Recyclability of a Waste Item** (Simple Task)
-   - Capture an image of a waste item and view the classification result(recyclable or not recyclable).
+   > Capture an image of a waste item and view the classification result (recyclable or not recyclable).
 2. **Learn and Apply Proper Recycling Methods for a Recyclable Item** (Moderate Task)
-   - View the provided recycling guide for the identified recyclable item and follow the step-by-step instructions.
+   > View the provided recycling guide for the identified recyclable item and follow the step-by-step instructions.
 3. **Submit Feedback to Assess Classification Results** (Complex Task)
-   - Provide feedback on the accuracy and usability of the classification results to help improve the system.
+   > Provide feedback on the accuracy and usability of the classification results to help improve the system.
 
 ## Contextual Information for the Evaluator
 
@@ -37,9 +45,15 @@ The prototype allows users to:
 - Provide feedback by selecting a star rating and tapping feedback tags on the feedback page.
 
 ### Limitations  
-- **No Real-Time Processing:** The prototype does not perform actual image processing or machine learning classification; all outputs are simulated using predefined results.
-- **No Camera or Backend Integration:** The prototype does not support real camera functionality, live data processing, or backend services, including data storage for feedback. 
-- **Limited Functionality:** Key features such as image classification and recycling guide generation are visually demonstrated only and not functionally implemented.
-- **Limited Navigation Flow:** Navigation is restricted to predefined interactions and may not fully represent all possible user paths; some buttons may not be functional.
-- **Limited Feedback Input:** While star ratings and feedback tags are interactive, text input is not supported due to prototype platform limitations.
-- **No Performance Evaluation:** System performance metrics such as processing time, accuracy, and responsiveness cannot be measured in this prototype.
+- **No Real-Time Processing**
+  > The prototype does not perform actual image processing or machine learning classification; all outputs are simulated using predefined results.
+- **No Camera or Backend Integration**
+  > The prototype does not support real camera functionality, live data processing, or backend services, including data storage for feedback. 
+- **Limited Functionality**
+  > Key features such as image classification and recycling guide generation are visually demonstrated only and not functionally implemented.
+- **Limited Navigation Flow**
+  > Navigation is restricted to predefined interactions and may not fully represent all possible user paths; some buttons may not be functional.
+- **Limited Feedback Input**
+  > While star ratings and feedback tags are interactive, text input is not supported due to prototype platform limitations.
+- **No Performance Evaluation**
+  > System performance metrics such as processing time, accuracy, and responsiveness cannot be measured in this prototype.
