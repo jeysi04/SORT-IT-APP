@@ -57,3 +57,13 @@ The prototype allows users to:
   > While star ratings and feedback tags are interactive, text input is not supported due to prototype platform limitations.
 - **No Performance Evaluation**
   > System performance metrics such as processing time, accuracy, and responsiveness cannot be measured in this prototype.
+
+## Project Team
+This project was developed by a group of BS Computer Science students from Bicol University College of Science.
+| Name                    | Role(s)                                           |
+|----------------         |--------                                           |
+| A Z Rain L. Espinas     | Project Manager, Developer Support                |
+| Ginno L. Buenaobra      | Quality Assurance, Developer Support              |
+| Janna Carla R. Morcozo  | Backend Developer, Requirements Analyst, Marketer |
+| Jaycee D. Cadag         | Frontend Developer, Marketer                      |
+| John Melrick M. Loviña  | Frontend Developer, Document Specialist           |
