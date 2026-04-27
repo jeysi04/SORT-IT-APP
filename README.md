@@ -10,6 +10,7 @@ SORT-IT is a mobile application designed to help users identify recyclable waste
 
 </div>
 
+<!-- FIGMA PROTOTYPE LINK -->
 ## Publicly Accessible Link
 Click here: https://www.figma.com/proto/0GlVO0l6U9LTIGEcBC1uNT/SORT-IT--Final-?node-id=1-2&t=bpQW1regw3MDpgnF-1
 
@@ -21,6 +22,7 @@ Click here: https://www.figma.com/proto/0GlVO0l6U9LTIGEcBC1uNT/SORT-IT--Final-?n
 3. **Submit Feedback to Assess Classification Results** (Complex Task)
    > Provide feedback on the accuracy and usability of the classification results to help improve the system.
 
+<!-- PROTOTYPE INFORMATION -->
 ## Contextual Information for the Evaluator
 
 ### Target Population
@@ -58,6 +60,7 @@ The prototype allows users to:
 - **No Performance Evaluation**
   > System performance metrics such as processing time, accuracy, and responsiveness cannot be measured in this prototype.
 
+<!-- PROJECT TEAM MEMBERS -->
 ## Project Team
 This project was developed by a group of BS Computer Science students from Bicol University College of Science.
 | **Name**                | **Role(s)**                                       |
