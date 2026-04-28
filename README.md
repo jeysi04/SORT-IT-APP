@@ -42,6 +42,14 @@ Follow these steps to use the SORT-IT prototype:
   + **Yes** → Displays available recycling methods  
   + **No** → Prompts you to provide feedback  
 
+#### Viewing Recycling Methods
+- A list of available recycling methods will be displayed.  
+- Tap a method to view its **step-by-step instructions**.  
+- You may save a method by tapping the **bookmark icon** beside it.  
+- Saved guides can be accessed later from the **Bookmarks page**.  
+
+> _Note: Bookmark functionality is simulated in this prototype. Actions such as adding or removing guides are not saved and will not be reflected on the Bookmarks page._
+
 ---
 
 ### Submit Feedback
