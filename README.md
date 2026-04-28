@@ -16,6 +16,8 @@ Click here: https://www.figma.com/proto/0GlVO0l6U9LTIGEcBC1uNT/SORT-IT--Final-?n
 
 <!-- APP OVERVIEW -->
 ## Features
+Below is a brief overview of the SORT-IT user interface:
+
 **Splash Screen**  
 The initial interface displayed after launching the application. It serves as a loading screen while the system initializes its components.
 
