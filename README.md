@@ -19,8 +19,6 @@ Click here: https://www.figma.com/proto/0GlVO0l6U9LTIGEcBC1uNT/SORT-IT--Final-?n
 **Splash Screen**  
 The initial interface displayed after launching the application. It serves as a loading screen while the system initializes its components.
 
----
-
 **Bottom Navigation Bar**  
 A persistent navigation bar located at the bottom of the application that provides access to the main sections:
 
