@@ -14,16 +14,52 @@ SORT-IT is a mobile application designed to help users identify recyclable waste
 ## Publicly Accessible Link
 Click here: https://www.figma.com/proto/0GlVO0l6U9LTIGEcBC1uNT/SORT-IT--Final-?node-id=1-2&t=bpQW1regw3MDpgnF-1
 
-## Tasks
-1. **Determine the Recyclability of a Waste Item** (Simple Task)
-   > Capture an image of a waste item and view the classification result (recyclable or not recyclable).
-2. **Learn and Apply Proper Recycling Methods for a Recyclable Item** (Moderate Task)
-   > View the provided recycling guide for the identified recyclable item and follow the step-by-step instructions.
-3. **Submit Feedback to Assess Classification Results** (Complex Task)
-   > Provide feedback on the accuracy and usability of the classification results to help improve the system.
+<!-- APP OVERVIEW -->
+## Features
+**Splash Screen**  
+The initial interface displayed after launching the application. It serves as a loading screen while the system initializes its components.
+
+---
+
+**Bottom Navigation Bar**  
+A persistent navigation bar located at the bottom of the application that provides access to the main sections:
+
+- **Home**  
+  Navigates to the Home page, which displays a welcoming interface, recently opened recycling guides, and an information icon that redirects to the About page.  
+
+  - **About Page**  
+    Provides information about the application and contact details for inquiries or support. It includes a horizontal scroll indicator for navigating through sections.
+
+- **Bookmarks**  
+  Displays a list of recycling guides saved by the user.
+
+  > _Note: The search bar in the Bookmarks page does not support text input due to prototype platform limitations._
+
+- **Camera**  
+  Opens the camera interface used for capturing images of waste materials for classification.
+
+  - **Loading / Image Processing Page**  
+    Appears after capturing an image and remains visible until processing is complete.  
+
+  - **Classification Result Page**  
+    Displays the classification result, including material and subtype. It also prompts the user to either view recycling methods or provide feedback.  
+
+    > _Note: Recycling methods are only available for waste classified as recyclable. Disposal methods for non-recyclable waste are not provided._
+
+  - **Recycling Methods Selection Page**  
+    Displays a list of available recycling guides for the identified recyclable item.
+
+  - **Recycling Guide Page**  
+    Provides detailed, step-by-step instructions on how to properly recycle or repurpose the identified recyclable item.
+
+- **FAQs**  
+  Displays frequently asked questions using an expandable list format for quick access to common concerns and issues.
+
+- **Feedback**  
+  Allows users to rate their app experience using a star rating and select predefined tags. A text input field is available for additional comments, with a 200-character limit indicator that turns red when the limit is reached.
 
 ## Usage  
-> ⚠️ **Note:** This prototype contains **simulated features** and may display **predefined or static outputs**. Some functionalities are limited and do not fully represent the final system.  
+> **Note:** The SORT-IT prototype contains **simulated features** and may display **predefined or static outputs**. Some functionalities are limited and do not fully represent the final system.  
 
 Follow these steps to use the SORT-IT prototype:  
 ### Capture and Classify a Waste Item
@@ -58,11 +94,19 @@ Follow these steps to use the SORT-IT prototype:
   2. Select applicable **feedback tags** (e.g., accuracy, ease of use).
   3. Review your selected inputs before submission.  
   
-> _Note: Text input for detailed feedback is currently unavailable in the prototype._
+> _Note: Text input for detailed feedback is unavailable in the prototype._
 
 - If you choose **not** to leave feedback:
   - You will remain on the result page.
   - You may leave the page using the **navigation bar** (e.g., Home or other sections).
+
+## Tasks
+1. **Determine the Recyclability of a Waste Item** (Simple Task)
+   > Capture an image of a waste item and view the classification result (recyclable or not recyclable).
+2. **Learn Proper Recycling Methods for a Recyclable Item** (Moderate Task)
+   > Select and view a recycling guide for the identified recyclable item, then review its step-by-step instructions to understand the proper recycling process.
+3. **Submit Feedback to Assess Classification Results** (Complex Task)
+   > Provide feedback on the accuracy and usability of the classification results to help improve the system.
 
 <!-- PROTOTYPE INFORMATION -->
 ## Contextual Information for the Evaluator
@@ -89,18 +133,29 @@ The prototype allows users to:
 - Provide feedback by selecting a star rating and tapping feedback tags on the feedback page.
 
 ### Limitations  
-- **No Real-Time Processing**
-  > The prototype does not perform actual image processing or machine learning classification; all outputs are simulated using predefined results.
-- **No Camera or Backend Integration**
-  > The prototype does not support real camera functionality, live data processing, or backend services, including data storage for feedback. 
-- **Limited Functionality**
-  > Key features such as image classification and recycling guide generation are visually demonstrated only and not functionally implemented.
-- **Limited Navigation Flow**
-  > Navigation is restricted to predefined interactions and may not fully represent all possible user paths; some buttons may not be functional.
-- **Limited Feedback Input**
-  > While star ratings and feedback tags are interactive, text input is not supported due to prototype platform limitations.
-- **No Performance Evaluation**
-  > System performance metrics such as processing time, accuracy, and responsiveness cannot be measured in this prototype.
+- **Simulated System Behavior**  
+  > The prototype does not perform actual image processing or machine learning classification. All outputs are simulated using predefined results, and core features are visually demonstrated only.
+
+- **No Camera or Backend Integration**  
+  > Real camera functionality, live data processing, and backend services (e.g., data storage for feedback) are not implemented.
+
+- **Limited Navigation and Interactions**  
+  > Navigation is restricted to predefined flows and may not represent all possible user paths. Some buttons and interface elements may be non-functional or behave differently from a fully developed system.
+
+- **Limited Feedback Functionality**  
+  > Feedback is limited to star ratings and predefined tags. Text input is not supported, and submitted feedback is not stored.
+
+- **Prototype Platform Constraints**  
+  > Certain interface elements are limited by the prototyping platform:
+  > - **Text Input**: Not supported (e.g., Bookmarks search bar and Feedback text field)  
+  > - **Loading / Image Processing Screen**: Requires manual tapping to proceed; it does not automatically redirect the user to the result page  
+  > - **Bookmarking**: Actions are simulated and are not saved; changes will not appear in the Bookmarks page
+
+- **Unavailable System Feedback**  
+  > Pop-up messages (e.g., toast notifications for invalid actions or system alerts) are part of the intended system but do not appear in the interactive prototype due to limited interaction flow.
+
+- **No Performance Evaluation**  
+  > System metrics such as processing time, accuracy, and responsiveness cannot be measured in this prototype.
 
 <!-- PROJECT TEAM MEMBERS -->
 ## Project Team
