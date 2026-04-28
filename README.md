@@ -33,8 +33,6 @@ A persistent navigation bar located at the bottom of the application that provid
 - **Bookmarks**  
   Displays a list of recycling guides saved by the user.
 
-  > _Note: The search bar in the Bookmarks page does not support text input due to prototype platform limitations._
-
 - **Camera**  
   Opens the camera interface used for capturing images of waste materials for classification.
 
