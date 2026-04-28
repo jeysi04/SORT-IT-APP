@@ -67,6 +67,6 @@ This project was developed by a group of BS Computer Science students from Bicol
 |-------------------------|---------------------------------------------------|
 | A Z Rain L. Espinas     | Project Manager, Developer Support                |
 | Ginno L. Buenaobra      | Quality Assurance, Developer Support              |
-| Janna Carla R. Morcozo  | Backend Developer, Requirements Analyst, Marketer |
-| Jaycee D. Cadag         | Frontend Developer, Marketer                      |
-| John Melrick M. Loviña  | Frontend Developer, Document Specialist           |
+| Janna Carla R. Morcozo  | Backend Developer, Requirements Analyst           |
+| Jaycee D. Cadag         | Frontend Developer, UI/UX Designer                |
+| John Melrick M. Loviña  | Frontend Developer, UI/UX Designer                |
