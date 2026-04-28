@@ -22,13 +22,47 @@ Click here: https://www.figma.com/proto/0GlVO0l6U9LTIGEcBC1uNT/SORT-IT--Final-?n
 3. **Submit Feedback to Assess Classification Results** (Complex Task)
    > Provide feedback on the accuracy and usability of the classification results to help improve the system.
 
+## Usage  
+> ⚠️ **Note:** This prototype contains **simulated features** and may display **predefined or static outputs**. Some functionalities are limited and do not fully represent the final system.  
+
+Follow these steps to use the SORT-IT prototype:  
+### Capture and Classify a Waste Item
+1. Tap the **camera button** in the center of the bottom navigation bar to open the camera interface.  
+2. Capture an **image** of the waste item by tapping the capture button.  
+3. Wait for the loading screen to appear.  
+4. **Tap the loading screen once** to proceed to the classification result.  
+
+> _Note: The loading screen does not automatically redirect. You must tap the screen to continue._
+
+---
+
+### View Results and Recycling Guide
+- The result page displays the identified material and classification.
+- Since the result is classified as recyclable (simulated), you will be prompted to view the recycling methods:
+  + **Yes** → Displays available recycling methods  
+  + **No** → Prompts you to provide feedback  
+
+---
+
+### Submit Feedback
+- If you choose to leave feedback:
+  1. Give a **star rating** based on the result.  
+  2. Select applicable **feedback tags** (e.g., accuracy, ease of use).
+  3. Review your selected inputs before submission.  
+  
+> _Note: Text input for detailed feedback is currently unavailable in the prototype._
+
+- If you choose **not** to leave feedback:
+  - You will remain on the result page.
+  - You may leave the page using the **navigation bar** (e.g., Home or other sections).
+
 <!-- PROTOTYPE INFORMATION -->
 ## Contextual Information for the Evaluator
 
 ### Target Population
 - Primary: Residents and homeowners who segregate waste at the household level and have limited knowledge of recycling practices
 - Secondary: Waste collectors and junk shop operators who regularly handle recyclable materials
-- Others: Individuals interested in proper waste management and environmental sustainability 
+- Others: Individuals interested in proper waste management and environmental sustainability
 
 ### When to use SORT-IT?
 SORT-IT can be used in everyday situations where users need quick guidance on proper waste disposal, such as:
