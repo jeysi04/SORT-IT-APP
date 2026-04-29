@@ -186,6 +186,12 @@ class RecyclableresultFragment : Fragment() {
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("Give Feedback") { _, _ ->
+
+                view?.post {
+                    (requireActivity() as MainActivity)
+                        .setNav(R.id.nav_feedback)
+                }
+
                 if (isAdded) {
 
                     val fragment = feedbackFragment()
@@ -252,4 +258,5 @@ class RecyclableresultFragment : Fragment() {
 
         dialog.window?.setBackgroundDrawableResource(R.color.white)
     }
+
 }

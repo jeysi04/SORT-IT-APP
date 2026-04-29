@@ -18,6 +18,7 @@ import android.graphics.BitmapFactory
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.coroutines.Job
@@ -33,6 +34,10 @@ class LoadingFragment : Fragment() {
     private var timeoutJob: Job? = null
     private var analysisJob: Job? = null
 
+    private lateinit var progressBar: ProgressBar
+    private lateinit var progressText: TextView
+    private var progressJob: Job? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +47,12 @@ class LoadingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        progressBar = view.findViewById(R.id.progressBarCircular)
+        progressText = view.findViewById(R.id.progressText)
+
+        // Start fake loading animation
+        startFakeProgress()
 
         filePath = arguments?.getString("file_path")
 
@@ -95,6 +106,11 @@ class LoadingFragment : Fragment() {
 
                 withContext(Dispatchers.Main) {
 
+                    progressJob?.cancel()
+                    progressBar.progress = 100
+                    progressText.text = "100%"
+
+
                     val resultFragment = RecyclableresultFragment().apply {
                         arguments = Bundle().apply {
                             putParcelable("predict_response", response)
@@ -127,7 +143,7 @@ class LoadingFragment : Fragment() {
 
         timeoutJob = lifecycleScope.launch {
 
-            delay(5000) // 5 seconds
+            delay(30000) // 30 seconds
 
             if (!isAdded) return@launch
 
@@ -202,6 +218,10 @@ class LoadingFragment : Fragment() {
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("Yes") { _, _ ->
+
+                progressJob?.cancel()
+                analysisJob?.cancel()
+
                 parentFragmentManager.popBackStack()
                 startActivity(Intent(requireContext(), CameraActivity::class.java))
             }
@@ -217,5 +237,23 @@ class LoadingFragment : Fragment() {
             .setTextColor(resources.getColor(R.color.black, null))
 
         dialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
+    private fun startFakeProgress() {
+        progressJob = lifecycleScope.launch {
+
+            var progress = 0
+
+            while (progress < 95) { // stop before 100 (wait for real result)
+                delay(300)
+
+                progress += (1..3).random()
+
+                if (progress > 95) progress = 95
+
+                progressBar.progress = progress
+                progressText.text = "$progress%"
+            }
+        }
     }
 }

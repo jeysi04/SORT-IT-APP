@@ -130,8 +130,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
-                android:backgroundTint="#F0CD6E"
                 android:fontFamily="@font/montserrat_extrabold"
+                android:background="@drawable/result_button"
+                app:backgroundTint="#F0CD6E"
                 android:text="No"
                 android:textAllCaps="false"
                 android:textColor="#467750"
@@ -141,15 +142,16 @@
                 android:id="@+id/buttonYes"
                 android:layout_width="160dp"
                 android:layout_height="62dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:background="@drawable/result_button"
+                app:backgroundTint="#F0CD6E"
                 android:text="Yes"
                 android:textAllCaps="false"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:backgroundTint="#F0CD6E"
-                android:fontFamily="@font/montserrat_extrabold"
-                android:textColor="#467750"/>
+                android:textColor="#467750"
+                android:textSize="20sp"/>
 
         </LinearLayout>
 

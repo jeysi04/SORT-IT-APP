@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -82,15 +83,40 @@ class GuideAdapter(
         holder.itemView.setOnClickListener {
 
             val context = holder.itemView.context
+            val prefs = context.getSharedPreferences("recent", Context.MODE_PRIVATE)
 
-            // Save recent guide
-            val prefs = context.getSharedPreferences("recent", android.content.Context.MODE_PRIVATE)
-            prefs.edit()
-                .putString("title", item.title)
-                .putString("time", item.time)
-                .putString("difficulty", item.difficulty)
-                .putString("image", item.image)
-                .apply()
+            // Get existing list
+            val json = prefs.getString("recent_list", "[]")
+            val list = org.json.JSONArray(json)
+
+            // Create new item
+            val newItem = org.json.JSONObject().apply {
+                put("title", item.title)
+                put("time", item.time)
+                put("difficulty", item.difficulty)
+                put("image", item.image)
+                put("html", item.html_file)
+            }
+
+            // Remove duplicate if already exists
+            for (i in 0 until list.length()) {
+                if (list.getJSONObject(i).getString("title") == item.title) {
+                    list.remove(i)
+                    break
+                }
+            }
+
+            // Add new item at top
+            val newList = org.json.JSONArray()
+            newList.put(newItem)
+
+            // Add old items (max 1 more → total = 2)
+            for (i in 0 until minOf(1, list.length())) {
+                newList.put(list.getJSONObject(i))
+            }
+
+            // Save back
+            prefs.edit().putString("recent_list", newList.toString()).apply()
 
             // Continue normal navigation
             onClick(item)

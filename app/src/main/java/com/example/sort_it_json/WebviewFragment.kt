@@ -10,16 +10,14 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
-import android.widget.Button
-import androidx.appcompat.app.AlertDialog
 
 class WebViewFragment : Fragment() {
 
     private var htmlFile: String? = null
-
-    private var hasShownDialog = false
+    private var webView: WebView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,80 +31,59 @@ class WebViewFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_webview, container, false)
 
-        // Find the WebView inside the inflated layout
-        val webView = view.findViewById<WebView>(R.id.webView)
+        webView = view.findViewById(R.id.webView)
 
-        // Hide WebView first (important)
-        webView.visibility = View.INVISIBLE
-
-        // Set a WebViewClient to handle page loading inside the WebView
-        webView.webViewClient = object : WebViewClient() {
-
-            // Called when the web page has finished loading
-            override fun onPageFinished(view: WebView?, url: String?) {
-
-                // Make the WebView visible now that the page is fully loaded
-                webView.visibility = View.VISIBLE
-            }
-        }
-
-        // Basic WebView settings
-        webView.settings.apply {
-            javaScriptEnabled = true        // For Finish Button
-            domStorageEnabled = true         // required for HTML5 local storage
-            allowFileAccess = true           // allows access to assets
-            cacheMode = WebSettings.LOAD_DEFAULT
-        }
-
-        webView.addJavascriptInterface(WebAppInterface(), "Android")
-
-        // Disable system forced dark mode
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
-            WebSettingsCompat.setForceDark(webView.settings, WebSettingsCompat.FORCE_DARK_OFF)
-        }
-
-        // WebViewClient to show content after load
-        webView.webViewClient = object : WebViewClient() {
-
-            // Called when a web page has finished loading
-            override fun onPageFinished(view: WebView?, url: String?) {
-                // Make the WebView visible only after the page fully loads
-                webView.visibility = View.VISIBLE
-            }
-        }
-
-        // Hide the WebView initially to avoid showing a blank or partially loaded page
-        webView.visibility = View.INVISIBLE
-
-        // Load HTML from assets directly
-        htmlFile?.let { fileName ->
-            webView.loadUrl("file:///android_asset/$fileName")
-        }
+        setupWebView()
+        loadHtml()
 
         return view
     }
 
-    // Called when the fragment’s view is being destroyed
-    override fun onDestroyView() {
+    private fun setupWebView() {
+        webView?.apply {
 
-        // Always call the superclass method first
-        super.onDestroyView()
+            visibility = View.INVISIBLE
 
-        // Find the WebView inside the fragment’s view (if it exists)
-        view?.findViewById<WebView>(R.id.webView)?.apply {
+            settings.apply {
+                javaScriptEnabled = true
+                domStorageEnabled = true
+                allowFileAccess = true
+                cacheMode = WebSettings.LOAD_DEFAULT
+            }
 
-            // Stop any ongoing page loading to free resources
-            stopLoading()
+            // Disable dark mode override
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+                WebSettingsCompat.setForceDark(
+                    settings,
+                    WebSettingsCompat.FORCE_DARK_OFF
+                )
+            }
 
-            // Remove all child views from the WebView
-            // Prevents memory leaks caused by attached views
-            removeAllViews()
+            webViewClient = object : WebViewClient() {
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    visibility = View.VISIBLE
+                }
+            }
 
-            // Destroy the WebView completely
-            destroy()
+            addJavascriptInterface(WebAppInterface(), "Android")
         }
     }
 
+    private fun loadHtml() {
+        htmlFile?.let {
+            webView?.loadUrl("file:///android_asset/$it")
+        }
+    }
+
+    override fun onDestroyView() {
+        webView?.apply {
+            stopLoading()
+            removeAllViews()
+            destroy()
+        }
+        webView = null
+        super.onDestroyView()
+    }
 
     inner class WebAppInterface {
 
@@ -116,33 +93,50 @@ class WebViewFragment : Fragment() {
             requireActivity().runOnUiThread {
 
                 val title = SpannableString("We'd Love Your Feedback").apply {
-                    setSpan(ForegroundColorSpan(resources.getColor(R.color.black, null)), 0, length, 0)
+                    setSpan(
+                        ForegroundColorSpan(resources.getColor(R.color.black, null)),
+                        0, length, 0
+                    )
                 }
+
                 val message = SpannableString("Would you like to share your experience with us?").apply {
-                    setSpan(ForegroundColorSpan(resources.getColor(R.color.black, null)), 0, length, 0)
+                    setSpan(
+                        ForegroundColorSpan(resources.getColor(R.color.black, null)),
+                        0, length, 0
+                    )
                 }
 
                 val dialog = AlertDialog.Builder(requireContext())
                     .setTitle(title)
                     .setMessage(message)
                     .setPositiveButton("Give Feedback") { _, _ ->
-                        val fragment = feedbackFragment()
+
+                        view?.post {
+                            (requireActivity() as MainActivity)
+                                .setNav(R.id.nav_feedback)
+                        }
+
                         if (isAdded) {
                             parentFragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
+                                .replace(R.id.fragment_container, feedbackFragment())
                                 .addToBackStack(null)
                                 .commit()
                         }
                     }
-                    .setNegativeButton("Maybe Later") { _, _ ->
-                    }
+                    .setNegativeButton("Maybe Later", null)
                     .create()
 
                 dialog.show()
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.darkgreen, null))
-                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.black, null))
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setTextColor(resources.getColor(R.color.darkgreen, null))
+
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                    .setTextColor(resources.getColor(R.color.black, null))
+
                 dialog.window?.setBackgroundDrawableResource(R.color.white)
             }
         }
     }
+
 }

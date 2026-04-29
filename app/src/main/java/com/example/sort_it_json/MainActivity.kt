@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         val fabCenter = findViewById<FloatingActionButton>(R.id.fab_center)
 
-        bottomNav.itemIconTintList = null
+        bottomNav.selectedItemId = R.id.nav_home
 
         setupFeedbackLogic(bottomNav)
 
@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         // FAB → Camera Activity
         fabCenter.setOnClickListener {
+            enterNonNavState()
             val intent = Intent(this, CameraActivity::class.java)
             cameraLauncher.launch(intent)
         }
@@ -75,16 +76,22 @@ class MainActivity : AppCompatActivity() {
         // Bottom Navigation (REPLACE MODE)
         bottomNav.setOnItemSelectedListener { item ->
 
-            if (!canNavigate()) return@setOnItemSelectedListener false
+            val fragment = when (item.itemId) {
 
-            when (item.itemId) {
-                R.id.nav_home -> switchFragment(NewHomeFragment())
-                R.id.nav_bookmark -> switchFragment(BookmarkFragment())
-                R.id.nav_faq -> switchFragment(FaqFragment())
-                R.id.nav_feedback -> switchFragment(feedbackFragment())
+                R.id.nav_home -> NewHomeFragment()
+                R.id.nav_bookmark -> BookmarkFragment()
+                R.id.nav_faq -> FaqFragment()
+                R.id.nav_feedback -> feedbackFragment()
+
+                else -> null
             }
 
-            true
+            if (fragment != null) {
+                switchFragment(fragment)
+                true
+            } else {
+                false
+            }
         }
     }
 
@@ -159,5 +166,20 @@ class MainActivity : AppCompatActivity() {
 
     fun hideSuccessOverlay() {
         findViewById<View>(R.id.global_success_overlay)?.visibility = View.GONE
+    }
+
+
+    private fun enterNonNavState() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        bottomNav.menu.findItem(R.id.nav_home).isChecked = false
+        bottomNav.menu.findItem(R.id.nav_bookmark).isChecked = false
+        bottomNav.menu.findItem(R.id.nav_faq).isChecked = false
+        bottomNav.menu.findItem(R.id.nav_feedback).isChecked = false
+    }
+
+    fun setNav(itemId: Int) {
+        findViewById<BottomNavigationView>(R.id.bottomNav)
+            .selectedItemId = itemId
     }
 }

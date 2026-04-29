@@ -70,4 +70,5 @@ class FaqFragment : Fragment() {
 
         return view
     }
+
 }

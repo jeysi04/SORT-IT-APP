@@ -40,6 +40,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContentView(R.layout.fragment_camera)

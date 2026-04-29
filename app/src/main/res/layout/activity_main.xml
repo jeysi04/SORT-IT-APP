@@ -29,10 +29,9 @@
         android:layout_height="wrap_content"
         android:background="#2A3F3F"
         app:itemActiveIndicatorStyle="@style/CustomActiveIndicator"
-        app:itemBackground="@android:color/transparent"
         app:itemIconSize="24dp"
-        app:itemIconTint="@null"
-        app:itemRippleColor="@color/white"
+        app:itemIconTint="@color/nav_icon_tint"
+        app:itemRippleColor="?attr/colorControlHighlight"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_menu" />

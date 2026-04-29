@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#467750"
+    android:background="#FFFFFF"
     android:padding="24dp">
 
     <!-- CENTER CONTENT -->
@@ -15,13 +15,33 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <!-- SVG / Loading Icon -->
-        <ProgressBar
-            android:id="@+id/progressBarCircular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="#F0CD6E"
-            android:layout_marginBottom="10dp"/>
+        <!-- Loading Icon -->
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center">
+
+            <ProgressBar
+                android:id="@+id/progressBarCircular"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="65"
+                android:progressDrawable="@drawable/circular_progress_drawable"/>
+
+            <TextView
+                android:id="@+id/progressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="65%"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+
+        </FrameLayout>
 
         <!-- Bold Title -->
         <TextView
@@ -31,7 +51,7 @@
             android:text="Processing Image..."
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:gravity="center"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginBottom="12dp" />
@@ -43,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="Hang tight!\nWe'll display the results shortly!"
             android:textSize="15sp"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:gravity="center"
             android:fontFamily="@font/montserrat_regular" />
 
@@ -56,11 +76,12 @@
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="#467750"
         android:fontFamily="@font/montserrat_regular"
+        android:background="@drawable/result_button"
         android:text="Cancel"
         android:textAllCaps="false"
-        android:textColor="#050505"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
 </LinearLayout>
