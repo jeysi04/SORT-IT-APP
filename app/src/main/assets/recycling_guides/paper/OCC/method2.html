@@ -1,192 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Old Corrugated Cartons Recycling Guide 2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Make Picture Frames from Old Cardboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
 
-<style>
-    :root {
-        --app-bg: #f4f4f4;
-        --card-bg: #ffffff;
-        --content-box-bg: #FBFBFB; 
-        --primary-text: #000000; 
-        --secondary-text: #999999;
-        --heading-gray: #666666; 
-        --btn-bg: #eed077;
-        --btn-text: #456b4d;
-    }
+    <style>
+        :root {
+            --app-bg: #ffffff;
+            --card-bg: #ffffff;
+            --primary-text: #000000;
+            --heading-color: #434343;
+            --btn-bg: #eed077;
+            --btn-text: #456b4d;
+            --timeline-line: #b3b3b3;
+        }
 
-    body {
-        margin: 0;
-        background-color: var(--app-bg);
-        display: flex;
-        justify-content: center;
-        padding: 30px; 
-        font-family: 'Montserrat', sans-serif;
-    }
-
-    .phone-container {
-        width: 100%;
-        max-width: 375px; 
-        background-color: var(--card-bg);
-        padding: 40px 25px 25px 25px; 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border-radius: 12px;
-        box-sizing: border-box; 
-    }
-
-    h1 {
-        font-weight: 800;
-        font-size: 20px;
-        color: #000;
-        margin-top: 0; 
-        margin-bottom: 2px;
-        text-align: justify;
-    }
-
-    .subtitle {
-        font-weight: 400;
-        font-size: 16px;
-        font-style: italic;
-        color: var(--secondary-text);
-        margin-bottom: 12px; 
-    }
-
-    .content-box {
-        background-color: var(--content-box-bg); 
-        padding: 20px; 
-        border-radius: 12px;
-    }
-
-    .description {
-        font-size: 14px;
-        line-height: 1.6;
-        color: var(--primary-text);
-        margin-bottom: 40px; 
-        text-align: justify;
-    }
-
-    h2 {
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--heading-gray); 
-        margin-top: 0;
-        margin-bottom: 12px;
-    }
-
-    ul {
-        padding-left: 18px;
-        font-size: 14px;
-        line-height: 1.5;
-        color: var(--primary-text);
-        margin-bottom: 40px; 
-    }
-
-    ol {
-        padding-left: 18px;
-        font-size: 14px;
-        line-height: 1.5;
-        color: var(--primary-text);
-        margin-bottom: 0; 
-    }
-
-    ul li {
-        margin-bottom: 6px; 
-    }
-
-    ol li {
-        margin-bottom: 12px; 
-        padding-left: 5px;
-        text-align: justify;
-    }
-
-    .finish-btn {
-        width: 100%;
-        margin-top: 25px;
-        padding: 16px;
-        background-color: var(--btn-bg);
-        border: none;
-        border-radius: 8px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 20px;
-        font-weight: 800;
-        color: var(--btn-text);
-        cursor: pointer;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    }
-
-    .finish-btn:hover {
-        opacity: 0.9;
-    }
-
-    @media (max-width: 480px) {
         body {
-            padding: 0; 
-            background-color: var(--card-bg); 
+            margin: 0;
+            background-color: var(--app-bg);
+            display: flex;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 375px; 
+            background-color: var(--card-bg);
+            padding: 40px 25px 25px 25px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            box-sizing: border-box; 
+        }
+
+        /* Back Button styles */
+        .back-btn { 
+
+            background: transparent; 
+            border: none;
+            padding: 0;
+            
+
+            margin-bottom: 30px; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            outline: none;
         }
         
-        .phone-container {
-            max-width: 100%; 
-            box-shadow: none; 
-            border-radius: 0; 
-            padding: 20px; 
+        .back-btn:active {
+            opacity: 0.7;
         }
-    }
+        
 
-</style>
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 21px;
+            color: #000000;
+            margin-top: 0;
+            margin-bottom: 5px;
+            line-height: 1.2;
+            text-align: justify;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--btn-bg);
+            color: #ffffff;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 17px;
+            padding: 4px 18px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--primary-text);
+            margin-bottom: 35px;
+            text-align: justify;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--heading-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .materials-list {
+            padding-left: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--primary-text);
+            margin-bottom: 40px;
+            margin-top: 0;
+        }
+
+        .materials-list li {
+            margin-bottom: 5px;
+        }
+
+       .timeline {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 40px;
+            gap: 20px; 
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start; 
+        }
+
+        .timeline-circle {
+            flex-shrink: 0;
+            width: 26px; 
+            height: 26px; 
+            border-radius: 50%;
+            background-color: var(--btn-bg);
+            margin-right: 15px;
+            margin-top: -2px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #434343; 
+        }
+
+        .timeline-content {
+            font-size: 15px;
+            line-height: 1.4;
+            color: var(--primary-text);
+            text-align: justify;
+        }
+
+                .finish-btn {
+            width: 100%;
+            margin-top: 20px; 
+            padding: 16px;
+            background-color: var(--btn-bg);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--btn-text);
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); 
+        }
+        .finish-btn:active {
+            opacity: 0.7;
+        }
+
+        .finish-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="phone-container">
+        <button class="back-btn">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="#eed077"/>
+                <path d="M21 16H11M11 16L15 12M11 16L15 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
 
-<div class="phone-container">
-
-    <h1>How to Make Picture Frames from Old Cardboard</h1>
-    <div class="subtitle">Old Corrugated Cartons</div>
-
-    <div class="content-box">
+        <h1>How to Make Picture Frames from Old Cardboard</h1>
+        <div class="badge">Old Corrugated Cartons</div>
 
         <div class="description">
-           Recycle old cardboard boxes into custom picture frames. This project is eco-friendly, easy, and allows you to create frames in any size or design.
+            Recycle old cardboard boxes into custom picture frames. This project is eco-friendly, easy, and allows you to create unique frames in any size or design to match your personal home décor.
         </div>
 
-        <h2>Materials Needed</h2>
-        <ul>
-            <li>Old corrugated cardboard (sturdy and clean)</li>
+        <h2>Materials Needed:</h2>
+        <ul class="materials-list">
+            <li>Old corrugated cardboard</li>
             <li>Scissors or box cutter</li>
             <li>Ruler</li>
             <li>Pencil or marker</li>
             <li>Glue or double-sided tape</li>
-            <li>Decorative materials (optional: paint, markers, fabric, washi tape)</li>
             <li>Photo or print to frame</li>
+            <li>Paint, markers, fabric, or washi tape (optional)</li>
         </ul>
 
-        <h2>Steps</h2>
-        <ol>
-            <li>Select the cardboard. Check the box for sturdiness and cleanliness. Avoid boxes that are bent, water-damaged, torn, or moldy. Use a thick piece for the frame’s base to ensure it holds its shape.</li>
-            <li>Measure your photo. Measure the width and height of your photo or artwork. Decide on the size of the frame border (e.g., 1–2 inches wide).</li>
-            <li>Cut the frame base. Using scissors or a box cutter, cut a rectangle from the cardboard slightly larger than the photo, leaving space for the border.</li>
-            <li>Cut out the frame opening. Draw a smaller rectangle in the center for the photo to show. Cut it out carefully, keeping the edges straight and neat. This becomes the window of your frame.</li>
-            <li>Reinforce the frame (optional). For extra strength, cut a second frame of the same size and glue it to the back of the first frame. This prevents bending and gives the frame a sturdy feel.</li>
-            <li>Decorate the frame. Use paint, markers, fabric, or tape to decorate the front and edges of the frame. Get creative with patterns or colors that match your décor.</li>
-            <li>Attach the photo. Place your photo behind the frame opening. Use glue, double-sided tape, or small corner tabs to hold the photo in place.</li>
-            <li>Create a stand or hanging option. For a tabletop frame, cut a small strip of cardboard, fold it into a triangle, and glue it to the back as a stand. For a wall frame, attach a loop of string or ribbon at the top.</li>
-            <li>Check stability. Ensure the frame holds the photo securely and stands upright or hangs properly before use.</li>
-            <li>Display. Place your recycled cardboard frame on a desk, shelf, or wall and enjoy your eco-friendly décor.</li>
-        </ol>
+        <h2>Steps:</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-circle">1</div>
+                <div class="timeline-content">Select the cardboard. Check the box for sturdiness and cleanliness. Avoid bent or water-damaged pieces. Use a thick section for the base to ensure the frame holds its shape.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">2</div>
+                <div class="timeline-content">Measure your photo. Measure the width and height of your photo. Decide on the size of the frame border, typically about 1–2 inches wide.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">3</div>
+                <div class="timeline-content">Cut the frame base. Using a box cutter, cut a rectangle from the cardboard slightly larger than the photo, leaving ample space for the border.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">4</div>
+                <div class="timeline-content">Cut out the frame opening. Draw a smaller rectangle in the center for the photo to show. Cut it out carefully, keeping the edges straight to create the window.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">5</div>
+                <div class="timeline-content">Reinforce the frame (optional). For extra strength, cut a second frame of the same size and glue it to the back. This prevents bending and adds a sturdy feel.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">6</div>
+                <div class="timeline-content">Decorate the frame. Use paint, markers, or fabric to decorate the front and edges. Get creative with patterns or colors that match your room’s style.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">7</div>
+                <div class="timeline-content">Attach the photo. Place your photo behind the opening. Use glue, double-sided tape, or small corner tabs to hold the photo securely in place.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">8</div>
+                <div class="timeline-content">Create a stand or hanger. For tabletops, fold a small cardboard strip into a triangle and glue it to the back. For walls, attach a loop of string at the top.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">9</div>
+                <div class="timeline-content">Check stability. Ensure the frame holds the photo securely and stands upright or hangs properly. Make any necessary adjustments to the balance.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">10</div>
+                <div class="timeline-content">Display. Place your recycled cardboard frame on a desk, shelf, or wall and enjoy your functional and eco-friendly home décor.</div>
+            </div>
+        </div>
 
+        <button class="finish-btn" type="button">Finish</button>
     </div>
-    <button class="finish-btn" type="button" onclick="goNext()">Finish</button>
-</div>
-
-<script>
-    function goNext() {
-        // Call the Kotlin function via the JS interface
-        Android.goToNextFragment();
-    }
-</script>
-
 </body>
 </html>
