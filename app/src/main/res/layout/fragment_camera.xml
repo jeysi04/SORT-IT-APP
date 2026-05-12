@@ -4,12 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <!-- 70% CAMERA -->
-    <androidx.camera.view.PreviewView
-        android:id="@+id/previewView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7" />
+        android:layout_weight="7">
+
+        <!-- Camera Preview -->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|start"
+            android:background="@android:color/transparent"
+            android:contentDescription="Back"
+            android:layout_margin="10dp"
+            android:padding="8dp"
+            android:src="@drawable/button_green_backward" />
+
+        <!-- Framing Guide Overlay -->
+        <View
+            android:id="@+id/cameraGrid"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/camera_grid_guide" />
+
+    </FrameLayout>
 
     <!-- 30% CONTROLS -->
     <androidx.cardview.widget.CardView

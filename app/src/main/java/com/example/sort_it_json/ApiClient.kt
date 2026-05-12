@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 object ApiClient {
 
     // Base URL (Render ML API)
-    private const val BASE_URL = Constants.RENDERED_MODEL
+    private const val BASE_URL = Constants.RENDERED_MODEL //"http://10.0.2.2:8000" //Constants.RENDERED_MODEL
 
     // Custom OkHttpClient with increased timeouts (for slow ML responses)
     private val client: OkHttpClient by lazy {

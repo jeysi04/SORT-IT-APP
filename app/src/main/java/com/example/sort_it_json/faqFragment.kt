@@ -19,15 +19,8 @@ class FaqFragment : Fragment() {
         //Set the fragment view to fragment_faq fragment
         val view = inflater.inflate(R.layout.fragment_faq, container, false)
 
+        //Declare and initialize back button
         val btnBack = view.findViewById<ImageButton>(R.id.btnBack)
-
-        btnBack.setOnClickListener {
-            if (isAdded) {
-                parentFragmentManager.beginTransaction()
-                    .remove(FaqFragment())
-                    .commit()
-            }
-        }
 
         // List of all question layouts and corresponding answer TextViews
         val faqTriple = listOf(
@@ -66,6 +59,10 @@ class FaqFragment : Fragment() {
                     }.start()
                 }
             }
+        }
+
+        btnBack.setOnClickListener {
+            (activity as? MainActivity)?.setNav(R.id.nav_home)
         }
 
         return view

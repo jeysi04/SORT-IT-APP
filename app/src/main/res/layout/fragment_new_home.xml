@@ -12,7 +12,7 @@
         <!-- HEADER -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="340dp"
+            android:layout_height="310dp"
             android:background="@drawable/home_header_bg"
             android:translationZ="6dp">
 
@@ -20,29 +20,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/titleText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:paddingTop="0dp"
                     android:fontFamily="@font/montserrat_extrabold"
+                    android:paddingTop="10dp"
                     android:text="Welcome to SORT-IT!"
                     android:textColor="#FFFFFF"
                     android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/Desc1Text"
-                    android:layout_width="343dp"
+                    android:layout_width="298dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/Home_Desc1"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/Desc2Text"
@@ -56,7 +55,7 @@
 
                 <Button
                     android:id="@+id/CaptureButon"
-                    android:layout_width="198dp"
+                    android:layout_width="170dp"
                     android:layout_height="44dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="15dp"
@@ -72,10 +71,11 @@
             <!-- TOP RIGHT BUTTON -->
             <ImageButton
                 android:id="@+id/btnAbout"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:layout_gravity="top|end"
-                android:layout_margin="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="16dp"
                 android:background="@drawable/circle_bg"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
@@ -89,7 +89,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="30dp"
             android:gravity="center"
             android:text="Let’s keep going with proper waste segregation and recycling."
             android:textColor="#202020"
@@ -111,8 +111,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
             android:text="Recently Opened"
             android:textColor="#202020"
             android:textSize="15sp"
@@ -125,7 +125,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginTop="10dp"
-            android:text="No recently opened guides yet."
+            android:text="No rece ntly opened guides yet."
             android:textColor="#888888"
             android:textSize="14sp"
             android:fontFamily="@font/montserrat_regular"
@@ -137,7 +137,7 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="112dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -156,7 +156,18 @@
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:background="#2A3F3F"
-                    android:gravity="center"/>
+                    android:gravity="center_vertical">
+
+                    <ImageButton
+                        android:id="@+id/bookmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="27dp"
+                        android:src="@drawable/notbookmark"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="Bookmark" />
+
+                </LinearLayout>
 
                 <!-- MIDDLE CONTENT -->
                 <LinearLayout
@@ -191,14 +202,14 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="2dp"
-                            android:padding="2dp">
+                            android:padding="3dp">
 
                             <ImageView
                                 android:layout_width="16dp"
                                 android:layout_height="16dp"
                                 android:src="@drawable/clock"
                                 android:contentDescription="Clock Icon"
-                                android:layout_marginEnd="4dp" />
+                                android:layout_marginEnd="5dp" />
 
                             <TextView
                                 android:id="@+id/time1"
@@ -252,8 +263,8 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="112dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             app:cardCornerRadius="16dp"
@@ -271,7 +282,18 @@
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:background="#2A3F3F"
-                    android:gravity="center"/>
+                    android:gravity="center_vertical">
+
+                    <ImageButton
+                        android:id="@+id/bookmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="27dp"
+                        android:src="@drawable/notbookmark"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="Bookmark" />
+
+                </LinearLayout>
 
                 <!-- MIDDLE CONTENT -->
                 <LinearLayout
@@ -306,7 +328,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="2dp"
-                            android:padding="2dp">
+                            android:padding="3dp">
 
                             <ImageView
                                 android:layout_width="16dp"

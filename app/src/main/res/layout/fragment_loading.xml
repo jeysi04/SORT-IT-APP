@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#FFFFFF"
-    android:padding="24dp">
+    android:padding="10dp">
 
     <!-- CENTER CONTENT -->
     <LinearLayout
@@ -72,16 +72,12 @@
     <!-- BOTTOM BUTTON -->
     <Button
         android:id="@+id/CancelButon"
-        android:layout_width="338dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="#467750"
-        android:fontFamily="@font/montserrat_regular"
+        android:layout_width="340dp"
+        android:layout_height="71dp"
         android:background="@drawable/result_button"
         android:text="Cancel"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"/>
 
 </LinearLayout>

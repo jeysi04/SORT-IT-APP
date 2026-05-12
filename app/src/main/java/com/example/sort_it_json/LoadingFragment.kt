@@ -1,6 +1,7 @@
 package com.example.sort_it_json
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import kotlinx.coroutines.Job
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -37,6 +39,7 @@ class LoadingFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var progressText: TextView
     private var progressJob: Job? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +61,10 @@ class LoadingFragment : Fragment() {
 
         val cancelButton = view.findViewById<Button>(R.id.CancelButon)
 
+        cancelButton.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(requireContext(), R.color.darkgreen)
+        )
+
         cancelButton.setOnClickListener {
             showExitDialog()
         }
@@ -65,7 +72,7 @@ class LoadingFragment : Fragment() {
         // START ANALYSIS AUTOMATICALLY
         filePath?.let { file ->
             analyzePhoto(File(file))
-            startTimeoutWarning()
+            //startTimeoutWarning()
         }
     }
 
@@ -110,6 +117,8 @@ class LoadingFragment : Fragment() {
                     progressBar.progress = 100
                     progressText.text = "100%"
 
+                    //Response
+                    //Log.d("API_RESPONSE", response.toString())
 
                     val resultFragment = RecyclableresultFragment().apply {
                         arguments = Bundle().apply {

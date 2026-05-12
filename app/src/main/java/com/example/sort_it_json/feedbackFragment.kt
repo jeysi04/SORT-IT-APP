@@ -13,6 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageButton
 import android.widget.EditText
 import android.widget.RatingBar
 import android.widget.TextView
@@ -28,6 +29,7 @@ class feedbackFragment : Fragment() {
 
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+    private lateinit var btnBack: ImageButton
     private val selectedTags = mutableSetOf<String>()
     private var tagButtons: List<MaterialButton> = listOf()
 
@@ -45,6 +47,9 @@ class feedbackFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Initialize back button
+        btnBack = view.findViewById<ImageButton>(R.id.btnBack)
 
         // Initialize Firebase
         db = FirebaseFirestore.getInstance()
@@ -137,6 +142,11 @@ class feedbackFragment : Fragment() {
 
             hideKeyboard(feedbackEditText)
             sendFeedbackToFirebase(rating, comment, selectedTags.toList(), sendButton, ratingBar, feedbackEditText)
+        }
+
+        // goes to home when back button is click
+        btnBack.setOnClickListener {
+            (activity as? MainActivity)?.setNav(R.id.nav_home)
         }
     }
 

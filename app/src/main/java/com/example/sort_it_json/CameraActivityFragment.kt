@@ -29,6 +29,7 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var previewView: PreviewView
     private lateinit var captureButton: ImageButton
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var btnBack: ImageButton
 
     private var imageCapture: ImageCapture? = null
     private var camera: Camera? = null
@@ -40,24 +41,25 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
         setContentView(R.layout.fragment_camera)
 
-        val root = findViewById<android.view.View>(android.R.id.content)
-
-        ViewCompat.setOnApplyWindowInsetsListener(root) { view, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-
-            view.setPadding(0, 0, 0, systemBars.bottom)
-            insets
-        }
-
+        btnBack = findViewById(R.id.btnBack)
         previewView = findViewById(R.id.previewView)
         captureButton = findViewById(R.id.capture_button)
-
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+        //Add gap for system bars
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
+            insets
+        }
 
         // Permission check
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -94,6 +96,10 @@ class CameraActivity : AppCompatActivity() {
         previewView.setOnTouchListener { _, event ->
             scaleGestureDetector.onTouchEvent(event)
             true
+        }
+
+        btnBack.setOnClickListener {
+            finish()
         }
     }
 
@@ -154,7 +160,7 @@ class CameraActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    Toast.makeText(this@CameraActivity, "Image captured!", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@CameraActivity, "Image captured!", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this@CameraActivity, MainActivity::class.java).apply {
                         putExtra("file_path", photoFile.absolutePath)
