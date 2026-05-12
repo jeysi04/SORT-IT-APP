@@ -1,183 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Old Newspaper Recycling Guide 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recycle Old/New Paper</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
 
-<style>
-    :root {
-        --app-bg: #f4f4f4;
-        --card-bg: #ffffff;
-        --content-box-bg: #FBFBFB; 
-        --primary-text: #000000; 
-        --secondary-text: #999999;
-        --heading-gray: #666666; 
-        --btn-bg: #eed077;
-        --btn-text: #456b4d;
-    }
+    <style>
+        :root {
+            --app-bg: #ffffff;
+            --card-bg: #ffffff;
+            --primary-text: #000000;
+            --heading-color: #434343;
+            --btn-bg: #eed077;
+            --btn-text: #456b4d;
+            --timeline-line: #b3b3b3;
+        }
 
-    body {
-        margin: 0;
-        background-color: var(--app-bg);
-        display: flex;
-        justify-content: center;
-        padding: 30px; 
-        font-family: 'Montserrat', sans-serif;
-    }
-
-    .phone-container {
-        width: 100%;
-        max-width: 375px; 
-        background-color: var(--card-bg);
-        padding: 40px 25px 25px 25px; 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border-radius: 12px;
-        box-sizing: border-box; 
-    }
-
-    h1 {
-        font-weight: 800;
-        font-size: 20px;
-        color: #000;
-        margin-top: 0; 
-        margin-bottom: 2px;
-    }
-
-    .subtitle {
-        font-weight: 400;
-        font-size: 16px;
-        font-style: italic;
-        color: var(--secondary-text);
-        margin-bottom: 12px; 
-    }
-
-    .content-box {
-        background-color: var(--content-box-bg); 
-        padding: 20px; 
-        border-radius: 12px;
-    }
-
-    .description {
-        font-size: 14px;
-        line-height: 1.6;
-        color: var(--primary-text);
-        margin-bottom: 40px; 
-        text-align: justify;
-    }
-
-    h2 {
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--heading-gray); 
-        margin-top: 0;
-        margin-bottom: 12px;
-    }
-
-    ul {
-        padding-left: 18px;
-        font-size: 14px;
-        line-height: 1.5;
-        color: var(--primary-text);
-        margin-bottom: 40px; 
-    }
-
-    ol {
-        padding-left: 18px;
-        font-size: 14px;
-        line-height: 1.5;
-        color: var(--primary-text);
-        margin-bottom: 0; 
-    }
-
-    ul li {
-        margin-bottom: 6px; 
-    }
-
-    ol li {
-        margin-bottom: 12px; 
-        padding-left: 5px;
-        text-align: justify;
-    }
-
-    .finish-btn {
-        width: 100%;
-        margin-top: 25px;
-        padding: 16px;
-        background-color: var(--btn-bg);
-        border: none;
-        border-radius: 8px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 20px;
-        font-weight: 800;
-        color: var(--btn-text);
-        cursor: pointer;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    }
-
-    .finish-btn:hover {
-        opacity: 0.9;
-    }
-
-    @media (max-width: 480px) {
         body {
-            padding: 0; 
-            background-color: var(--card-bg); 
+            margin: 0;
+            background-color: var(--app-bg);
+            display: flex;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 375px; 
+            background-color: var(--card-bg);
+            padding: 40px 25px 25px 25px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            box-sizing: border-box; 
+        }
+
+        /* Back Button styles */
+        .back-btn { 
+
+            background: transparent; 
+            border: none;
+            padding: 0;
+            
+
+            margin-bottom: 30px; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            outline: none;
         }
         
-        .phone-container {
-            max-width: 100%; 
-            box-shadow: none; 
-            border-radius: 0; 
-            padding: 20px; 
+        .back-btn:active {
+            opacity: 0.7;
         }
-    }
+        
 
-</style>
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 21px;
+            color: #000000;
+            margin-top: 0;
+            margin-bottom: 5px;
+            line-height: 1.2;
+            text-align: justify;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--btn-bg);
+            color: #ffffff;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 17px;
+            padding: 4px 18px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--primary-text);
+            margin-bottom: 35px;
+            text-align: justify;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--heading-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .materials-list {
+            padding-left: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--primary-text);
+            margin-bottom: 40px;
+            margin-top: 0;
+        }
+
+        .materials-list li {
+            margin-bottom: 5px;
+        }
+
+       .timeline {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 40px;
+            gap: 20px; 
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start; 
+        }
+
+        .timeline-circle {
+            flex-shrink: 0;
+            width: 26px; 
+            height: 26px; 
+            border-radius: 50%;
+            background-color: var(--btn-bg);
+            margin-right: 15px;
+            margin-top: -2px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #434343; 
+        }
+
+        .timeline-content {
+            font-size: 15px;
+            line-height: 1.4;
+            color: var(--primary-text);
+            text-align: justify;
+        }
+
+                .finish-btn {
+            width: 100%;
+            margin-top: 20px; 
+            padding: 16px;
+            background-color: var(--btn-bg);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--btn-text);
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); 
+        }
+        .finish-btn:active {
+            opacity: 0.7;
+        }
+
+        .finish-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="phone-container">
+        <button class="back-btn">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="#eed077"/>
+                <path d="M21 16H11M11 16L15 12M11 16L15 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
 
-<div class="phone-container">
-
-    <h1>Recycle Old/New Paper</h1>
-    <div class="subtitle">Old Newspapers</div>
-
-    <div class="content-box">
+        <h1>Recycle Old/New Paper</h1>
+        <div class="badge">Old Newspapers</div>
 
         <div class="description">
-            Turn old newspapers into homemade recycled paper using simple items you can find at home.
+            Turn old newspapers, notebooks, or office paper into homemade recycled paper using simple items you can find at home. This process helps reduce household waste while creating unique, textured paper for crafts or stationery.
         </div>
 
-        <h2>Materials Needed</h2>
-        <ul>
-            <li>Old newspapers, notebooks, or office paper</li>
-            <li>Paper shredder or scissors (optional)</li>
+        <h2>Materials Needed:</h2>
+        <ul class="materials-list">
+            <li>Old newspapers or office paper</li>
             <li>Clean water</li>
             <li>Large bowl or bucket</li>
+            <li>Paper shredder or scissors (optional)</li>
         </ul>
 
-        <h2>Steps</h2>
-        <ol>
-           <li>Sort your paper by type and remove staples or plastic.</li>
-           <li>Tear the paper into small pieces or shred it.</li>
-           <li>Soak the paper in water for a few hours until it becomes pulp.</li>
-           <li>Pour the pulp into a recycling bin or give it to your local recycling center.</li>
-           <li>Let the recycled paper dry completely before reuse.</li>
-        </ol>
+        <h2>Steps:</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-circle">1</div>
+                <div class="timeline-content">Sort your paper. Go through your stack of old newspapers or notebooks. Remove any staples, plastic windows from envelopes, or adhesive tape to avoid contamination.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">2</div>
+                <div class="timeline-content">Tear or shred. Tear the paper by hand into small, confetti-sized pieces. Alternatively, use a paper shredder to speed up the process and ensure uniform sizes.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">3</div>
+                <div class="timeline-content">Soak in water. Place the paper pieces into a large bowl or bucket. Cover them with clean water and let them soak for a few hours until the paper becomes soft pulp.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">4</div>
+                <div class="timeline-content">Prepare for collection. Once the pulp is ready, you can drain the excess water and place it in a recycling bin or take it to your local community recycling center.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">5</div>
+                <div class="timeline-content">Dry for reuse. If making new sheets at home, spread the pulp thinly on a screen or flat surface. Let it dry completely in the sun before using it for your projects.</div>
+            </div>
+        </div>
 
+        <button class="finish-btn" type="button">Finish</button>
     </div>
-    <button class="finish-btn" type="button" onclick="goNext()">Finish</button>
-</div>
-
-<script>
-    function goNext() {
-        // Call the Kotlin function via the JS interface
-        Android.goToNextFragment();
-    }
-</script>
-
 </body>
 </html>

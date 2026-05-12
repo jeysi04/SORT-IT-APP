@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woven Zipper Pouch</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --app-bg: #ffffff;
+            --card-bg: #ffffff;
+            --primary-text: #000000;
+            --heading-color: #434343;
+            --btn-bg: #eed077;
+            --btn-text: #456b4d;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--app-bg);
+            display: flex;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 375px; 
+            background-color: var(--card-bg);
+            padding: 40px 25px 25px 25px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            box-sizing: border-box; 
+        }
+
+        /* Back Button styles */
+        .back-btn { 
+
+            background: transparent; 
+            border: none;
+            padding: 0;
+            
+
+            margin-bottom: 30px; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            outline: none;
+        }
+        
+        .back-btn:active {
+            opacity: 0.7;
+        }
+        
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 21px;
+            color: #000000;
+            margin-top: 0;
+            margin-bottom: 5px;
+            line-height: 1.2;
+            text-align: justify;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--btn-bg);
+            color: #ffffff;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 17px;
+            padding: 4px 18px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--primary-text);
+            margin-bottom: 35px;
+            text-align: justify;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--heading-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .materials-list {
+            padding-left: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--primary-text);
+            margin-bottom: 40px;
+            margin-top: 0;
+        }
+
+        .materials-list li { margin-bottom: 5px; }
+
+       .timeline {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 40px;
+            gap: 20px; 
+        }
+
+        .timeline-item { display: flex; align-items: flex-start; }
+
+        .timeline-circle {
+            flex-shrink: 0;
+            width: 26px; 
+            height: 26px; 
+            border-radius: 50%;
+            background-color: var(--btn-bg);
+            margin-right: 15px;
+            margin-top: -2px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #434343; 
+        }
+
+        .timeline-content {
+            font-size: 15px;
+            line-height: 1.4;
+            color: var(--primary-text);
+            text-align: justify;
+        }
+
+                .finish-btn {
+            width: 100%;
+            margin-top: 20px; 
+            padding: 16px;
+            background-color: var(--btn-bg);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--btn-text);
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); 
+        }
+        .finish-btn:active {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="phone-container">
+        <button class="back-btn">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="#eed077"/>
+                <path d="M21 16H11M11 16L15 12M11 16L15 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+
+        <h1>Woven Zipper Pouch using Plastic Wrappers</h1>
+        <div class="badge">Clean and Dry Flexible Plastics</div>
+
+        <div class="description">
+            Colorful candy wrappers or shampoo sachets can be folded and woven together to create a durable, waterproof fabric. This technique is perfect for making unique coin purses, pencil cases, or small bags.
+        </div>
+
+        <h2>Materials Needed:</h2>
+        <ul class="materials-list">
+            <li>Clean candy wrappers or shampoo sachets</li>
+            <li>Scissors and a Ruler</li>
+            <li>Clear tape</li>
+            <li>Needle and thread (or sewing machine)</li>
+            <li>Zipper</li>
+        </ul>
+
+        <h2>Steps:</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-circle">1</div>
+                <div class="timeline-content">Clean and dry. Thoroughly wash the wrappers or sachets to remove any sticky residue or soap. They must be completely dry before you start folding.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">2</div>
+                <div class="timeline-content">Cut to uniform sizes. Use a ruler and scissors to cut all the wrappers into identically sized rectangles (e.g., 2 by 4 inches).</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">3</div>
+                <div class="timeline-content">Fold into links. Fold the long edges of a rectangle to the center, then fold in half lengthwise. Fold the ends to the center again, and fold in half to create a small "V" shaped link.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">4</div>
+                <div class="timeline-content">Interlock the pieces. Slide the prongs of one "V" into the slots of another "V". Continue interlocking them to form a long, zigzagging chain. Make several chains of equal length.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">5</div>
+                <div class="timeline-content">Sew the rows. Line up your woven chains side-by-side. Use a needle and strong thread (or clear tape) to stitch the chains together, creating a solid sheet of woven plastic.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-circle">6</div>
+                <div class="timeline-content">Attach a zipper. Fold the woven sheet in half to form a pouch shape. Sew the sides together, then hand-stitch a zipper to the top opening to finish your recycled coin purse!</div>
+            </div>
+        </div>
+        <button class="finish-btn" type="button">Finish</button>
+    </div>
+</body>
+</html>
