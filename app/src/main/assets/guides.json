@@ -1,0 +1,960 @@
+[
+  {
+    "id": "glass_bottles_cleaning",
+    "category": "Glass Bottle",
+    "title": "How to Clean Glass Bottles",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverglassbottle1",
+    "html_file": "recycling_guides/glass/glass_bottles/method1.html"
+  },
+  {
+  "id": "glass_bottles_disposal",
+  "category": "Glass Bottle",
+  "title": "How to Make Decorative Glass Bottles",
+  "time": "15-20 mins",
+  "difficulty": "Easy",
+  "image": "coverglassbottle2",
+  "html_file": "recycling_guides/glass/glass_bottles/method2.html"
+  },
+  {
+    "id": "glass_bottles_disposal",
+    "category": "Glass Bottle",
+    "title": "How to Make a Terrarium Using Glass Bottles",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverglassbottle3",
+    "html_file": "recycling_guides/glass/glass_bottles/method3.html"
+  },
+  {
+    "id": "glass_bottles_reuse",
+    "category": "Glass Bottle",
+    "title": "Recycling Glass Bottles into Drinking Glasses",
+    "time": "15-20 mins",
+    "difficulty": "Advanced",
+    "image": "coverglassbottle4",
+    "html_file": "recycling_guides/glass/glass_bottles/method4.html"
+  },
+
+
+  {
+    "id": "flat_glass_recycling",
+    "category": "Flat Glass",
+    "title": "Recycling Flat Glass at a Collection Facility",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverflatglass1",
+    "html_file": "recycling_guides/glass/flat_glass/method1.html"
+  },
+  {
+    "id": "flat_glass_recycling",
+    "category": "Flat Glass",
+    "title": "Decorative Garden Borders Using Flat Glass",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverflatglass2",
+    "html_file": "recycling_guides/glass/flat_glass/method2.html"
+  },
+  {
+    "id": "flat_glass_recycling",
+    "category": "Flat Glass",
+    "title": "Garden Stepping Stones",
+    "time": "30-40 mins",
+    "difficulty": "Moderate",
+    "image": "coverflatglass3",
+    "html_file": "recycling_guides/glass/flat_glass/method3.html"
+  },
+ {
+    "id": "flat_glass_recycling",
+    "category": "Flat Glass",
+    "title": "Glass Mosaic Tabletop",
+    "time": "45-60 mins",
+    "difficulty": "Advanced",
+    "image": "coverflatglass4",
+    "html_file": "recycling_guides/glass/flat_glass/method4.html"
+  },
+
+  {
+    "id": "cullets_recycle",
+    "category": "Glass Cullet",
+    "title": "How to Recycle Cullet Glass",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverculletglass1",
+    "html_file": "recycling_guides/glass/cullets/method1.html"
+  },
+  {
+    "id": "cullets_recycle",
+    "category": "Glass Cullet",
+    "title": "DIY Glass Mulch for Potted Plants",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverculletglass2",
+    "html_file": "recycling_guides/glass/cullets/method2.html"
+  },
+  {
+    "id": "cullets_recycle",
+    "category": "Glass Cullet",
+    "title": "Aggregate Substitute in Concrete",
+    "time": "15-20 mins",
+    "difficulty": "Moderate",
+    "image": "coverculletglass3",
+    "html_file": "recycling_guides/glass/cullets/method3.html"
+  },
+  {
+    "id": "cullets_recycle",
+    "category": "Glass Cullet",
+    "title": "Water Filtration Layers",
+    "time": "10-15 mins",
+    "difficulty": "Moderate",
+    "image": "coverculletglass4",
+    "html_file": "recycling_guides/glass/cullets/method4.html"
+  },
+
+
+  {
+    "id": "aluminum_recycling",
+    "category": "Aluminum_Tin",
+    "title": "Traditional Recycling of Aluminum Cans",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coveraluminumtin1",
+    "html_file": "recycling_guides/metal/aluminum_tin/method1.html"
+  },
+  {
+    "id": "aluminum_recycling",
+    "category": "Aluminum_Tin",
+    "title": "How to Make a Makeup Brush Holder",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coveraluminumtin2",
+    "html_file": "recycling_guides/metal/aluminum_tin/method2.html"
+  },
+  {
+    "id": "aluminum_recycling",
+    "category": "Aluminum_Tin",
+    "title": "How to Make a DIY Desk Organizer",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coveraluminumtin3",
+    "html_file": "recycling_guides/metal/aluminum_tin/method3.html"
+  },
+  {
+    "id": "aluminum_recycling",
+    "category": "Aluminum_Tin",
+    "title": "How to Make a Candle Holders and Lanterns",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coveraluminumtin4",
+    "html_file": "recycling_guides/metal/aluminum_tin/method4.html"
+  },
+
+
+
+  {
+    "id": "copper_scrap_recycling",
+    "category": "Copper",
+    "title": "Recycle at a Scrap Yard or Metal Recycler",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "covercopper1",
+    "html_file": "recycling_guides/metal/copper/method1.html"
+  },
+  {
+    "id": "copper_scrap_recycling",
+    "category": "Copper",
+    "title": "How to Make a Wire Heart Sculpture",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "covercopper2",
+    "html_file": "recycling_guides/metal/copper/method2.html"
+  },
+  {
+    "id": "copper_scrap_recycling",
+    "category": "Copper",
+    "title": "How to Make a Wire Jewelry Holder",
+    "time": "25-35 mins",
+    "difficulty": "Moderate",
+    "image": "covercopper3",
+    "html_file": "recycling_guides/metal/copper/method3.html"
+  },
+  {
+    "id": "copper_scrap_recycling",
+    "category": "Copper",
+    "title": "How to Make a Copper Wire Plant Trellis",
+    "time": "25-35 mins",
+    "difficulty": "Moderate",
+    "image": "covercopper4",
+    "html_file": "recycling_guides/metal/copper/method4.html"
+  },
+
+
+  {
+    "id": "steel_scrap_recycling",
+    "category": "Steel",
+    "title": "Scrap Metal Recycling (Industrial Recycling)",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coversteel1",
+    "html_file": "recycling_guides/metal/steel/method1.html"
+  },
+  {
+    "id": "steel_scrap_recycling",
+    "category": "Steel",
+    "title": "Garden Tool Storage using Old Pots and Pans",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coversteel2",
+    "html_file": "recycling_guides/metal/steel/method2.html"
+  },
+  {
+    "id": "steel_scrap_recycling",
+    "category": "Steel",
+    "title": "How to Make a Magnetic Spice Rack",
+    "time": "25-35 mins",
+    "difficulty": "Moderate",
+    "image": "coversteel3",
+    "html_file": "recycling_guides/metal/steel/method3.html"
+  },
+  {
+    "id": "steel_scrap_recycling",
+    "category": "Steel",
+    "title": "Mini Water Fountains using Old Pots and Pans",
+    "time": "45-60 mins",
+    "difficulty": "Advanced",
+    "image": "coversteel4",
+    "html_file": "recycling_guides/metal/steel/method4.html"
+  },
+
+
+  {
+    "id": "mp_recycle",
+    "category": "Mixed Paper",
+    "title": "How to Make an Origami Flower",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "covermp1",
+    "html_file": "recycling_guides/paper/MP/method1.html"
+  },
+  {
+    "id": "mp_recycle",
+    "category": "Mixed Paper",
+    "title": "How to Make a Bookmark Out of Old Folders",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "covermp2",
+    "html_file": "recycling_guides/paper/MP/method2.html"
+  },
+  {
+    "id": "mp_recycle",
+    "category": "Mixed Paper",
+    "title": "How to Make a Flashcards Out of Old Folders",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "covermp3",
+    "html_file": "recycling_guides/paper/MP/method3.html"
+  },
+  {
+    "id": "mp_recycle",
+    "category": "Mixed Paper",
+    "title": "How to Make Gift Wrap Out of Magazine Paper",
+    "time": "5-15 mins",
+    "difficulty": "Easy",
+    "image": "covermp4",
+    "html_file": "recycling_guides/paper/MP/method4.html"
+  },
+  {
+    "id": "mp_recycle",
+    "category": "Mixed Paper",
+    "title": "How to Make a Placemats or Coasters",
+    "time": "30-45 mins",
+    "difficulty": "Moderate",
+    "image": "covermp5",
+    "html_file": "recycling_guides/paper/MP/method5.html"
+  },
+  {
+    "id": "mp_recycle",
+    "category": "Mixed Paper",
+    "title": "How to Make Magazine Paper Baskets",
+    "time": "45-60 mins",
+    "difficulty": "Advanced",
+    "image": "covermp6",
+    "html_file": "recycling_guides/paper/MP/method6.html"
+  },
+
+  {
+    "id": "occ_recycle",
+    "category": "Old Corrugated Cartons",
+    "title": "Make Seedling Pots from Paper Bags",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverocc1",
+    "html_file": "recycling_guides/paper/OCC/method1.html"
+  },
+  {
+    "id": "occ_recycle",
+    "category": "Old Corrugated Cartons",
+    "title": "How to Make Picture Frames from Old Cardboard",
+    "time": "15-25 mins",
+    "difficulty": "Easy",
+    "image": "coverocc2",
+    "html_file": "recycling_guides/paper/OCC/method2.html"
+  },
+  {
+    "id": "occ_recycle",
+    "category": "Old Corrugated Cartons",
+    "title": "How to Make a Lamp from Carton",
+    "time": "30-45 mins",
+    "difficulty": "Moderate",
+    "image": "coverocc3",
+    "html_file": "recycling_guides/paper/OCC/method3.html"
+  },
+    {
+    "id": "occ_recycle",
+    "category": "Old Corrugated Cartons",
+    "title": "DIY Cat Scratcher",
+    "time": "30-45 mins",
+    "difficulty": "Moderate",
+    "image": "coverocc4",
+    "html_file": "recycling_guides/paper/OCC/method4.html"
+  },
+  {
+    "id": "occ_recycle",
+    "category": "Old Corrugated Cartons",
+    "title": "How to Make a Pet House from Old Corrugated Cardboard",
+    "time": "5-10 mins",
+    "difficulty": "Moderate",
+    "image": "coverocc5",
+    "html_file": "recycling_guides/paper/OCC/method5.html"
+  },
+
+  {
+    "id": "onp_recycle",
+    "category": "Old Newspaper",
+    "title": "Recycle Old/New Paper",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coveronp1",
+    "html_file": "recycling_guides/paper/ONP/method1.html"
+  },
+  {
+    "id": "onp_paper_crafts",
+    "category": "Old Newspaper",
+    "title": "Paper Craft Projects",
+    "time": "10-20 mins",
+    "difficulty": "Easy",
+    "image": "coveronp2",
+    "html_file": "recycling_guides/paper/ONP/method2.html"
+  },
+  {
+    "id": "onp_paper_crafts",
+    "category": "Old Newspaper",
+    "title": "Use Newspapers for Composting",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coveronp3",
+    "html_file": "recycling_guides/paper/ONP/method3.html"
+  },
+  {
+    "id": "onp_paper_crafts",
+    "category": "Old Newspaper",
+    "title": "How to Make Newspaper Seedling Pots",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coveronp4",
+    "html_file": "recycling_guides/paper/ONP/method4.html"
+  },
+
+  {
+    "id": "swl_recycle",
+    "category": "Selected White Ledger",
+    "title": "How to Select White Ledger Paper for Recycling",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverswl1",
+    "html_file": "recycling_guides/paper/SWL/method1.html"
+  },
+  {
+    "id": "swl_recycle",
+    "category": "Selected White Ledger",
+    "title": "How to Make a Small Notebook",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverswl2",
+    "html_file": "recycling_guides/paper/SWL/method2.html"
+  },
+  {
+    "id": "swl_recycle",
+    "category": "Selected White Ledger",
+    "title": "How to Make Gift Wrapping",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverswl3",
+    "html_file": "recycling_guides/paper/SWL/method3.html"
+  },
+  {
+    "id": "swl_recycle",
+    "category": "Selected White Ledger",
+    "title": "How to Make a DIY Desk Notepad",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverswl4",
+    "html_file": "recycling_guides/paper/SWL/method4.html"
+  },
+
+  {
+    "id": "ubc_recycle",
+    "category": "Used Beverage Cartons",
+    "title": "How to Make a Small Planter or Seed Starter",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverubc1",
+    "html_file": "recycling_guides/paper/UBC/method1.html"
+  },
+  {
+    "id": "ubc_recycle",
+    "category": "Used Beverage Cartons",
+    "title": "How to Make a DIY Bird Feeder",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverubc2",
+    "html_file": "recycling_guides/paper/UBC/method2.html"
+  },
+  {
+    "id": "ubc_recycle",
+    "category": "Used Beverage Cartons",
+    "title": "How to Use Beverage Cartons as Storage or Organize",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverubc3",
+    "html_file": "recycling_guides/paper/UBC/method3.html"
+  },
+  {
+    "id": "ubc_recycle",
+    "category": "Used Beverage Cartons",
+    "title": "Create a Pencil or Pen Holder",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverubc4",
+    "html_file": "recycling_guides/paper/UBC/method4.html"
+  },
+
+  {
+    "id": "hdpe_recycle",
+    "category": "HDPE",
+    "title": "How to Make Storage Containers",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverhdpe1",
+    "html_file": "recycling_guides/plastic/HDPE/method1.html"
+  },
+  {
+    "id": "hdpe_recycle",
+    "category": "HDPE",
+    "title": "How to Build a Mini Compost Scoop",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverhdpe2",
+    "html_file": "recycling_guides/plastic/HDPE/method2.html"
+  },
+  {
+    "id": "hdpe_recycle",
+    "category": "HDPE",
+    "title": "How to Make a DIY Funnel",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverhdpe3",
+    "html_file": "recycling_guides/plastic/HDPE/method3.html"
+  },
+  {
+    "id": "hdpe_recycle",
+    "category": "HDPE",
+    "title": "How to Make a Bird Feeder",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverhdpe4",
+    "html_file": "recycling_guides/plastic/HDPE/method4.html"
+  },
+
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "Precise Plant Watering Tool",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverldpe1",
+    "html_file": "recycling_guides/plastic/LDPE/method1.html"
+  },
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "DIY Paint Dispenser",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverldpe2",
+    "html_file": "recycling_guides/plastic/LDPE/method2.html"
+  },
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "Homemade Glue Applicator",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverldpe3",
+    "html_file": "recycling_guides/plastic/LDPE/method3.html"
+  },
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "Travel Cord Organizer from Tubes",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverldpe4",
+    "html_file": "recycling_guides/plastic/LDPE/method4.html"
+  },
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "Precision Oil Dispenser",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverldpe5",
+    "html_file": "recycling_guides/plastic/LDPE/method5.html"
+  },
+  {
+    "id": "ldpe_recycle",
+    "category": "LDPE",
+    "title": "Refillable Travel Tube",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverldpe6",
+    "html_file": "recycling_guides/plastic/LDPE/method6.html"
+  },
+
+
+  {
+    "id": "others_recycle",
+    "category": "Other Plastic",
+    "title": "Return Water Container for Professional Recycling",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverothers1",
+    "html_file": "recycling_guides/plastic/Others/method1.html"
+  },
+  {
+    "id": "others_recycle",
+    "category": "Other Plastic",
+    "title": "How to Convert Containers into Water Storage (Non-Drinking Use)",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverothers2",
+    "html_file": "recycling_guides/plastic/Others/method2.html"
+  },
+  {
+    "id": "others_recycle",
+    "category": "Other Plastic",
+    "title": "DIY Drip Irrigation System using Old Water Jugs",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverothers3",
+    "html_file": "recycling_guides/plastic/Others/method3.html"
+  },
+  {
+    "id": "others_recycle",
+    "category": "Other Plastic",
+    "title": "How to Make DIY Diskette Coasters",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverothers4",
+    "html_file": "recycling_guides/plastic/Others/method4.html"
+  },
+  {
+    "id": "others_recycle",
+    "category": "Other Plastic",
+    "title": "How to Make a CD Wind Chime",
+    "time": "30-45 mins",
+    "difficulty": "Moderate",
+    "image": "coverothers5",
+    "html_file": "recycling_guides/plastic/Others/method5.html"
+  },
+  {
+    "id": "others_recycle",
+    "category": "Other Plastic",
+    "title": "CD Mosaic Planter",
+    "time": "45-60 mins",
+    "difficulty": "Advanced",
+    "image": "coverothers6",
+    "html_file": "recycling_guides/plastic/Others/method6.html"
+  },
+
+  {
+    "id": "pet_recycle",
+    "category": "PET",
+    "title": "How to Create a Self-Watering Plant Bottle",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverpet1",
+    "html_file": "recycling_guides/plastic/PET/method1.html"
+  },
+  {
+    "id": "pet_recycle",
+    "category": "PET",
+    "title": "Make Bird or Animal Water Stations",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverpet2",
+    "html_file": "recycling_guides/plastic/PET/method2.html"
+  },
+  {
+    "id": "pet_recycle",
+    "category": "PET",
+    "title": "How to Make a Plastic Bottle Lamp",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverpet3",
+    "html_file": "recycling_guides/plastic/PET/method3.html"
+  },
+  {
+    "id": "pet_recycle",
+    "category": "PET",
+    "title": "How to Create a Hanging Herb Garden",
+    "time": "25-30 mins",
+    "difficulty": "Advanced",
+    "image": "coverpet4",
+    "html_file": "recycling_guides/plastic/PET/method4.html"
+  },
+
+  {
+    "id": "pp_recycle",
+    "category": "PP",
+    "title": "Reuse as Storage Containers",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverpp1",
+    "html_file": "recycling_guides/plastic/PP/method1.html"
+  },
+  {
+    "id": "pp_recycle",
+    "category": "PP",
+    "title": "How to Make a Desk Organizer from Bottle Caps or Containers",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverpp2",
+    "html_file": "recycling_guides/plastic/PP/method2.html"
+  },
+  {
+    "id": "pp_recycle",
+    "category": "PP",
+    "title": "How to Create Plant Pots or Seed Starters",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverpp3",
+    "html_file": "recycling_guides/plastic/PP/method3.html"
+  },
+  {
+    "id": "pp_recycle",
+    "category": "PP",
+    "title": "DIY Paint Palettes",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverpp4",
+    "html_file": "recycling_guides/plastic/PP/method4.html"
+  },
+  {
+    "id": "pp_recycle",
+    "category": "PP",
+    "title": "DIY Cord Bobbin",
+    "time": "10-15 min ",
+    "difficulty": "Easy",
+    "image": "coverpp5",
+    "html_file": "recycling_guides/plastic/PP/method5.html"
+  },
+
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "How to Make Decorative Crafts",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverps1",
+    "html_file": "recycling_guides/plastic/PS/method1.html"
+  },
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "How to Make a Pin Cushion",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverps2",
+    "html_file": "recycling_guides/plastic/PS/method2.html"
+  },
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "Create a Stamping Tool",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverps3",
+    "html_file": "recycling_guides/plastic/PS/method3.html"
+  },
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "Make a Mini Whiteboard Eraser",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverps4",
+    "html_file": "recycling_guides/plastic/PS/method4.html"
+  },
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "How to Make DIY Floatation Devices",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverps5",
+    "html_file": "recycling_guides/plastic/PS/method5.html"
+  },
+  {
+    "id": "ps_recycle",
+    "category": "PS",
+    "title": "DIY Jewelry Organizer from Plastic Cutleries",
+    "time": "30-45 mins",
+    "difficulty": "Moderate",
+    "image": "coverps6",
+    "html_file": "recycling_guides/plastic/PS/method6.html"
+  },
+
+  {
+    "id": "pvc_recycle",
+    "category": "PVC",
+    "title": "How to Make a Cable or Cord Holder",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverpvc1",
+    "html_file": "recycling_guides/plastic/PVC/method1.html"
+  },
+  {
+    "id": "pvc_recycle",
+    "category": "PVC",
+    "title": "How to Make Plant Supports or Trellises",
+    "time": "20-25 mins",
+    "difficulty": "Moderate",
+    "image": "coverpvc2",
+    "html_file": "recycling_guides/plastic/PVC/method2.html"
+  },
+  {
+    "id": "pvc_recycle",
+    "category": "PVC",
+    "title": "Create a PVC Cable and Wire Organizer",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverpvc3",
+    "html_file": "recycling_guides/plastic/PVC/method3.html"
+  },
+  {
+    "id": "pvc_recycle",
+    "category": "PVC",
+    "title": "How to Make DIY Rainwater Diverter",
+    "time": "15-20 mins",
+    "difficulty": "Advanced",
+    "image": "coverpvc4",
+    "html_file": "recycling_guides/plastic/PVC/method4.html"
+  },
+
+
+  {
+    "id": "cdfp_recycle",
+    "category": "Clean and Dry Flexible Plastic",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "title": "Reuse as Trash Liners",
+    "image": "covercdfp1",
+    "html_file": "recycling_guides/residual/CDFP/method1.html"
+  },
+  {
+    "id": "cdfp_recycle",
+    "category": "Clean and Dry Flexible Plastic",
+    "title": "How to Create Bags Out of Tarpaulin",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "covercdfp2",
+    "html_file": "recycling_guides/residual/CDFP/method2.html"
+  },
+  {
+    "id": "cdfp_recycle",
+    "category": "Clean and Dry Flexible Plastic",
+    "title": "How to Make an Outdoor Covers and Protectors from Tarpaulin",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "covercdfp3",
+    "html_file": "recycling_guides/residual/CDFP/method3.html"
+  },
+  {
+    "id": "cdfp_recycle",
+    "category": "Clean and Dry Flexible Plastic",
+    "title": "Cable Labels from Plastic Straws",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "covercdfp4",
+    "html_file": "recycling_guides/residual/CDFP/method4.html"
+  },
+  {
+    "id": "cdfp_recycle",
+    "category":"Clean and Dry Flexible Plastic",
+    "title": "Straw Bracelets Out of Plastic Straws",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "covercdfp5",
+    "html_file": "recycling_guides/residual/CDFP/method5.html"
+  },
+  {
+    "id": "cdfp_recycle",
+    "category": "Clean and Dry Flexible Plastic",
+    "title": "Create Plastic Yarn (Plarn) using Garbage Bags",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "covercdfp6",
+    "html_file": "recycling_guides/residual/CDFP/method6.html"
+  },
+  {
+    "id": "cdfp_recycle",
+    "category": "Clean and Dry Flexible Plastic",
+    "title": "Woven Zipper Pouch using Plastic Wrappers",
+    "time": "45-60 mins",
+    "difficulty": "Advanced",
+    "image": "covercdfp7",
+    "html_file": "recycling_guides/residual/CDFP/method7.html"
+  },
+
+  {
+    "id": "leather_recycle",
+    "category": "Leather",
+    "title": "How to Make Leather Keychains",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverleather1",
+    "html_file": "recycling_guides/residual/leather/method1.html"
+  },
+  {
+    "id": "leather_recycle",
+    "category": "Leather",
+    "title": "How to Make Leather Bracelets",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverleather2",
+    "html_file": "recycling_guides/residual/leather/method2.html"
+  },
+  {
+    "id": "leather_recycle",
+    "category": "Leather",
+    "title": "How to Make Jewelry Holders using Leather",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverleather3",
+    "html_file": "recycling_guides/residual/leather/method3.html"
+  },
+  {
+    "id": "leather_recycle",
+    "category": "Leather",
+    "title": "How to Make Leather Cord Organizers using Leather",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverleather4",
+    "html_file": "recycling_guides/residual/leather/method4.html"
+  },
+
+
+  {
+    "id": "rubber_recycle",
+    "category": "Rubber",
+    "title": "How to Make Rubber Hair Ties",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "coverrubber1",
+    "html_file": "recycling_guides/residual/rubber/method1.html"
+  },
+  {
+    "id": "rubber_recycle",
+    "category": "Rubber",
+    "title": "How to Make Garden Stepping Pads",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverrubber2",
+    "html_file": "recycling_guides/residual/rubber/method2.html"
+  },
+  {
+    "id": "rubber_recycle",
+    "category": "Rubber",
+    "title": "How to Make DIY Doorstops",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "coverrubber3",
+    "html_file": "recycling_guides/residual/rubber/method3.html"
+  },
+  {
+    "id": "rubber_recycle",
+    "category": "Rubber",
+    "title": "Anti-Vibration Furniture Pad using Rubber Slippers",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "coverrubber4",
+    "html_file": "recycling_guides/residual/rubber/method4.html"
+  },
+  {
+    "id": "rubber_recycle",
+    "category": "Rubber",
+    "title": "Non-Slip Hanger Grips using Rubber Bands",
+    "time": "20-30 mins",
+    "difficulty": "Moderate",
+    "image": "coverrubber5",
+    "html_file": "recycling_guides/residual/rubber/method5.html"
+  },
+  {
+    "id": "rubber_recycle",
+    "category": "Rubber",
+    "title": "Upcycled Tire Planter",
+    "time": "30-45 mins",
+    "difficulty": "Moderate",
+    "image": "coverrubber6",
+    "html_file": "recycling_guides/residual/rubber/method6.html"
+  },
+
+  {
+    "id": "textiles_recycle",
+    "category": "Textiles",
+    "title": "Donate Usable Clothing",
+    "time": "5-10 mins",
+    "difficulty": "Easy",
+    "image": "covertextiles1",
+    "html_file": "recycling_guides/residual/textiles/method1.html"
+  },
+  {
+    "id": "textiles_recycle",
+    "category": "Textiles",
+    "title": "How to Make DIY Hair Scrunchies from Used Clothes",
+    "time": "10-15 mins",
+    "difficulty": "Easy",
+    "image": "covertextiles2",
+    "html_file": "recycling_guides/residual/textiles/method2.html"
+  },
+  {
+    "id": "textiles_recycle",
+    "category": "Textiles",
+    "title": "How to Turn Used Clothes into Rags",
+    "time": "15-20 mins",
+    "difficulty": "Easy",
+    "image": "covertextiles3",
+    "html_file": "recycling_guides/residual/textiles/method3.html"
+  },
+  {
+    "id": "textiles_recycle",
+    "category": "Textiles",
+    "title": "DIY Tote Bags from Used Clothes",
+    "time": "20-30 mins",
+    "difficulty": "Easy",
+    "image": "covertextiles4",
+    "html_file": "recycling_guides/residual/textiles/method4.html"
+  }
+
+]
