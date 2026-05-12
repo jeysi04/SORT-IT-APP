@@ -1,136 +1,206 @@
 package com.example.sort_it_json
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-
-
-// Guide adapter to be able to display the list of guides
 
 class GuideAdapter(
 
-    //Variable for the list of guides
     private val guides: List<GuideItem>,
-
-    //Variable that handles click for each item
     private val onClick: (GuideItem) -> Unit
 
-    //A RecyclerView is  used to display a large set of data in a scrollable list or grid
 ) : RecyclerView.Adapter<GuideAdapter.ViewHolder>() {
 
-    //ViewHolder holds references to the views of a single item in the RecyclerView
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) :
+        RecyclerView.ViewHolder(view) {
 
-        //These are displayed in each item on the list: Image and title
-        val title: TextView = view.findViewById(R.id.title)
-        val time: TextView = view.findViewById(R.id.time)
-        val difficulty: TextView = view.findViewById(R.id.difficulty)
-        val image: ImageView = view.findViewById(R.id.image)
-        val bookmark: ImageButton = view.findViewById(R.id.bookmark)
+        val title: TextView =
+            view.findViewById(R.id.title)
+
+        val time: TextView =
+            view.findViewById(R.id.time)
+
+        val difficulty: TextView =
+            view.findViewById(R.id.difficulty)
+
+        val image: ImageView =
+            view.findViewById(R.id.image)
+
+        val bookmark: ImageButton =
+            view.findViewById(R.id.bookmark)
     }
 
-    //Called when a new item is added to the list
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+
         val view = LayoutInflater.from(parent.context)
-            //The design for each item (item_choicedesign) is wrap in each ViewHolder
-            .inflate(R.layout.item_choicedesign, parent, false)
+            .inflate(
+                R.layout.item_choicedesign,
+                parent,
+                false
+            )
+
         return ViewHolder(view)
     }
 
-    //Called when a RecyclerView binds a data to a view
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //Updates the position of the new view with data
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int
+    ) {
+
         val item = guides[position]
 
-        //Adds the title
         holder.title.text = item.title
-
-        //Adds time and difficulty
         holder.time.text = item.time
         holder.difficulty.text = item.difficulty
 
-        //Change the background of the difficulty component
         when (item.difficulty.lowercase()) {
-            "easy" -> holder.difficulty.setBackgroundResource(R.drawable.difficulty_easy_bg)
-            "moderate" -> holder.difficulty.setBackgroundResource(R.drawable.difficulty_moderate_bg)
-            "advanced" -> holder.difficulty.setBackgroundResource(R.drawable.difficulty_advanced_bg)
+
+            "easy" -> {
+                holder.difficulty.setBackgroundResource(
+                    R.drawable.difficulty_easy_bg
+                )
+            }
+
+            "moderate" -> {
+                holder.difficulty.setBackgroundResource(
+                    R.drawable.difficulty_moderate_bg
+                )
+            }
+
+            "advanced" -> {
+                holder.difficulty.setBackgroundResource(
+                    R.drawable.difficulty_advanced_bg
+                )
+            }
         }
 
-        //Gets the image for the specific view and stores it in redID
-        val resId = holder.itemView.context.resources.getIdentifier(
-            item.image, "drawable", holder.itemView.context.packageName
-        )
-        //Puts the resID image on the view
+        val resId = holder.itemView.context.resources
+            .getIdentifier(
+                item.image,
+                "drawable",
+                holder.itemView.context.packageName
+            )
+
         holder.image.setImageResource(resId)
 
-        //Code for adding bookmark
-        updateBookmarkIcon(holder.bookmark, item.isBookmarked)
+        updateBookmarkIcon(
+            holder.bookmark,
+            item.isBookmarked
+        )
 
         holder.bookmark.setOnClickListener {
-            val index = holder.bindingAdapterPosition
-            if (index != RecyclerView.NO_POSITION) {
-                guides[index].isBookmarked = !guides[index].isBookmarked
-                notifyItemChanged(index)
+
+            item.isBookmarked = !item.isBookmarked
+
+            updateBookmarkIcon(
+                holder.bookmark,
+                item.isBookmarked
+            )
+
+            val prefs = holder.itemView.context
+                .getSharedPreferences(
+                    "bookmarks",
+                    Context.MODE_PRIVATE
+                )
+
+            val savedBookmarks =
+                prefs.getStringSet(
+                    "bookmark_titles",
+                    mutableSetOf()
+                )?.toMutableSet()
+                    ?: mutableSetOf()
+
+            if (item.isBookmarked) {
+                savedBookmarks.add(item.title)
+            } else {
+                savedBookmarks.remove(item.title)
             }
+
+            prefs.edit()
+                .putStringSet(
+                    "bookmark_titles",
+                    savedBookmarks
+                )
+                .apply()
         }
 
-        //Adds a clickListener
         holder.itemView.setOnClickListener {
 
-            val context = holder.itemView.context
-            val prefs = context.getSharedPreferences("recent", Context.MODE_PRIVATE)
+            saveRecentItem(holder.itemView.context, item)
 
-            // Get existing list
-            val json = prefs.getString("recent_list", "[]")
-            val list = org.json.JSONArray(json)
-
-            // Create new item
-            val newItem = org.json.JSONObject().apply {
-                put("title", item.title)
-                put("time", item.time)
-                put("difficulty", item.difficulty)
-                put("image", item.image)
-                put("html", item.html_file)
-            }
-
-            // Remove duplicate if already exists
-            for (i in 0 until list.length()) {
-                if (list.getJSONObject(i).getString("title") == item.title) {
-                    list.remove(i)
-                    break
-                }
-            }
-
-            // Add new item at top
-            val newList = org.json.JSONArray()
-            newList.put(newItem)
-
-            // Add old items (max 1 more → total = 2)
-            for (i in 0 until minOf(1, list.length())) {
-                newList.put(list.getJSONObject(i))
-            }
-
-            // Save back
-            prefs.edit().putString("recent_list", newList.toString()).apply()
-
-            // Continue normal navigation
             onClick(item)
         }
     }
 
-    //Returns the total number of items so RecyclerView knows how many views to display
-    override fun getItemCount() = guides.size
+    override fun getItemCount(): Int {
+        return guides.size
+    }
 
-    private fun updateBookmarkIcon(button: ImageButton, isBookmarked: Boolean) {
+    private fun saveRecentItem(
+        context: Context,
+        item: GuideItem
+    ) {
+
+        val prefs = context.getSharedPreferences(
+            "recent",
+            Context.MODE_PRIVATE
+        )
+
+        // 1. Get old list
+        val oldJson = prefs.getString("recent_list", "[]")
+        val oldList = org.json.JSONArray(oldJson)
+
+        // 2. Create new list
+        val newList = org.json.JSONArray()
+
+        // 3. Add NEW item first (most recent)
+        val newItem = org.json.JSONObject().apply {
+            put("title", item.title)
+            put("time", item.time)
+            put("difficulty", item.difficulty)
+            put("image", item.image)
+            put("html", item.html_file)
+        }
+
+        newList.put(newItem)
+
+        // 4. Add old items (limit to 1 more since max = 2)
+        for (i in 0 until oldList.length()) {
+
+            if (newList.length() == 2) break
+
+            newList.put(oldList.getJSONObject(i))
+        }
+
+        // 5. Save back
+        prefs.edit()
+            .putString("recent_list", newList.toString())
+            .apply()
+    }
+
+    private fun guidesContext(): Context {
+        return guides.firstOrNull()
+            ?.let { null }
+            ?: throw IllegalStateException()
+    }
+
+    private fun updateBookmarkIcon(
+        button: ImageButton,
+        isBookmarked: Boolean
+    ) {
+
         if (isBookmarked) {
-            button.setImageResource(R.drawable.bookmarked) // saved icon
+            button.setImageResource(R.drawable.bookmarked)
         } else {
-            button.setImageResource(R.drawable.notbookmark) // empty icon
+            button.setImageResource(R.drawable.notbookmark)
         }
     }
 }

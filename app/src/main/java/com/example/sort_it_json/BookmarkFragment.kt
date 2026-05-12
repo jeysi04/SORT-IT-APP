@@ -1,14 +1,16 @@
 package com.example.sort_it_json
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class BookmarkFragment : Fragment() {
 
@@ -23,24 +25,68 @@ class BookmarkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Declare and initialize back button
         val btnBack = view.findViewById<ImageButton>(R.id.btnBack)
 
         btnBack.setOnClickListener {
             (activity as? MainActivity)?.setNav(R.id.nav_home)
         }
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewBookmarked)
+        val recyclerView =
+            view.findViewById<RecyclerView>(R.id.recyclerViewBookmarked)
 
-        //val allGuides = DataStore.guides  // your data source
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext())
 
-        // FILTER BOOKMARKED ITEMS
-        //val bookmarkedList = allGuides.filter { it.isBookmarked }
+        val allGuides = loadGuidesFromAssets()
 
-        //recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        //recyclerView.adapter = GuideAdapter(bookmarkedList) { item ->
-            // handle click if needed
+        val prefs = requireContext().getSharedPreferences(
+            "bookmarks",
+            Context.MODE_PRIVATE
+        )
+
+        val bookmarkedTitles =
+            prefs.getStringSet(
+                "bookmark_titles",
+                mutableSetOf()
+            ) ?: mutableSetOf()
+
+        allGuides.forEach {
+            it.isBookmarked =
+                bookmarkedTitles.contains(it.title)
         }
 
+        val bookmarkedList =
+            allGuides.filter { it.isBookmarked }
 
+        recyclerView.adapter =
+            GuideAdapter(bookmarkedList) { item ->
+
+                val fragment = WebViewFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("html_file", item.html_file)
+                    }
+                }
+
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+    }
+
+    private fun loadGuidesFromAssets(
+        fileName: String = "guides.json"
+    ): List<GuideItem> {
+
+        val jsonString = requireContext()
+            .assets
+            .open(fileName)
+            .bufferedReader()
+            .use { it.readText() }
+
+        val listType =
+            object : TypeToken<List<GuideItem>>() {}.type
+
+        return Gson().fromJson(jsonString, listType)
+    }
 }

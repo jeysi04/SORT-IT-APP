@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import android.content.Context
 
 class GuideListFragment : Fragment() {
 
@@ -79,7 +80,27 @@ class GuideListFragment : Fragment() {
 
         // Load guides from JSON
         val allGuides = loadGuidesFromAssets()
-        val filteredList = allGuides.filter { it.category == subcategory }
+
+        val prefs = requireContext().getSharedPreferences(
+            "bookmarks",
+            Context.MODE_PRIVATE
+        )
+
+        val bookmarkedTitles =
+            prefs.getStringSet(
+                "bookmark_titles",
+                mutableSetOf()
+            ) ?: mutableSetOf()
+
+        allGuides.forEach {
+            it.isBookmarked =
+                bookmarkedTitles.contains(it.title)
+        }
+
+        val filteredList =
+            allGuides.filter {
+                it.category == subcategory
+            }
 
         // Set adapter
         recyclerView.adapter = GuideAdapter(filteredList) { guideItem ->

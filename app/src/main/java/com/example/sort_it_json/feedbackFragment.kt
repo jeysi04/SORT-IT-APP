@@ -146,6 +146,17 @@ class feedbackFragment : Fragment() {
 
         // goes to home when back button is click
         btnBack.setOnClickListener {
+
+            if (isFeedbackInProgress()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Finish feedback first!",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                return@setOnClickListener
+            }
+
             (activity as? MainActivity)?.setNav(R.id.nav_home)
         }
     }
