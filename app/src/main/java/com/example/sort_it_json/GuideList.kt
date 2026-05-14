@@ -41,6 +41,8 @@ class GuideListFragment : Fragment() {
         //Declare back button
         val btnTopLeft = view.findViewById<ImageButton>(R.id.btnTopLeft)
 
+        (activity as MainActivity).enterNonNavState()
+
         // Changes the subcategory text based on the analyzed subcategory
         when (subcategory) {
             //Glass
@@ -103,9 +105,21 @@ class GuideListFragment : Fragment() {
             }
 
         // Set adapter
-        recyclerView.adapter = GuideAdapter(filteredList) { guideItem ->
-            openGuide(guideItem.html_file)
-        }
+        recyclerView.adapter = GuideAdapter(
+            guides = filteredList,
+
+            // Handles click to open guide
+            onClick = { guideItem ->
+                openGuide(guideItem.html_file)
+            },
+
+            // Handles bookmark updates (required by adapter)
+            onBookmarkChanged = { item, wasRemoved ->
+
+                // No snackbar here, so we safely ignore it
+                // You can leave this empty if not needed in this screen
+            }
+        )
 
         btnTopLeft.setOnClickListener {
             if (isAdded) {

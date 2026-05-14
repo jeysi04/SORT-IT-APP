@@ -53,6 +53,8 @@ class RecyclableresultFragment : Fragment() {
             return view
         }
 
+        (activity as MainActivity).enterNonNavState()
+
         val stage1Label = response.stage1.label
 
         //TEST

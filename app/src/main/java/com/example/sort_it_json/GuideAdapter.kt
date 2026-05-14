@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 class GuideAdapter(
 
     private val guides: List<GuideItem>,
-    private val onClick: (GuideItem) -> Unit
+    private val onClick: (GuideItem) -> Unit,
 
-) : RecyclerView.Adapter<GuideAdapter.ViewHolder>() {
+    // NEW: notify fragment when bookmark changes
+    private val onBookmarkChanged: (GuideItem, Boolean) -> Unit
+
+): RecyclerView.Adapter<GuideAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
@@ -98,38 +101,39 @@ class GuideAdapter(
 
         holder.bookmark.setOnClickListener {
 
+            val wasBookmarked = item.isBookmarked
+
+            // Toggle bookmark state
             item.isBookmarked = !item.isBookmarked
 
-            updateBookmarkIcon(
-                holder.bookmark,
-                item.isBookmarked
-            )
+            // Update icon
+            updateBookmarkIcon(holder.bookmark, item.isBookmarked)
 
             val prefs = holder.itemView.context
-                .getSharedPreferences(
-                    "bookmarks",
-                    Context.MODE_PRIVATE
-                )
+                .getSharedPreferences("bookmarks", Context.MODE_PRIVATE)
 
             val savedBookmarks =
-                prefs.getStringSet(
-                    "bookmark_titles",
-                    mutableSetOf()
-                )?.toMutableSet()
+                prefs.getStringSet("bookmark_titles", mutableSetOf())?.toMutableSet()
                     ?: mutableSetOf()
 
             if (item.isBookmarked) {
+
+                // ADD bookmark
                 savedBookmarks.add(item.title)
+
             } else {
+
+                // REMOVE bookmark
                 savedBookmarks.remove(item.title)
             }
 
+            // Save changes
             prefs.edit()
-                .putStringSet(
-                    "bookmark_titles",
-                    savedBookmarks
-                )
+                .putStringSet("bookmark_titles", savedBookmarks)
                 .apply()
+
+            // Notify Fragment (for Snackbar + Undo)
+            onBookmarkChanged(item, wasBookmarked && !item.isBookmarked)
         }
 
         holder.itemView.setOnClickListener {

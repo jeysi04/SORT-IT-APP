@@ -130,6 +130,13 @@ class MainActivity : AppCompatActivity() {
 
     // REPLACE FRAGMENT (DESTROYS OLD ONE)
     private fun switchFragment(fragment: Fragment) {
+
+        val bottomNav =
+            findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        // restore normal navigation behavior
+        bottomNav.menu.setGroupCheckable(0, true, true)
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
@@ -138,7 +145,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Show loading screen with file
-    public fun showLoadingFragment(filePath: String) {
+    fun showLoadingFragment(filePath: String) {
+
+        val bottomNav =
+            findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        // clear highlight immediately
+        //bottomNav.menu.setGroupCheckable(0, true, false)
+
         val fragment = LoadingFragment().apply {
             arguments = Bundle().apply {
                 putString("file_path", filePath)
@@ -205,13 +219,18 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.global_success_overlay)?.visibility = View.GONE
     }
 
-
     fun enterNonNavState() {
 
         val bottomNav =
             findViewById<BottomNavigationView>(R.id.bottomNav)
 
-        bottomNav.selectedItemId = View.NO_ID
+        // Clear ALL selections safely
+        bottomNav.menu.setGroupCheckable(0, true, false)
+
+        bottomNav.menu.findItem(R.id.nav_home).isChecked = false
+        bottomNav.menu.findItem(R.id.nav_bookmark).isChecked = false
+        bottomNav.menu.findItem(R.id.nav_faq).isChecked = false
+        bottomNav.menu.findItem(R.id.nav_feedback).isChecked = false
     }
 
     fun setNav(itemId: Int) {

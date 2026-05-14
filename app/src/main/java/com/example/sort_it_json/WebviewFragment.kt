@@ -31,6 +31,8 @@ class WebViewFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_webview, container, false)
 
+        (activity as MainActivity).enterNonNavState()
+
         webView = view.findViewById(R.id.webView)
 
         setupWebView()

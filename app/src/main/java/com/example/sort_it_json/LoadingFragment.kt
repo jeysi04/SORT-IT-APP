@@ -59,6 +59,8 @@ class LoadingFragment : Fragment() {
 
         filePath = arguments?.getString("file_path")
 
+        (activity as MainActivity).enterNonNavState()
+
         val cancelButton = view.findViewById<Button>(R.id.CancelButon)
 
         cancelButton.backgroundTintList = ColorStateList.valueOf(
@@ -129,6 +131,7 @@ class LoadingFragment : Fragment() {
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, resultFragment)
                         .commit()
+                    (activity as MainActivity).updateFab(resultFragment)
                 }
 
                 if (file.exists()) file.delete()
