@@ -140,6 +140,7 @@ class GuideListFragment : Fragment() {
             // This allows the user to press the back button
             .addToBackStack(null)
             .commit()
+        (activity as MainActivity).updateFab(fragment)
     }
 
     // Function that loads guide data from a JSON file inside the assets folder

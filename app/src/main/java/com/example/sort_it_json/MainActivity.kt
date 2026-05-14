@@ -1,6 +1,9 @@
 package com.example.sort_it_json
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.media.Image
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -19,6 +22,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var fabCenter: FloatingActionButton
+    private var isCameraFlowActive = false
+    private val cameraFlowFragments = setOf(
+        LoadingFragment::class,
+        RecyclableresultFragment::class,
+        GuideListFragment::class,
+        WebViewFragment::class
+    )
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -29,8 +40,21 @@ class MainActivity : AppCompatActivity() {
 
             if (filePath != null) {
 
-                // FORCE LOADING SCREEN
+                isCameraFlowActive = true
+
                 showLoadingFragment(filePath)
+            }
+
+        } else {
+
+            // User backed out of camera
+            isCameraFlowActive = false
+
+            val current =
+                supportFragmentManager.findFragmentById(R.id.fragment_container)
+
+            if (current != null) {
+                updateFab(current)
             }
         }
     }
@@ -40,13 +64,10 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        //Add space above the app for the header
-
-
         setContentView(R.layout.activity_main)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        val fabCenter = findViewById<FloatingActionButton>(R.id.fab_center)
+        fabCenter = findViewById<FloatingActionButton>(R.id.fab_center)
 
         bottomNav.selectedItemId = R.id.nav_home
 
@@ -61,7 +82,11 @@ class MainActivity : AppCompatActivity() {
 
         // FAB → Camera Activity
         fabCenter.setOnClickListener {
+            isCameraFlowActive = true
+
             enterNonNavState()
+            changeFabTint(android.graphics.Color.parseColor("#F0CD6E"))
+
             val intent = Intent(this, CameraActivity::class.java)
             cameraLauncher.launch(intent)
         }
@@ -102,11 +127,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     // REPLACE FRAGMENT (DESTROYS OLD ONE)
     private fun switchFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
+
+        updateFab(fragment)
     }
 
     // Show loading screen with file
@@ -120,6 +148,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
+
+        updateFab(fragment)
     }
 
     override fun onResume() {
@@ -176,17 +206,35 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun enterNonNavState() {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+    fun enterNonNavState() {
 
-        bottomNav.menu.findItem(R.id.nav_home).isChecked = false
-        bottomNav.menu.findItem(R.id.nav_bookmark).isChecked = false
-        bottomNav.menu.findItem(R.id.nav_faq).isChecked = false
-        bottomNav.menu.findItem(R.id.nav_feedback).isChecked = false
+        val bottomNav =
+            findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        bottomNav.selectedItemId = View.NO_ID
     }
 
     fun setNav(itemId: Int) {
         findViewById<BottomNavigationView>(R.id.bottomNav)
             .selectedItemId = itemId
+    }
+
+    fun changeFabTint(color: Int) {
+        fabCenter.imageTintList = ColorStateList.valueOf(color)
+    }
+
+    fun updateFab(fragment: Fragment) {
+
+        val isCameraFlow = cameraFlowFragments.any {
+            it.isInstance(fragment)
+        }
+
+        val color = if (isCameraFlow) {
+            Color.parseColor("#F0CD6E") // yellow
+        } else {
+            Color.parseColor("#FFFFFF") // default
+        }
+
+        changeFabTint(color)
     }
 }

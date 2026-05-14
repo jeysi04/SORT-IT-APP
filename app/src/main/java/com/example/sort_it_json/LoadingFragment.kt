@@ -72,7 +72,7 @@ class LoadingFragment : Fragment() {
         // START ANALYSIS AUTOMATICALLY
         filePath?.let { file ->
             analyzePhoto(File(file))
-            //startTimeoutWarning()
+            startTimeoutWarning()
         }
     }
 
@@ -152,7 +152,7 @@ class LoadingFragment : Fragment() {
 
         timeoutJob = lifecycleScope.launch {
 
-            delay(30000) // 30 seconds
+            delay(60000) // 60 seconds
 
             if (!isAdded) return@launch
 

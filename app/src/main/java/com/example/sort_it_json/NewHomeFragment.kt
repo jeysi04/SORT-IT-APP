@@ -3,6 +3,7 @@ package com.example.sort_it_json
 // Android context + UI imports
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -178,6 +179,7 @@ class NewHomeFragment : Fragment() {
         // ----------------------------
 
         captureButton.setOnClickListener {
+            (activity as MainActivity).enterNonNavState()
 
             // Open CameraActivity
             val intent = Intent(requireContext(), CameraActivity::class.java)
@@ -332,6 +334,8 @@ class NewHomeFragment : Fragment() {
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit()
+
+            (activity as MainActivity).updateFab(fragment)
         }
     }
 
@@ -344,12 +348,10 @@ class NewHomeFragment : Fragment() {
     ) {
 
         if (isBookmarked) {
-
             // Filled icon
             button.setImageResource(R.drawable.bookmarked)
 
         } else {
-
             // Empty icon
             button.setImageResource(R.drawable.notbookmark)
         }

@@ -31,6 +31,8 @@ class BookmarkFragment : Fragment() {
             (activity as? MainActivity)?.setNav(R.id.nav_home)
         }
 
+        loadBookmarks(view)
+
         val recyclerView =
             view.findViewById<RecyclerView>(R.id.recyclerViewBookmarked)
 
@@ -61,6 +63,8 @@ class BookmarkFragment : Fragment() {
         recyclerView.adapter =
             GuideAdapter(bookmarkedList) { item ->
 
+                refreshBookmarks()
+
                 val fragment = WebViewFragment().apply {
                     arguments = Bundle().apply {
                         putString("html_file", item.html_file)
@@ -88,5 +92,53 @@ class BookmarkFragment : Fragment() {
             object : TypeToken<List<GuideItem>>() {}.type
 
         return Gson().fromJson(jsonString, listType)
+    }
+
+    private fun loadBookmarks(view: View) {
+
+        val recyclerView =
+            view.findViewById<RecyclerView>(R.id.recyclerViewBookmarked)
+
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext())
+
+        val allGuides = loadGuidesFromAssets()
+
+        val prefs = requireContext().getSharedPreferences(
+            "bookmarks",
+            Context.MODE_PRIVATE
+        )
+
+        val bookmarkedTitles =
+            prefs.getStringSet("bookmark_titles", mutableSetOf()) ?: mutableSetOf()
+
+        allGuides.forEach {
+            it.isBookmarked = bookmarkedTitles.contains(it.title)
+        }
+
+        val bookmarkedList =
+            allGuides.filter { it.isBookmarked }
+
+        recyclerView.adapter =
+            GuideAdapter(
+                bookmarkedList,
+                onClick = { item ->
+
+                    val fragment = WebViewFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("html_file", item.html_file)
+                        }
+                    }
+
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                }
+            )
+    }
+
+    fun refreshBookmarks() {
+        view?.let { loadBookmarks(it) }
     }
 }

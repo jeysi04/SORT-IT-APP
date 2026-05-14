@@ -126,6 +126,8 @@ class RecyclableresultFragment : Fragment() {
                         .replace(R.id.fragment_container, fragment)
                         .addToBackStack(null)
                         .commit()
+
+                    (activity as MainActivity).updateFab(fragment)
                 }
             }
         } else {

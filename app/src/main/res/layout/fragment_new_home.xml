@@ -162,7 +162,8 @@
                         android:id="@+id/bookmark1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="27dp"
+                        android:layout_marginLeft="3dp"
+                        android:padding="30dp"
                         android:src="@drawable/notbookmark"
                         android:background="@android:color/transparent"
                         android:contentDescription="Bookmark" />
@@ -288,7 +289,8 @@
                         android:id="@+id/bookmark2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="27dp"
+                        android:layout_marginLeft="3dp"
+                        android:padding="30dp"
                         android:src="@drawable/notbookmark"
                         android:background="@android:color/transparent"
                         android:contentDescription="Bookmark" />
