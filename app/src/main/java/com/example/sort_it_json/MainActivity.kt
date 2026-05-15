@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.graphics.drawable.DrawableCompat
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             if (fragment != null) {
                 switchFragment(fragment)
                 updateFab(fragment)
+                updateIconTint(fragment)
                 true
             } else {
                 false
@@ -107,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.executePendingTransactions()
 
         updateFab(fragment)
-        updateHomeIconTint(fragment)
+        updateIconTint(fragment)
     }
 
     fun showLoadingFragment(filePath: String) {
@@ -123,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         updateFab(fragment)
-        updateHomeIconTint(fragment)
+        updateIconTint(fragment)
     }
 
     override fun onResume() {
@@ -133,7 +135,7 @@ class MainActivity : AppCompatActivity() {
 
         if (current != null && current !is LoadingFragment) {
             updateFab(current)
-            updateHomeIconTint(current)
+            updateIconTint(current)
         }
     }
 
@@ -209,26 +211,24 @@ class MainActivity : AppCompatActivity() {
         cameraLauncher.launch(intent)
     }
 
-    fun updateHomeIconTint(fragment: Fragment) {
+    fun updateIconTint(fragment: Fragment) {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
-        val homeItem = bottomNav.menu.findItem(R.id.nav_home)
+        when (fragment) {
 
-        val shouldHighlightHome =
-            fragment is LoadingFragment ||
-                    fragment is RecyclableresultFragment ||
-                    fragment is GuideListFragment ||
-                    fragment is WebViewFragment
+            is LoadingFragment,
+            is RecyclableresultFragment,
+            is GuideListFragment,
+            is WebViewFragment -> {
 
-        val color = if (shouldHighlightHome) {
-            Color.parseColor("#FFFFFF")
-        } else {
-            Color.parseColor("#F0CD6E")
-        }
+                // visually highlight recycle tab ONLY if it exists
+                bottomNav.menu.findItem(R.id.nav_recycle).isChecked = true
+            }
 
-        homeItem.icon = homeItem.icon?.mutate()?.apply {
-            setTint(color)
+            else -> {
+                bottomNav.menu.findItem(R.id.nav_home).isChecked = true
+            }
         }
     }
 }
