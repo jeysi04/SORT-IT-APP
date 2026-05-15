@@ -53,7 +53,6 @@ class RecyclableresultFragment : Fragment() {
             return view
         }
 
-        (activity as MainActivity).enterNonNavState()
 
         val stage1Label = response.stage1.label
 
@@ -129,7 +128,7 @@ class RecyclableresultFragment : Fragment() {
                         .addToBackStack(null)
                         .commit()
 
-                    (activity as MainActivity).updateFab(fragment)
+                    //(activity as MainActivity).updateFab(fragment)
                 }
             }
         } else {
@@ -261,6 +260,10 @@ class RecyclableresultFragment : Fragment() {
             .setTextColor(resources.getColor(R.color.black, null))
 
         dialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 }

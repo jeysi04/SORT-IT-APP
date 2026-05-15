@@ -78,7 +78,7 @@ class NewHomeFragment : Fragment() {
                 Context.MODE_PRIVATE
             )
 
-    // Check if this is first app launch
+        // Check if this is first app launch
         val isFirstLaunch =
             appPrefs.getBoolean(
                 "is_first_launch",
@@ -179,11 +179,17 @@ class NewHomeFragment : Fragment() {
         // ----------------------------
 
         captureButton.setOnClickListener {
-            (activity as MainActivity).enterNonNavState()
 
-            // Open CameraActivity
-            val intent = Intent(requireContext(), CameraActivity::class.java)
-            startActivity(intent)
+            (activity as MainActivity).apply {
+
+                //enterNonNavState()
+                //changeFabTint(Color.parseColor("#F0CD6E"))
+
+                val intent =
+                    Intent(requireContext(), CameraActivity::class.java)
+
+                startCamera(intent)
+            }
         }
     }
 
@@ -335,7 +341,6 @@ class NewHomeFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
 
-            (activity as MainActivity).updateFab(fragment)
         }
     }
 
@@ -356,4 +361,5 @@ class NewHomeFragment : Fragment() {
             button.setImageResource(R.drawable.notbookmark)
         }
     }
+
 }
