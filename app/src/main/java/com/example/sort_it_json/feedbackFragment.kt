@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,8 +20,8 @@ import android.widget.EditText
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -49,7 +51,7 @@ class feedbackFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize back button
-        btnBack = view.findViewById<ImageButton>(R.id.btnBack)
+        btnBack = view.findViewById(R.id.btnBack)
 
         // Initialize Firebase
         db = FirebaseFirestore.getInstance()
@@ -129,31 +131,53 @@ class feedbackFragment : Fragment() {
             setupTagToggle(button)
         }
 
-        // Initialize Send Button
+        // Initialize Send Button and Submit Overlay Views
         val sendButton = view.findViewById<MaterialButton>(R.id.send_feedback_button)
+        val submitOverlay = view.findViewById<View>(R.id.submit_overlay)
+        val btnCancelSubmit = view.findViewById<MaterialButton>(R.id.btn_cancel_submit)
+        val btnConfirmSubmit = view.findViewById<MaterialButton>(R.id.btn_confirm_submit)
+
+        updateDirtyState() // Set initial state (gray/disabled) upon loading
+
         sendButton.setOnClickListener {
             val rating = ratingBar.rating
             val comment = feedbackEditText.text.toString().trim()
 
             if (rating == 0f && comment.isEmpty() && selectedTags.isEmpty()) {
-                Toast.makeText(context, "Please provide some feedback before sending", Toast.LENGTH_SHORT).show()
+                showCustomToast("Please provide some feedback before sending")
                 return@setOnClickListener
             }
 
             hideKeyboard(feedbackEditText)
+            // SHOW THE POP-UP OVERLAY INSTEAD OF SENDING DIRECTLY
+            submitOverlay.visibility = View.VISIBLE
+        }
+
+        // Action when "Cancel" is clicked in the overlay
+        btnCancelSubmit.setOnClickListener {
+            submitOverlay.visibility = View.GONE
+        }
+
+        // Action when "Submit" is clicked in the overlay
+        btnConfirmSubmit.setOnClickListener {
+            // Check for internet connection first
+            if (!isNetworkAvailable()) {
+                submitOverlay.visibility = View.GONE // Hide overlay
+                showCustomToast("Please check your internet connection and try again.")
+                return@setOnClickListener
+            }
+
+            // If there is internet, proceed to send
+            submitOverlay.visibility = View.GONE
+            val rating = ratingBar.rating
+            val comment = feedbackEditText.text.toString().trim()
             sendFeedbackToFirebase(rating, comment, selectedTags.toList(), sendButton, ratingBar, feedbackEditText)
         }
 
-        // goes to home when back button is click
+        // Goes to home when back button is clicked
         btnBack.setOnClickListener {
-
             if (isFeedbackInProgress()) {
-                Toast.makeText(
-                    requireContext(),
-                    "Finish feedback first!",
-                    Toast.LENGTH_SHORT
-                ).show()
-
+                showCustomToast("Please finish or send your feedback before leaving.")
                 return@setOnClickListener
             }
 
@@ -161,10 +185,63 @@ class feedbackFragment : Fragment() {
         }
     }
 
+    // --- UTILITY FUNCTIONS ---
+
+    // Function to check Internet Connection
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return when {
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
+        }
+    }
+
+    // Function to show Custom Toast with a message
+    fun showCustomToast(message: String) {
+        val textView = TextView(requireContext()).apply {
+            text = message
+            textSize = 16f
+            typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular) // Changed to Regular
+            setTextColor(Color.parseColor("#000000")) // Changed to Black
+
+            // Gumawa ng Light Background para mabasa ang Black Text
+            val backgroundShape = android.graphics.drawable.GradientDrawable().apply {
+                setColor(Color.parseColor("#EFEDED")) // Light Gray/White Background
+                cornerRadius = 200f
+            }
+            background = backgroundShape
+
+            setPadding(50, 20, 50, 20)
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
+        }
+
+        val toast = Toast(requireContext())
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = textView
+        toast.show()
+    }
+
     private fun updateDirtyState() {
-        val feedbackEditText = view?.findViewById<EditText>(R.id.feedback_edit_text)
-        val comment = feedbackEditText?.text?.toString() ?: ""
+        val root = view ?: return
+        val feedbackEditText = root.findViewById<EditText>(R.id.feedback_edit_text)
+
+        val comment = feedbackEditText?.text?.toString()?.trim() ?: ""
         isFeedbackDirty = currentRating > 0f || comment.isNotEmpty() || selectedTags.isNotEmpty()
+
+        val sendButton = root.findViewById<MaterialButton>(R.id.send_feedback_button)
+        if (isFeedbackDirty) {
+            sendButton?.isEnabled = true
+            sendButton?.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#89C07E")) // Green
+            sendButton?.setTextColor(Color.WHITE)
+        } else {
+            sendButton?.isEnabled = false
+            sendButton?.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#D9D9D9")) // Gray
+            sendButton?.setTextColor(Color.parseColor("#919191"))
+        }
     }
 
     // This function is checked by MainActivity before navigating
@@ -209,6 +286,9 @@ class feedbackFragment : Fragment() {
         editText: EditText
     ) {
         sendButton.isEnabled = false
+        // KEEP IT GREEN AND WHITE WHILE SENDING
+        sendButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#89C07E"))
+        sendButton.setTextColor(Color.WHITE)
         sendButton.text = "Sending..."
 
         val feedbackData = hashMapOf(
@@ -233,12 +313,14 @@ class feedbackFragment : Fragment() {
                 currentRating = 0f
                 editText.text.clear()
                 resetTags()
-                sendButton.isEnabled = true
                 sendButton.text = "Send Feedback"
+                updateDirtyState() // Updates button back to gray and disabled after success
             }
             .addOnFailureListener { e ->
-                Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                showCustomToast("Error: ${e.message}")
                 sendButton.isEnabled = true
+                sendButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#89C07E"))
+                sendButton.setTextColor(Color.WHITE)
                 sendButton.text = "Send Feedback"
             }
     }
@@ -252,5 +334,4 @@ class feedbackFragment : Fragment() {
             button.elevation = 0f
         }
     }
-
 }

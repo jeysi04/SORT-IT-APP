@@ -5,10 +5,10 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.core.graphics.drawable.DrawableCompat
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -59,6 +59,12 @@ class MainActivity : AppCompatActivity() {
 
         // FAB → Camera Activity
         fabCenter.setOnClickListener {
+
+            // ADDED CHECK: Prevent opening camera if feedback is in progress
+            if (!canNavigate()) {
+                return@setOnClickListener
+            }
+
             isCameraFlowActive = true
 
             val intent = Intent(this, CameraActivity::class.java)
@@ -81,6 +87,11 @@ class MainActivity : AppCompatActivity() {
 
         // Bottom Navigation
         bottomNav.setOnItemSelectedListener { item ->
+
+            // ADDED CHECK: Harangin agad ang pag-click sa nav bar kung may type sa feedback
+            if (!canNavigate()) {
+                return@setOnItemSelectedListener false
+            }
 
             val fragment = when (item.itemId) {
                 R.id.nav_home -> NewHomeFragment()
@@ -161,10 +172,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // UPDATED: Ngayon ay tinatawag na niya ang showCustomToast galing sa feedbackFragment
     private fun canNavigate(): Boolean {
         val current = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (current is feedbackFragment && current.isFeedbackInProgress()) {
-            Toast.makeText(this, "Finish feedback first!", Toast.LENGTH_SHORT).show()
+            current.showCustomToast("Please finish or send your feedback before leaving.")
             return false
         }
         return true
@@ -180,6 +192,9 @@ class MainActivity : AppCompatActivity() {
 
 
     fun setNav(itemId: Int) {
+        // ADDED CHECK: Para sure na blocked din kapag programmatic ang pag-set ng nav
+        if (!canNavigate()) return
+
         findViewById<BottomNavigationView>(R.id.bottomNav)
             .selectedItemId = itemId
     }
