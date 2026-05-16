@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .commit()
+            .commitNow()
 
         updateFab(fragment)
         updateIconTint(fragment)
@@ -221,14 +221,17 @@ class MainActivity : AppCompatActivity() {
             is RecyclableresultFragment,
             is GuideListFragment,
             is WebViewFragment -> {
-
-                // visually highlight recycle tab ONLY if it exists
                 bottomNav.menu.findItem(R.id.nav_recycle).isChecked = true
             }
-
             else -> {
                 bottomNav.menu.findItem(R.id.nav_home).isChecked = true
             }
         }
+    }
+
+    companion object {
+        var instance: MainActivity? = null
+
+        var latestPredictionResponse: PredictResponse? = null
     }
 }

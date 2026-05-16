@@ -122,11 +122,9 @@ class LoadingFragment : Fragment() {
                     //Response
                     //Log.d("API_RESPONSE", response.toString())
 
-                    val resultFragment = RecyclableresultFragment().apply {
-                        arguments = Bundle().apply {
-                            putParcelable("predict_response", response)
-                        }
-                    }
+                    MainActivity.latestPredictionResponse = response
+
+                    val resultFragment = RecyclableresultFragment()
 
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, resultFragment)

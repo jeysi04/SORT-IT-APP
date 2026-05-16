@@ -26,7 +26,7 @@ class RecyclableresultFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Safe retrieval of Parcelable
-        predictResponse = arguments?.getParcelable("predict_response")
+        predictResponse = MainActivity.latestPredictionResponse
     }
 
     override fun onCreateView(
