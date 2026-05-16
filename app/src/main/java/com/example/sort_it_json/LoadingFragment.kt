@@ -124,7 +124,11 @@ class LoadingFragment : Fragment() {
 
                     MainActivity.latestPredictionResponse = response
 
-                    val resultFragment = RecyclableresultFragment()
+                    val resultFragment = RecyclableresultFragment().apply {
+                        arguments = Bundle().apply {
+                            putParcelable("predict_response", response)
+                        }
+                    }
 
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, resultFragment)

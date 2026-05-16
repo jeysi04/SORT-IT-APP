@@ -2,7 +2,6 @@ package com.example.sort_it_json
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
@@ -26,7 +25,7 @@ class RecyclableresultFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Safe retrieval of Parcelable
-        predictResponse = MainActivity.latestPredictionResponse
+        predictResponse = arguments?.getParcelable("predict_response")
     }
 
     override fun onCreateView(
@@ -55,11 +54,13 @@ class RecyclableresultFragment : Fragment() {
 
 
         val stage1Label = response.stage1.label
+        val categoryLabel = response.stage2?.label ?: "Unknown"
+        val subcategoryLabel = response.stage3?.label ?: "Unknown"
 
         //TEST
         Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
 
-        if (stage1Label == "non-recyclable") {
+        if (stage1Label == "non_recyclable") {
             // Non-recyclable UI
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
@@ -67,32 +68,30 @@ class RecyclableresultFragment : Fragment() {
             typeText.visibility = View.GONE
             illustbg.setImageResource(R.drawable.nonrec_illus)
             illustclass.setImageResource(R.drawable.nonrecyclable)
-            questbot.text = "Would you like to leave feedback?"
+            questbot.text = "Would you like to take a new picture?"
 
             val dpHeight = 537
             val scale = resources.displayMetrics.density
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
-                if (isAdded) {
 
-                    val fragment = feedbackFragment()
+                parentFragmentManager.popBackStack(
+                    null,
+                    androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+                )
 
-                    parentFragmentManager.beginTransaction()
-                        .add(R.id.fragment_container, fragment)
-                        .hide(this@RecyclableresultFragment)
-                        .addToBackStack("guide")
-                        .commit()
-                }
+                val intent = Intent(requireContext(), CameraActivity::class.java)
+                startActivity(intent)
+
             }
 
-        } else if (stage1Label == "recyclable") {
+        }
+
+        if (stage1Label == "recyclable" && categoryLabel != "Unknown") {
             // Recyclable UI
             classText.text = "Your waste is recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#007700"))
-
-            val categoryLabel = response.stage2?.label ?: "Unknown"
-            val subcategoryLabel = response.stage3?.label ?: "Unknown"
 
             //TEST
             Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
@@ -105,12 +104,42 @@ class RecyclableresultFragment : Fragment() {
             // Illustrations
             illustclass.setImageResource(
                 when (categoryLabel) {
-                    "metal" -> R.drawable.metal_illus
-                    "paper" -> R.drawable.paper_illus
-                    "plastic" -> R.drawable.plastic_illus
-                    "glass" -> R.drawable.glass_illus
-                    "residual" -> R.drawable.residual_illus
-                    else -> R.drawable.unknown_illus
+
+                    "metal" -> {
+                        Toast.makeText(requireContext(), "Metal detected", Toast.LENGTH_SHORT).show()
+                        R.drawable.metal_illus
+                    }
+
+                    "paper" -> {
+                        // long logic here
+                        val test = "paper"
+                        println(test)
+
+                        R.drawable.paper_illus
+                    }
+
+                    "plastic" -> {
+                        // multiple lines allowed
+                        val isPlastic = true
+
+                        if (isPlastic) {
+                            R.drawable.plastic_illus
+                        } else {
+                            R.drawable.unknown
+                        }
+                    }
+
+                    "glass" -> {
+                        R.drawable.glass_illus
+                    }
+
+                    "residual" -> {
+                        R.drawable.residual_illus
+                    }
+
+                    else -> {
+                        R.drawable.unknown
+                    }
                 }
             )
 
@@ -131,10 +160,34 @@ class RecyclableresultFragment : Fragment() {
                     //(activity as MainActivity).updateFab(fragment)
                 }
             }
-        } else {
-            // Unknown label
-            classText.text = "Error: Unexpected result"
+        }
+
+        if (categoryLabel == "Unknown")
+        {
+            // Non-recyclable UI
+            classText.text = "Your waste could not be identified!"
+            classText.setTextColor(android.graphics.Color.parseColor("#D89B2B"))
+            catText.text = "Please make sure the object is centered and clearly visible."
             typeText.visibility = View.GONE
+            illustbg.setImageResource(R.drawable.unknown_illus)
+            illustclass.setImageResource(R.drawable.unknown)
+            questbot.text = "Would you like to take a new picture?"
+
+            val dpHeight = 537
+            val scale = resources.displayMetrics.density
+            layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
+
+            btnYes.setOnClickListener {
+
+                parentFragmentManager.popBackStack(
+                    null,
+                    androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+                )
+
+                val intent = Intent(requireContext(), CameraActivity::class.java)
+                startActivity(intent)
+
+            }
         }
 
         btnNo.setOnClickListener {
