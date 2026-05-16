@@ -1,333 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingRight="5dp"
-    android:paddingLeft="5dp"
     android:fillViewport="true"
     android:background="#FFFFFF">
 
-    <!-- ScrollView MUST have only ONE child -->
+    <!-- ScrollView MUST have ONE child -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- MAIN CONTENT -->
+
+        <!-- ================= FAQ SECTION ================= -->
+
         <LinearLayout
-            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="0dp">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/yellowlogoicon"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginTop="90dp"
-                android:contentDescription="logo_yellow_icon_desc"
-                android:src="@drawable/about_applogo" />
-
-
-            <LinearLayout
+            <!-- HEADER -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:minHeight="60dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp"
+                android:background="@drawable/yellow_header_page">
 
+                <!-- Back Button -->
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Back"
+                    android:padding="8dp"
+                    android:src="@drawable/button_green_backward"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <!-- Title (Perfectly Centered) -->
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:justificationMode="inter_word"
-                    android:text="@string/about_intro"
+                    android:text="About Us"
                     android:textColor="#000000"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:justificationMode="inter_word"
-                    android:text="GOAL"
-                    android:textColor="#467750"
-                    android:textSize="15sp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:justificationMode="inter_word"
-                    android:text="@string/about_goal"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:justificationMode="inter_word"
-                    android:text="1. Determine what is recyclable."
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:justificationMode="inter_word"
-                    android:text="2. Discover the proper recycling procedure."
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:justificationMode="inter_word"
-                    android:text="3. Create environmentally friendly trash management practices."
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-            </LinearLayout>
+            <!-- FAQ -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_marginTop="50dp"
+                android:padding="15dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="DEVELOPERS"
-                    android:textColor="#467750"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:justificationMode="inter_word"
-                    android:text="@string/about_developers"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-
+                <!-- ================= FAQ ITEM ================= -->
                 <LinearLayout
+                    android:id="@+id/layoutQuestion1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="8dp"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:orientation="vertical"
+                    android:background="#F5F5F5"
+                    android:padding="16dp"
+                    android:layout_marginBottom="5dp">
 
-                    <ImageView
-                        android:id="@+id/membericon_az"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginTop="10dp"
-                        android:contentDescription="logo_yellow_icon_desc"
-                        android:src="@drawable/member_az" />
-
-                    <TextView
+                    <!-- QUESTION ROW -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="25dp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:layout_marginLeft="20dp"
-                        android:text="A Z Rain L. Espinas,"
-                        android:textColor="#000000"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                        android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                        <TextView
+                            android:id="@+id/tvQuestion1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="How to use the app?"
+                            android:textSize="15sp"
+                            android:textColor="#000000"
+                            android:fontFamily="@font/montserrat_bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/arrowIcon1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
-                    <ImageView
-                        android:id="@+id/membericon_ginno"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginTop="10dp"
-                        android:contentDescription="logo_yellow_icon_desc"
-                        android:src="@drawable/member_ginno" />
+                        <ImageView
+                            android:id="@+id/arrowIcon1"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/arrow_down"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <!-- ANSWER (HIDDEN BY DEFAULT) -->
                     <TextView
+                        android:id="@+id/tvAnswer1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="25dp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:layout_marginLeft="20dp"
-                        android:text="Ginno L. Buenaobra"
-                        android:textColor="#000000"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/membericon_janna"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginTop="10dp"
-                        android:contentDescription="logo_yellow_icon_desc"
-                        android:src="@drawable/member_janna" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="25dp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:layout_marginLeft="20dp"
-                        android:text="Janna Carla R. Morcozo"
-                        android:textColor="#000000"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/membericon_jaycee"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginTop="10dp"
-                        android:contentDescription="logo_yellow_icon_desc"
-                        android:src="@drawable/member_jaycee" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="25dp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:layout_marginLeft="20dp"
-                        android:text="Jaycee D. Cadag"
-                        android:textColor="#000000"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/membericon_melrick"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginTop="10dp"
-                        android:contentDescription="logo_yellow_icon_desc"
-                        android:src="@drawable/member_melrick" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="25dp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:layout_marginLeft="20dp"
-                        android:text="John Melrick M. Loviña"
-                        android:textColor="#000000"
-                        android:textSize="15sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <!-- CONTACT US SECTION -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:justificationMode="inter_word"
-                    android:text="CONTACT US:"
-                    android:textColor="#467750"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:id="@+id/contactRow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:contentDescription="gmail_icon_desc"
-                        android:src="@drawable/gmaillogo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
+                        android:justificationMode="inter_word"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="sortit2k25@gmail.com"
-                        android:textColor="#000000"
-                        android:textSize="15sp" />
+                        android:text="Capture the image of the waste. Let the system analyze the material. Identify the classification. Learn and recycle."
+                        android:textSize="15sp"
+                        android:textColor="#555555"
+                        android:visibility="gone"
+                        android:paddingTop="12dp"/>
+
+                </LinearLayout>
+
+                <!-- Add more FAQ items here by copying the block above -->
+                <!-- ================= FAQ ITEM ================= -->
+                <LinearLayout
+                    android:id="@+id/layoutQuestion2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#F5F5F5"
+                    android:padding="16dp"
+                    android:layout_marginBottom="5dp">
+
+                    <!-- QUESTION ROW -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvQuestion2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="How does the app works?"
+                            android:textSize="15sp"
+                            android:textColor="#000000"
+                            android:fontFamily="@font/montserrat_bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/arrowIcon2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <ImageView
+                            android:id="@+id/arrowIcon2"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/arrow_down"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- ANSWER (HIDDEN BY DEFAULT) -->
+                    <TextView
+                        android:id="@+id/tvAnswer2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Capture a photo of any material. The system analyzes the image using AI-based classification. It identifies the type of material (plastic, paper, glass, metal, etc.) and tells you if it’s recyclable. The app also provides recycling tips and disposal guidance."
+                        android:textSize="15sp"
+                        android:textColor="#555555"
+                        android:visibility="gone"
+                        android:paddingTop="12dp"/>
+
                 </LinearLayout>
 
             </LinearLayout>
-
 
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

@@ -90,6 +90,23 @@ class WebViewFragment : Fragment() {
     inner class WebAppInterface {
 
         @android.webkit.JavascriptInterface
+        fun goBack() {
+            requireActivity().runOnUiThread {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
+        }
+
+        @android.webkit.JavascriptInterface
+        fun goHome() {
+            requireActivity().runOnUiThread {
+                (requireActivity() as MainActivity).setNav(R.id.nav_home)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, NewHomeFragment())
+                    .commit()
+            }
+        }
+
+        @android.webkit.JavascriptInterface
         fun goToNextFragment() {
 
             requireActivity().runOnUiThread {
