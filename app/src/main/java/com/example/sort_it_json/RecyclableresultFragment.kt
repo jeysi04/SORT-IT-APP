@@ -57,9 +57,9 @@ class RecyclableresultFragment : Fragment() {
         val stage1Label = response.stage1.label
 
         //TEST
-        //Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
 
-        if (stage1Label == "non_recyclable") {
+        if (stage1Label == "non-recyclable") {
             // Non-recyclable UI
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
@@ -95,8 +95,8 @@ class RecyclableresultFragment : Fragment() {
             val subcategoryLabel = response.stage3?.label ?: "Unknown"
 
             //TEST
-            //Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
-            //Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
 
             catText.text = "It's $categoryLabel!"
             typeText.visibility = View.VISIBLE
