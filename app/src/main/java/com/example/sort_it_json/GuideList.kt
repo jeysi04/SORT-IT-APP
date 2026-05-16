@@ -41,7 +41,7 @@ class GuideListFragment : Fragment() {
         //Declare back button
         val btnTopLeft = view.findViewById<ImageButton>(R.id.btnTopLeft)
 
-        (activity as MainActivity).enterNonNavState()
+        //(activity as MainActivity).enterNonNavState()
 
         // Changes the subcategory text based on the analyzed subcategory
         when (subcategory) {
@@ -154,7 +154,6 @@ class GuideListFragment : Fragment() {
             // This allows the user to press the back button
             .addToBackStack(null)
             .commit()
-        (activity as MainActivity).updateFab(fragment)
     }
 
     // Function that loads guide data from a JSON file inside the assets folder

@@ -8,25 +8,21 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fabCenter: FloatingActionButton
     private var isCameraFlowActive = false
-    private val cameraFlowFragments = setOf(
-        LoadingFragment::class,
-        RecyclableresultFragment::class,
-        GuideListFragment::class,
-        WebViewFragment::class
-    )
+
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -36,41 +32,25 @@ class MainActivity : AppCompatActivity() {
             val filePath = result.data?.getStringExtra("file_path")
 
             if (filePath != null) {
-
                 isCameraFlowActive = true
-
                 showLoadingFragment(filePath)
             }
 
-        } else {
-
-            // User backed out of camera
-            isCameraFlowActive = false
-
-            val current =
-                supportFragmentManager.findFragmentById(R.id.fragment_container)
-
-            if (current != null) {
-                updateFab(current)
-            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
-
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        fabCenter = findViewById<FloatingActionButton>(R.id.fab_center)
+        fabCenter = findViewById(R.id.fab_center)
 
         bottomNav.selectedItemId = R.id.nav_home
 
         setupFeedbackLogic(bottomNav)
 
-        // Load default fragment
         if (savedInstanceState == null) {
             switchFragment(NewHomeFragment())
         }
@@ -86,9 +66,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             isCameraFlowActive = true
-
-            enterNonNavState()
-            changeFabTint(android.graphics.Color.parseColor("#F0CD6E"))
 
             val intent = Intent(this, CameraActivity::class.java)
             cameraLauncher.launch(intent)
@@ -108,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Bottom Navigation (REPLACE MODE)
+        // Bottom Navigation
         bottomNav.setOnItemSelectedListener { item ->
 
             // ADDED CHECK: Harangin agad ang pag-click sa nav bar kung may type sa feedback
@@ -117,17 +94,17 @@ class MainActivity : AppCompatActivity() {
             }
 
             val fragment = when (item.itemId) {
-
                 R.id.nav_home -> NewHomeFragment()
                 R.id.nav_bookmark -> BookmarkFragment()
                 R.id.nav_faq -> FaqFragment()
                 R.id.nav_feedback -> feedbackFragment()
-
                 else -> null
             }
 
             if (fragment != null) {
                 switchFragment(fragment)
+                updateFab(fragment)
+                updateIconTint(fragment)
                 true
             } else {
                 false
@@ -135,31 +112,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    // REPLACE FRAGMENT (DESTROYS OLD ONE)
     private fun switchFragment(fragment: Fragment) {
-
-        val bottomNav =
-            findViewById<BottomNavigationView>(R.id.bottomNav)
-
-        // restore normal navigation behavior
-        bottomNav.menu.setGroupCheckable(0, true, true)
-
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
 
+        supportFragmentManager.executePendingTransactions()
+
         updateFab(fragment)
+        updateIconTint(fragment)
     }
 
-    // Show loading screen with file
     fun showLoadingFragment(filePath: String) {
-
-        val bottomNav =
-            findViewById<BottomNavigationView>(R.id.bottomNav)
-
-        // clear highlight immediately
-        //bottomNav.menu.setGroupCheckable(0, true, false)
 
         val fragment = LoadingFragment().apply {
             arguments = Bundle().apply {
@@ -169,9 +133,10 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .commit()
+            .commitNow()
 
         updateFab(fragment)
+        updateIconTint(fragment)
     }
 
     override fun onResume() {
@@ -179,9 +144,9 @@ class MainActivity : AppCompatActivity() {
 
         val current = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
-        // DO NOT override loading fragment
-        if (current !is LoadingFragment && current == null) {
-            switchFragment(NewHomeFragment())
+        if (current != null && current !is LoadingFragment) {
+            updateFab(current)
+            updateIconTint(current)
         }
     }
 
@@ -191,15 +156,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleIncomingIntent(intent: Intent) {
-
         val filePath = intent.getStringExtra("file_path")
-
         if (filePath != null) {
             showLoadingFragment(filePath)
         }
     }
 
-    // Feedback logic
     private fun setupFeedbackLogic(bottomNav: BottomNavigationView) {
         val closeGlobalButton = findViewById<MaterialButton>(R.id.close_global_success_button)
 
@@ -228,19 +190,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.global_success_overlay)?.visibility = View.GONE
     }
 
-    fun enterNonNavState() {
-
-        val bottomNav =
-            findViewById<BottomNavigationView>(R.id.bottomNav)
-
-        // Clear ALL selections safely
-        bottomNav.menu.setGroupCheckable(0, true, false)
-
-        bottomNav.menu.findItem(R.id.nav_home).isChecked = false
-        bottomNav.menu.findItem(R.id.nav_bookmark).isChecked = false
-        bottomNav.menu.findItem(R.id.nav_faq).isChecked = false
-        bottomNav.menu.findItem(R.id.nav_feedback).isChecked = false
-    }
 
     fun setNav(itemId: Int) {
         // ADDED CHECK: Para sure na blocked din kapag programmatic ang pag-set ng nav
@@ -250,22 +199,54 @@ class MainActivity : AppCompatActivity() {
             .selectedItemId = itemId
     }
 
-    fun changeFabTint(color: Int) {
-        fabCenter.imageTintList = ColorStateList.valueOf(color)
-    }
 
     fun updateFab(fragment: Fragment) {
 
-        val isCameraFlow = cameraFlowFragments.any {
-            it.isInstance(fragment)
-        }
+        when (fragment) {
 
-        val color = if (isCameraFlow) {
-            Color.parseColor("#F0CD6E") // yellow
-        } else {
-            Color.parseColor("#FFFFFF") // default
-        }
+            is LoadingFragment,
+            is RecyclableresultFragment,
+            is GuideListFragment,
+            is WebViewFragment -> {
 
-        changeFabTint(color)
+                fabCenter.imageTintList =
+                    ColorStateList.valueOf(Color.parseColor("#F0CD6E"))
+            }
+
+            else -> {
+
+                fabCenter.imageTintList =
+                    ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+            }
+        }
+    }
+
+    fun startCamera(intent: Intent) {
+        isCameraFlowActive = true
+        cameraLauncher.launch(intent)
+    }
+
+    fun updateIconTint(fragment: Fragment) {
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        when (fragment) {
+
+            is LoadingFragment,
+            is RecyclableresultFragment,
+            is GuideListFragment,
+            is WebViewFragment -> {
+                bottomNav.menu.findItem(R.id.nav_recycle).isChecked = true
+            }
+            else -> {
+                bottomNav.menu.findItem(R.id.nav_home).isChecked = true
+            }
+        }
+    }
+
+    companion object {
+        var instance: MainActivity? = null
+
+        var latestPredictionResponse: PredictResponse? = null
     }
 }

@@ -15,7 +15,8 @@
 
         <item
             android:title="Recycle"
-            android:id="@+id/nav_recycle" />
+            android:id="@+id/nav_recycle"
+            android:icon="@drawable/recyclemenu"/>
 
         <item
             android:id="@+id/nav_faq"

@@ -59,7 +59,7 @@ class LoadingFragment : Fragment() {
 
         filePath = arguments?.getString("file_path")
 
-        (activity as MainActivity).enterNonNavState()
+        //(activity as MainActivity).enterNonNavState()
 
         val cancelButton = view.findViewById<Button>(R.id.CancelButon)
 
@@ -122,16 +122,13 @@ class LoadingFragment : Fragment() {
                     //Response
                     //Log.d("API_RESPONSE", response.toString())
 
-                    val resultFragment = RecyclableresultFragment().apply {
-                        arguments = Bundle().apply {
-                            putParcelable("predict_response", response)
-                        }
-                    }
+                    MainActivity.latestPredictionResponse = response
+
+                    val resultFragment = RecyclableresultFragment()
 
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, resultFragment)
                         .commit()
-                    (activity as MainActivity).updateFab(resultFragment)
                 }
 
                 if (file.exists()) file.delete()

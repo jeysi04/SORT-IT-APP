@@ -26,7 +26,7 @@ class RecyclableresultFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Safe retrieval of Parcelable
-        predictResponse = arguments?.getParcelable("predict_response")
+        predictResponse = MainActivity.latestPredictionResponse
     }
 
     override fun onCreateView(
@@ -53,14 +53,13 @@ class RecyclableresultFragment : Fragment() {
             return view
         }
 
-        (activity as MainActivity).enterNonNavState()
 
         val stage1Label = response.stage1.label
 
         //TEST
-        //Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
 
-        if (stage1Label == "non_recyclable") {
+        if (stage1Label == "non-recyclable") {
             // Non-recyclable UI
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
@@ -96,8 +95,8 @@ class RecyclableresultFragment : Fragment() {
             val subcategoryLabel = response.stage3?.label ?: "Unknown"
 
             //TEST
-            //Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
-            //Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
 
             catText.text = "It's $categoryLabel!"
             typeText.visibility = View.VISIBLE
@@ -129,7 +128,7 @@ class RecyclableresultFragment : Fragment() {
                         .addToBackStack(null)
                         .commit()
 
-                    (activity as MainActivity).updateFab(fragment)
+                    //(activity as MainActivity).updateFab(fragment)
                 }
             }
         } else {
@@ -261,6 +260,10 @@ class RecyclableresultFragment : Fragment() {
             .setTextColor(resources.getColor(R.color.black, null))
 
         dialog.window?.setBackgroundDrawableResource(R.color.white)
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 }
