@@ -20,7 +20,6 @@ import java.util.concurrent.Executors
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.content.Context
-import android.graphics.Color
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -100,7 +99,6 @@ class CameraActivity : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
-            setResult(RESULT_CANCELED)
             finish()
         }
     }
@@ -118,6 +116,7 @@ class CameraActivity : AppCompatActivity() {
                 }
 
             imageCapture = ImageCapture.Builder()
+                .setTargetResolution(Size(224, 224))
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 .build()
 
@@ -163,11 +162,11 @@ class CameraActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     //Toast.makeText(this@CameraActivity, "Image captured!", Toast.LENGTH_SHORT).show()
 
-                    val resultIntent = Intent().apply {
+                    val intent = Intent(this@CameraActivity, MainActivity::class.java).apply {
                         putExtra("file_path", photoFile.absolutePath)
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     }
-
-                    setResult(RESULT_OK, resultIntent)
+                    startActivity(intent)
                     finish()
                 }
 

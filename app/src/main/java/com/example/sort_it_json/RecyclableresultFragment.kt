@@ -58,7 +58,7 @@ class RecyclableresultFragment : Fragment() {
         val subcategoryLabel = response.stage3?.label ?: "Unknown"
 
         //TEST
-        Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
 
         if (stage1Label == "non_recyclable") {
             // Non-recyclable UI
@@ -88,14 +88,14 @@ class RecyclableresultFragment : Fragment() {
 
         }
 
-        if (stage1Label == "recyclable" && categoryLabel != "Unknown") {
+        if (stage1Label == "recyclable" && categoryLabel != "Unknown" && categoryLabel != "uncertain") {
             // Recyclable UI
             classText.text = "Your waste is recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#007700"))
 
             //TEST
-            Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
-            Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
 
             catText.text = "It's $categoryLabel!"
             typeText.visibility = View.VISIBLE
@@ -106,27 +106,15 @@ class RecyclableresultFragment : Fragment() {
                 when (categoryLabel) {
 
                     "metal" -> {
-                        Toast.makeText(requireContext(), "Metal detected", Toast.LENGTH_SHORT).show()
                         R.drawable.metal_illus
                     }
 
                     "paper" -> {
-                        // long logic here
-                        val test = "paper"
-                        println(test)
-
                         R.drawable.paper_illus
                     }
 
                     "plastic" -> {
-                        // multiple lines allowed
-                        val isPlastic = true
-
-                        if (isPlastic) {
                             R.drawable.plastic_illus
-                        } else {
-                            R.drawable.unknown
-                        }
                     }
 
                     "glass" -> {
@@ -162,7 +150,7 @@ class RecyclableresultFragment : Fragment() {
             }
         }
 
-        if (categoryLabel == "Unknown")
+        if (categoryLabel == "Unknown" || categoryLabel == "uncertain")
         {
             // Non-recyclable UI
             classText.text = "Your waste could not be identified!"

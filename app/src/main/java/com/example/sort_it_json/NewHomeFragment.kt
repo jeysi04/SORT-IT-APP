@@ -129,13 +129,13 @@ class NewHomeFragment : Fragment() {
             // LOAD FIRST ITEM (INDEX 0)
             // ----------------------------
 
-                val item1 = list.getJSONObject(0)
+            val item1 = list.getJSONObject(0)
 
-                // Bind first recent card
-                bindRecent(view, item1, 1)
+            // Bind first recent card
+            bindRecent(view, item1, 1)
 
-                // Make sure card is visible
-                recentCard1.visibility = View.VISIBLE
+            // Make sure card is visible
+            recentCard1.visibility = View.VISIBLE
 
             // ----------------------------
             // LOAD SECOND ITEM (INDEX 1)

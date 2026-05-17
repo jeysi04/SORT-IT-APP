@@ -59,8 +59,6 @@ class LoadingFragment : Fragment() {
 
         filePath = arguments?.getString("file_path")
 
-        //(activity as MainActivity).enterNonNavState()
-
         val cancelButton = view.findViewById<Button>(R.id.CancelButon)
 
         cancelButton.backgroundTintList = ColorStateList.valueOf(
@@ -122,8 +120,6 @@ class LoadingFragment : Fragment() {
                     //Response
                     //Log.d("API_RESPONSE", response.toString())
 
-                    MainActivity.latestPredictionResponse = response
-
                     val resultFragment = RecyclableresultFragment().apply {
                         arguments = Bundle().apply {
                             putParcelable("predict_response", response)
@@ -156,7 +152,7 @@ class LoadingFragment : Fragment() {
 
         timeoutJob = lifecycleScope.launch {
 
-            delay(60000) // 60 seconds
+            delay(30000) // 30 seconds
 
             if (!isAdded) return@launch
 
