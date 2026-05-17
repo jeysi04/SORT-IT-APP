@@ -94,8 +94,8 @@ class RecyclableresultFragment : Fragment() {
             classText.setTextColor(android.graphics.Color.parseColor("#007700"))
 
             //TEST
-            Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
-            Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
 
             catText.text = "It's $categoryLabel!"
             typeText.visibility = View.VISIBLE
