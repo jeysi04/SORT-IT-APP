@@ -152,8 +152,9 @@ class RecyclableresultFragment : Fragment() {
 
         if (categoryLabel == "Unknown" || categoryLabel == "uncertain" || subcategoryLabel == "Unknown")
         {
-            // Non-recyclable UI
+            // Unknown UI
             classText.text = "Your waste could not be identified!"
+            classText.textSize = 27f
             classText.setTextColor(android.graphics.Color.parseColor("#D89B2B"))
             catText.text = "Please make sure the object is centered and clearly visible."
             typeText.visibility = View.GONE
