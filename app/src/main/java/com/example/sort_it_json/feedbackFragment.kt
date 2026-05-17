@@ -20,6 +20,7 @@ import android.widget.EditText
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
@@ -38,6 +39,9 @@ class feedbackFragment : Fragment() {
     // To track if the user has started providing feedback
     private var isFeedbackDirty: Boolean = false
     private var currentRating: Float = 0f
+
+    // Variable to track if we are actively sending data to Firebase
+    private var isSending: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +66,19 @@ class feedbackFragment : Fragment() {
             auth.signInAnonymously()
         }
 
+        // --- SYSTEM BACK BUTTON HANDLER ---
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isFeedbackInProgress()) {
+                    // SHOW EXIT POP-UP INSTEAD OF TOAST
+                    view.findViewById<View>(R.id.exit_overlay)?.visibility = View.VISIBLE
+                } else {
+                    isEnabled = false
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
+
         // Initialize RatingBar
         val ratingBar = view.findViewById<RatingBar>(R.id.rating_bar)
         ratingBar.progressTintList = ColorStateList.valueOf(Color.parseColor("#F0CD6E"))
@@ -69,6 +86,8 @@ class feedbackFragment : Fragment() {
 
         var lastRating = 0f
         ratingBar.setOnTouchListener { v, event ->
+            if (isSending) return@setOnTouchListener true // BLOCKS interaction while sending
+
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     lastRating = ratingBar.rating
@@ -137,9 +156,21 @@ class feedbackFragment : Fragment() {
         val btnCancelSubmit = view.findViewById<MaterialButton>(R.id.btn_cancel_submit)
         val btnConfirmSubmit = view.findViewById<MaterialButton>(R.id.btn_confirm_submit)
 
-        updateDirtyState() // Set initial state (gray/disabled) upon loading
+        // Initialize the Local Success Overlay Views
+        val successOverlay = view.findViewById<View>(R.id.success_overlay)
+        val btnCloseSuccess = view.findViewById<MaterialButton>(R.id.close_success_button)
 
+        // --- NEW: Initialize the Exit Overlay Views ---
+        val exitOverlay = view.findViewById<View>(R.id.exit_overlay)
+        val btnCancelExit = view.findViewById<MaterialButton>(R.id.btn_cancel_exit)
+        val btnConfirmExit = view.findViewById<MaterialButton>(R.id.btn_confirm_exit)
+
+        updateDirtyState()
+
+        // Send Feedback Button Logic
         sendButton.setOnClickListener {
+            if (isSending) return@setOnClickListener // Double-tap protection
+
             val rating = ratingBar.rating
             val comment = feedbackEditText.text.toString().trim()
 
@@ -148,46 +179,64 @@ class feedbackFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            hideKeyboard(feedbackEditText)
-            // SHOW THE POP-UP OVERLAY INSTEAD OF SENDING DIRECTLY
-            submitOverlay.visibility = View.VISIBLE
-        }
-
-        // Action when "Cancel" is clicked in the overlay
-        btnCancelSubmit.setOnClickListener {
-            submitOverlay.visibility = View.GONE
-        }
-
-        // Action when "Submit" is clicked in the overlay
-        btnConfirmSubmit.setOnClickListener {
-            // Check for internet connection first
             if (!isNetworkAvailable()) {
-                submitOverlay.visibility = View.GONE // Hide overlay
                 showCustomToast("Please check your internet connection and try again.")
                 return@setOnClickListener
             }
 
-            // If there is internet, proceed to send
+            hideKeyboard(feedbackEditText)
+            submitOverlay.visibility = View.VISIBLE
+        }
+
+        // Submit Overlay Logic
+        btnCancelSubmit.setOnClickListener {
+            submitOverlay.visibility = View.GONE
+        }
+
+        btnConfirmSubmit.setOnClickListener {
+            if (!isNetworkAvailable()) {
+                submitOverlay.visibility = View.GONE
+                showCustomToast("Connection lost. Please check your internet and try again.")
+                return@setOnClickListener
+            }
+
             submitOverlay.visibility = View.GONE
             val rating = ratingBar.rating
             val comment = feedbackEditText.text.toString().trim()
             sendFeedbackToFirebase(rating, comment, selectedTags.toList(), sendButton, ratingBar, feedbackEditText)
         }
 
-        // Goes to home when back button is clicked
+        // Success Overlay Logic
+        btnCloseSuccess.setOnClickListener {
+            successOverlay.visibility = View.GONE
+            (activity as? MainActivity)?.setNav(R.id.nav_home)
+        }
+
+        // --- NEW: Exit Overlay Logic ---
+        btnCancelExit.setOnClickListener {
+            exitOverlay.visibility = View.GONE // Stay on the page
+        }
+
+        btnConfirmExit.setOnClickListener {
+            // User confirmed they want to leave, so we reset the dirty state
+            isFeedbackDirty = false
+            exitOverlay.visibility = View.GONE
+            (activity as? MainActivity)?.setNav(R.id.nav_home) // Go home
+        }
+
+        // Top Header Back Button Logic
         btnBack.setOnClickListener {
             if (isFeedbackInProgress()) {
-                showCustomToast("Please finish or send your feedback before leaving.")
-                return@setOnClickListener
+                // SHOW EXIT POP-UP INSTEAD OF TOAST
+                exitOverlay.visibility = View.VISIBLE
+            } else {
+                (activity as? MainActivity)?.setNav(R.id.nav_home)
             }
-
-            (activity as? MainActivity)?.setNav(R.id.nav_home)
         }
     }
 
     // --- UTILITY FUNCTIONS ---
 
-    // Function to check Internet Connection
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
@@ -200,17 +249,15 @@ class feedbackFragment : Fragment() {
         }
     }
 
-    // Function to show Custom Toast with a message
     fun showCustomToast(message: String) {
         val textView = TextView(requireContext()).apply {
             text = message
             textSize = 16f
-            typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular) // Changed to Regular
-            setTextColor(Color.parseColor("#000000")) // Changed to Black
+            typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
+            setTextColor(Color.parseColor("#000000"))
 
-            // Gumawa ng Light Background para mabasa ang Black Text
             val backgroundShape = android.graphics.drawable.GradientDrawable().apply {
-                setColor(Color.parseColor("#EFEDED")) // Light Gray/White Background
+                setColor(Color.parseColor("#EFEDED"))
                 cornerRadius = 200f
             }
             background = backgroundShape
@@ -225,7 +272,21 @@ class feedbackFragment : Fragment() {
         toast.show()
     }
 
+    // Freezes or Unfreezes UI components
+    private fun setInputsEnabled(enabled: Boolean) {
+        val root = view ?: return
+        val ratingBar = root.findViewById<RatingBar>(R.id.rating_bar)
+        val feedbackEditText = root.findViewById<EditText>(R.id.feedback_edit_text)
+
+        ratingBar.setIsIndicator(!enabled) // Freezes the rating bar strictly
+        feedbackEditText.isEnabled = enabled // Disables typing
+        tagButtons.forEach { it.isEnabled = enabled } // Disables tag clicking
+    }
+
     private fun updateDirtyState() {
+        // If we are actively sending, DO NOT re-enable the button!
+        if (isSending) return
+
         val root = view ?: return
         val feedbackEditText = root.findViewById<EditText>(R.id.feedback_edit_text)
 
@@ -235,18 +296,23 @@ class feedbackFragment : Fragment() {
         val sendButton = root.findViewById<MaterialButton>(R.id.send_feedback_button)
         if (isFeedbackDirty) {
             sendButton?.isEnabled = true
-            sendButton?.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#89C07E")) // Green
+            sendButton?.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#89C07E"))
             sendButton?.setTextColor(Color.WHITE)
         } else {
             sendButton?.isEnabled = false
-            sendButton?.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#D9D9D9")) // Gray
+            sendButton?.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#D9D9D9"))
             sendButton?.setTextColor(Color.parseColor("#919191"))
         }
     }
 
-    // This function is checked by MainActivity before navigating
     fun isFeedbackInProgress(): Boolean {
-        return isFeedbackDirty
+        // If we are actively sending, treat it as in-progress so they can't swipe back out
+        return isFeedbackDirty || isSending
+    }
+
+    // --- NEW: Public function for MainActivity to trigger the exit overlay ---
+    fun showExitOverlay() {
+        view?.findViewById<View>(R.id.exit_overlay)?.visibility = View.VISIBLE
     }
 
     private fun hideKeyboard(view: View) {
@@ -255,10 +321,12 @@ class feedbackFragment : Fragment() {
     }
 
     private fun setupTagToggle(button: MaterialButton) {
-        button.tag = false // false means not selected
+        button.tag = false
         val tagName = button.text.toString()
 
         button.setOnClickListener {
+            if (isSending) return@setOnClickListener // Blocks clicks while sending
+
             val isSelected = !(button.tag as Boolean)
             button.tag = isSelected
 
@@ -285,8 +353,11 @@ class feedbackFragment : Fragment() {
         ratingBar: RatingBar,
         editText: EditText
     ) {
+        // --- PREPARE FOR SENDING (FREEZE UI) ---
+        isSending = true
+        setInputsEnabled(false)
+
         sendButton.isEnabled = false
-        // KEEP IT GREEN AND WHITE WHILE SENDING
         sendButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#89C07E"))
         sendButton.setTextColor(Color.WHITE)
         sendButton.text = "Sending..."
@@ -302,26 +373,30 @@ class feedbackFragment : Fragment() {
         db.collection("feedbacks")
             .add(feedbackData)
             .addOnSuccessListener {
-                // Feedback is sent, so it's no longer "dirty"
+                // --- SUCCESS (UNFREEZE AND RESET) ---
+                isSending = false
                 isFeedbackDirty = false
 
-                // Show Global Success Overlay
-                (activity as? MainActivity)?.showSuccessOverlay()
+                val successOverlay = view?.findViewById<View>(R.id.success_overlay)
+                successOverlay?.visibility = View.VISIBLE
 
-                // Reset UI
                 ratingBar.rating = 0f
                 currentRating = 0f
                 editText.text.clear()
                 resetTags()
+
                 sendButton.text = "Send Feedback"
-                updateDirtyState() // Updates button back to gray and disabled after success
+                setInputsEnabled(true)
+                updateDirtyState()
             }
             .addOnFailureListener { e ->
+                // --- FAILED (UNFREEZE SO THEY CAN RETRY) ---
+                isSending = false
+                setInputsEnabled(true)
+
                 showCustomToast("Error: ${e.message}")
-                sendButton.isEnabled = true
-                sendButton.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#89C07E"))
-                sendButton.setTextColor(Color.WHITE)
                 sendButton.text = "Send Feedback"
+                updateDirtyState()
             }
     }
 

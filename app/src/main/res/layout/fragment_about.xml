@@ -1,183 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#FFFFFF">
+    android:background="@android:color/white">
 
-    <!-- ScrollView MUST have ONE child -->
-    <LinearLayout
+    <!-- HEADER -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="80dp"
+        android:background="@drawable/yellow_header_page"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/button_green_backward"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- ================= FAQ SECTION ================= -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:fontFamily="@font/montserrat_bold"
+            android:text="About Us"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- HEADER -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="60dp"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="12dp"
-                android:background="@drawable/yellow_header_page">
+    <!-- VIEW PAGER (Swipeable Content) -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/aboutViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
-                <!-- Back Button -->
-                <ImageButton
-                    android:id="@+id/btnBack"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="Back"
-                    android:padding="8dp"
-                    android:src="@drawable/button_green_backward"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+    <!-- DOTS INDICATOR -->
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:dotsColor="#D9D9D9"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="10dp"
+        app:dotsSpacing="4dp"
+        app:dotsWidthFactor="2.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:selectedDotColor="#467750" />
 
-                <!-- Title (Perfectly Centered) -->
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="About Us"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/montserrat_bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- FAQ -->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:padding="15dp"
-                android:orientation="vertical">
-
-                <!-- ================= FAQ ITEM ================= -->
-                <LinearLayout
-                    android:id="@+id/layoutQuestion1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="#F5F5F5"
-                    android:padding="16dp"
-                    android:layout_marginBottom="5dp">
-
-                    <!-- QUESTION ROW -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/tvQuestion1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="How to use the app?"
-                            android:textSize="15sp"
-                            android:textColor="#000000"
-                            android:fontFamily="@font/montserrat_bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrowIcon1"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-
-                        <ImageView
-                            android:id="@+id/arrowIcon1"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/arrow_down"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <!-- ANSWER (HIDDEN BY DEFAULT) -->
-                    <TextView
-                        android:id="@+id/tvAnswer1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:justificationMode="inter_word"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:text="Capture the image of the waste. Let the system analyze the material. Identify the classification. Learn and recycle."
-                        android:textSize="15sp"
-                        android:textColor="#555555"
-                        android:visibility="gone"
-                        android:paddingTop="12dp"/>
-
-                </LinearLayout>
-
-                <!-- Add more FAQ items here by copying the block above -->
-                <!-- ================= FAQ ITEM ================= -->
-                <LinearLayout
-                    android:id="@+id/layoutQuestion2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="#F5F5F5"
-                    android:padding="16dp"
-                    android:layout_marginBottom="5dp">
-
-                    <!-- QUESTION ROW -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/tvQuestion2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="How does the app works?"
-                            android:textSize="15sp"
-                            android:textColor="#000000"
-                            android:fontFamily="@font/montserrat_bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrowIcon2"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-
-                        <ImageView
-                            android:id="@+id/arrowIcon2"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/arrow_down"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <!-- ANSWER (HIDDEN BY DEFAULT) -->
-                    <TextView
-                        android:id="@+id/tvAnswer2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:justificationMode="inter_word"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:text="Capture a photo of any material. The system analyzes the image using AI-based classification. It identifies the type of material (plastic, paper, glass, metal, etc.) and tells you if it’s recyclable. The app also provides recycling tips and disposal guidance."
-                        android:textSize="15sp"
-                        android:textColor="#555555"
-                        android:visibility="gone"
-                        android:paddingTop="12dp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

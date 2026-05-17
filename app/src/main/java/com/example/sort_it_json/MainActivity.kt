@@ -9,14 +9,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,19 +38,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         fabCenter = findViewById(R.id.fab_center)
 
+        // Hide navigation UI during splash
+        bottomNav.visibility = View.GONE
+        fabCenter.visibility = View.GONE
+
         bottomNav.selectedItemId = R.id.nav_home
 
         setupFeedbackLogic(bottomNav)
 
         if (savedInstanceState == null) {
-            switchFragment(NewHomeFragment())
+            // Start with SplashFragment instead of Home
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, SplashFragment())
+                .commit()
         }
 
         handleIncomingIntent(intent)
@@ -60,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         // FAB → Camera Activity
         fabCenter.setOnClickListener {
 
-            // ADDED CHECK: Prevent opening camera if feedback is in progress
             if (!canNavigate()) {
                 return@setOnClickListener
             }
@@ -88,7 +91,6 @@ class MainActivity : AppCompatActivity() {
         // Bottom Navigation
         bottomNav.setOnItemSelectedListener { item ->
 
-            // ADDED CHECK: Harangin agad ang pag-click sa nav bar kung may type sa feedback
             if (!canNavigate()) {
                 return@setOnItemSelectedListener false
             }
@@ -103,13 +105,19 @@ class MainActivity : AppCompatActivity() {
 
             if (fragment != null) {
                 switchFragment(fragment)
-                updateFab(fragment)
-                updateIconTint(fragment)
                 true
             } else {
                 false
             }
         }
+    }
+
+    // Called by SplashFragment when loading finishes
+    fun onSplashFinished() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.visibility = View.VISIBLE
+        fabCenter.visibility = View.VISIBLE
+        switchFragment(NewHomeFragment())
     }
 
     private fun switchFragment(fragment: Fragment) {
@@ -144,7 +152,7 @@ class MainActivity : AppCompatActivity() {
 
         val current = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
-        if (current != null && current !is LoadingFragment) {
+        if (current != null && current !is LoadingFragment && current !is SplashFragment) {
             updateFab(current)
             updateIconTint(current)
         }
@@ -172,11 +180,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // UPDATED: Ngayon ay tinatawag na niya ang showCustomToast galing sa feedbackFragment
+    // --- UPDATED: triggers the exit pop-up instead of a Toast ---
     private fun canNavigate(): Boolean {
         val current = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (current is feedbackFragment && current.isFeedbackInProgress()) {
-            current.showCustomToast("Please finish or send your feedback before leaving.")
+            current.showExitOverlay() // <--- This calls the pop-up we just made
             return false
         }
         return true
@@ -192,7 +200,6 @@ class MainActivity : AppCompatActivity() {
 
 
     fun setNav(itemId: Int) {
-        // ADDED CHECK: Para sure na blocked din kapag programmatic ang pag-set ng nav
         if (!canNavigate()) return
 
         findViewById<BottomNavigationView>(R.id.bottomNav)
@@ -246,7 +253,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var instance: MainActivity? = null
-
         var latestPredictionResponse: PredictResponse? = null
     }
 }

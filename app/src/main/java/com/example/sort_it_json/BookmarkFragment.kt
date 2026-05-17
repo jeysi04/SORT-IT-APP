@@ -107,8 +107,15 @@ class BookmarkFragment : Fragment() {
                             com.google.android.material.R.id.snackbar_text
                         )
 
-                    textView.setTextColor(Color.parseColor("#467750"))
-                    textView.setTypeface(textView.typeface, Typeface.BOLD)
+                    textView.setTextColor(Color.parseColor("#000000")) // Sets text to Black
+                    val customFont = androidx.core.content.res.ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular) // Sets to Montserrat Regular
+                    textView.typeface = customFont
+
+                    // Style the UNDO button to be BOLD and Montserrat
+                    val actionTextView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_action)
+                    val boldFont = androidx.core.content.res.ResourcesCompat.getFont(requireContext(), R.font.montserrat_bold)
+                    actionTextView.typeface = boldFont
+                    actionTextView.setAllCaps(false)
 
                     snackbar.setAction("UNDO") {
 

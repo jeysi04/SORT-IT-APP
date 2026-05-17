@@ -5,14 +5,10 @@
         <item name="colorPrimary">@color/darkgreen</item>
     </style>
 
+    <!-- Main Theme used by the app -->
     <style name="Theme.SortItJSON" parent="Base.Theme.SortItJSON" />
 
-    <!-- SPLASHSCREEN -->
-    <style name="Theme.App.SortItJSON" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
-        <item name="postSplashScreenTheme">@style/Base.Theme.SortItJSON</item>
-    </style>
+    <!-- REMOVE THE "Theme.App.SortItJSON" BLOCK ENTIRELY -->
 
     <!-- What happens when a button is click: Bottom Nav-->
     <style name="CustomActiveIndicator">
@@ -25,6 +21,5 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-
 
 </resources>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/titleDevelopers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="DEVELOPERS"
+        android:textColor="#467750"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtDevDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:lineSpacingExtra="2dp"
+        android:text="@string/about_developers"
+        android:textColor="#434343"
+        android:textSize="15sp"
+        android:justificationMode="inter_word"
+        app:layout_constraintTop_toBottomOf="@id/titleDevelopers" />
+
+    <!-- Member 1 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMember1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FBFBFB"
+        app:layout_constraintTop_toBottomOf="@id/txtDevDesc">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/member_az"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RecycleShape" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="A Z Rain L. Espinas"
+                    android:textColor="#434343"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Project Manager"
+                    android:textColor="#919191"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Member 2 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMember2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FBFBFB"
+        app:layout_constraintTop_toBottomOf="@id/cardMember1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/member_ginno"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RecycleShape" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Ginno L. Buenaobra"
+                    android:textColor="#434343"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Quality Assurance Tester"
+                    android:textColor="#919191"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Member 3 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMember3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FBFBFB"
+        app:layout_constraintTop_toBottomOf="@id/cardMember2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/member_janna"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RecycleShape" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Janna Carla R. Morcozo"
+                    android:textColor="#434343"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Lead Developer"
+                    android:textColor="#919191"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Member 4 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMember4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FBFBFB"
+        app:layout_constraintTop_toBottomOf="@id/cardMember3">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/member_jaycee"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RecycleShape" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Jaycee D. Cadag"
+                    android:textColor="#434343"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="UI/UX Designer"
+                    android:textColor="#919191"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Member 5 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMember5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FBFBFB"
+        app:layout_constraintTop_toBottomOf="@id/cardMember4">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/member_melrick"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RecycleShape" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="John Melrick M. Loviña"
+                    android:textColor="#434343"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="UI/UX Designer"
+                    android:textColor="#919191"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Contact Section -->
+    <TextView
+        android:id="@+id/titleContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="CONTACT US:"
+        android:textColor="#467750"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardMember5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/titleContact">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/gmaillogo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="sortit2k25@gmail.com"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="14sp"
+            android:autoLink="email" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
