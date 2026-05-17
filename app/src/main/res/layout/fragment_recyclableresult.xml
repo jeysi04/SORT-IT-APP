@@ -64,6 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_extrabold"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:gravity="center"
                 android:text="@string/recyclable_result"
                 android:textColor="#467750"
