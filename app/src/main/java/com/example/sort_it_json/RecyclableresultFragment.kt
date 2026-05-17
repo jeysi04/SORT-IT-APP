@@ -88,7 +88,7 @@ class RecyclableresultFragment : Fragment() {
 
         }
 
-        if (stage1Label == "recyclable" && categoryLabel != "Unknown" && categoryLabel != "uncertain") {
+        if (stage1Label == "recyclable" && categoryLabel != "Unknown" && categoryLabel != "uncertain" && subcategoryLabel != "Unknown") {
             // Recyclable UI
             classText.text = "Your waste is recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#007700"))
@@ -150,7 +150,7 @@ class RecyclableresultFragment : Fragment() {
             }
         }
 
-        if (categoryLabel == "Unknown" || categoryLabel == "uncertain")
+        if (categoryLabel == "Unknown" || categoryLabel == "uncertain" || subcategoryLabel == "Unknown")
         {
             // Non-recyclable UI
             classText.text = "Your waste could not be identified!"
