@@ -39,8 +39,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         fabCenter = findViewById(R.id.fab_center)
+        bottomNav = findViewById(R.id.bottomNav)
 
-        // Hide navigation UI during splash
+        // --- THE UNIVERSAL FIX (UPGRADED) ---
+        supportFragmentManager.registerFragmentLifecycleCallbacks(
+            object : androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks() {
+                override fun onFragmentStarted(fm: androidx.fragment.app.FragmentManager, f: Fragment) {
+                    super.onFragmentStarted(fm, f)
+
+                    // ONLY hide on Splash Screen. Loading Screen will now show the Nav Bar!
+                    if (f is SplashFragment) {
+                        bottomNav.visibility = View.GONE
+                        fabCenter.visibility = View.GONE
+                    } else {
+                        bottomNav.visibility = View.VISIBLE
+                        fabCenter.visibility = View.VISIBLE
+
+                        updateFab(f)
+                        updateIconTint(f)
+                    }
+                }
+            }, true
+        )
+
+        // Hide navigation UI initially during splash
         bottomNav.visibility = View.GONE
         fabCenter.visibility = View.GONE
 
@@ -96,9 +118,6 @@ class MainActivity : AppCompatActivity() {
 
     // Called by SplashFragment when loading finishes
     fun onSplashFinished() {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.visibility = View.VISIBLE
-        fabCenter.visibility = View.VISIBLE
         switchFragment(NewHomeFragment())
     }
 
@@ -108,13 +127,9 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         supportFragmentManager.executePendingTransactions()
-
-        updateFab(fragment)
-        updateIconTint(fragment)
     }
 
     fun showLoadingFragment(filePath: String) {
-
         val fragment = LoadingFragment().apply {
             arguments = Bundle().apply {
                 putString("file_path", filePath)
@@ -124,23 +139,11 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commitNow()
-
-        updateFab(fragment)
-        updateIconTint(fragment)
     }
 
     override fun onResume() {
         super.onResume()
-
-        bottomNav.visibility = View.VISIBLE
-        fabCenter.visibility = View.VISIBLE
-
-        val current = supportFragmentManager.findFragmentById(R.id.fragment_container)
-
-        if (current != null && current !is LoadingFragment && current !is SplashFragment) {
-            updateFab(current)
-            updateIconTint(current)
-        }
+        // We no longer need manual logic here! The Universal Listener handles it.
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -165,11 +168,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // --- UPDATED: triggers the exit pop-up instead of a Toast ---
     private fun canNavigate(): Boolean {
         val current = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (current is feedbackFragment && current.isFeedbackInProgress()) {
-            current.showExitOverlay() // <--- This calls the pop-up we just made
+            current.showExitOverlay()
             return false
         }
         return true
@@ -193,20 +195,15 @@ class MainActivity : AppCompatActivity() {
 
 
     fun updateFab(fragment: Fragment) {
-
         when (fragment) {
-
             is LoadingFragment,
             is RecyclableresultFragment,
             is GuideListFragment,
             is WebViewFragment -> {
-
                 fabCenter.imageTintList =
                     ColorStateList.valueOf(Color.parseColor("#F0CD6E"))
             }
-
             else -> {
-
                 fabCenter.imageTintList =
                     ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
             }
@@ -219,17 +216,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateIconTint(fragment: Fragment) {
-
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
         when (fragment) {
-
+            // 1. Recycle / Camera flow
             is LoadingFragment,
             is RecyclableresultFragment,
             is GuideListFragment,
             is WebViewFragment -> {
                 bottomNav.menu.findItem(R.id.nav_recycle).isChecked = true
             }
+            // 2. Bookmark Tab
+            is BookmarkFragment -> {
+                bottomNav.menu.findItem(R.id.nav_bookmark).isChecked = true
+            }
+            // 3. FAQ Tab
+            is FaqFragment -> {
+                bottomNav.menu.findItem(R.id.nav_faq).isChecked = true
+            }
+            // 4. Feedback Tab
+            is feedbackFragment -> {
+                bottomNav.menu.findItem(R.id.nav_feedback).isChecked = true
+            }
+            // 5. Default (Home)
             else -> {
                 bottomNav.menu.findItem(R.id.nav_home).isChecked = true
             }

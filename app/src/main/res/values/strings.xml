@@ -45,7 +45,7 @@
     <string name="tag_reliability">Reliability of results</string>
     <string name="tag_response">Response time</string>
     <string name="tag_ease">Ease of use</string>
-    <string name="feedback_success_msg">Thank you for sharing your \nthoughts. We appreciate \nyour feedback !</string>
+    <string name="feedback_success_msg">Thank you for sharing your thoughts. We appreciate your feedback !</string>
     <string name="action_close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
