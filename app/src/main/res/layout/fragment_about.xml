@@ -9,7 +9,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:minHeight="60dp"
         android:background="@drawable/yellow_header_page"
         app:layout_constraintTop_toTopOf="parent">
 

@@ -41,6 +41,12 @@ class MainActivity : AppCompatActivity() {
         fabCenter = findViewById(R.id.fab_center)
         bottomNav = findViewById(R.id.bottomNav)
 
+        val goHome = intent.getBooleanExtra("go_home", false)
+
+        if (goHome) {
+            bottomNav.selectedItemId = R.id.nav_home
+        }
+
         // --- THE UNIVERSAL FIX (UPGRADED) ---
         supportFragmentManager.registerFragmentLifecycleCallbacks(
             object : androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks() {
@@ -187,10 +193,18 @@ class MainActivity : AppCompatActivity() {
 
 
     fun setNav(itemId: Int) {
+        val nav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        if (itemId == R.id.nav_home) {
+            supportFragmentManager.popBackStack(
+                null,
+                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
+        }
+
         if (!canNavigate()) return
 
-        findViewById<BottomNavigationView>(R.id.bottomNav)
-            .selectedItemId = itemId
+        nav.selectedItemId = itemId
     }
 
 
@@ -249,4 +263,6 @@ class MainActivity : AppCompatActivity() {
         var instance: MainActivity? = null
         var latestPredictionResponse: PredictResponse? = null
     }
+
+
 }

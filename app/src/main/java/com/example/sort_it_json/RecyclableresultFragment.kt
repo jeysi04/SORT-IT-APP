@@ -144,8 +144,6 @@ class RecyclableresultFragment : Fragment() {
                         .replace(R.id.fragment_container, fragment)
                         .addToBackStack(null)
                         .commit()
-
-                    //(activity as MainActivity).updateFab(fragment)
                 }
             }
         }
@@ -180,8 +178,7 @@ class RecyclableresultFragment : Fragment() {
         }
 
         btnNo.setOnClickListener {
-            showFeedbackDialog()
-            parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            (activity as? MainActivity)?.setNav(R.id.nav_home)
         }
 
         btnTopLeft.setOnClickListener {
