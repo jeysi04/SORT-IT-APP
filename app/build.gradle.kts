@@ -45,7 +45,7 @@ android {
     applicationVariants.all {
         outputs.all {
             val outputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-            val appName = "Sort-It"
+            val appName = "SORT-IT"
             outputImpl.outputFileName = "${appName}.apk"
         }
     }

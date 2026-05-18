@@ -94,13 +94,22 @@ class WebViewFragment : Fragment() {
             }
         }
 
+        // ==========================================
+        // FIXED: SAFELY GO HOME WITHOUT CLOSING APP
+        // ==========================================
         @android.webkit.JavascriptInterface
         fun goHome() {
             requireActivity().runOnUiThread {
-                (requireActivity() as MainActivity).setNav(R.id.nav_home)
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, NewHomeFragment())
-                    .commit()
+                // 1. Update the bottom navigation visual state safely
+                val bottomNav = requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNav)
+                bottomNav?.selectedItemId = R.id.nav_home
+
+                // 2. Safely replace the fragment to NewHomeFragment
+                if (isAdded) {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, NewHomeFragment())
+                        .commit()
+                }
             }
         }
 
@@ -155,5 +164,4 @@ class WebViewFragment : Fragment() {
             }
         }
     }
-
 }

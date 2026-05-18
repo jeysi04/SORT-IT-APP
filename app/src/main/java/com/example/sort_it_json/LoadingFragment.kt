@@ -2,6 +2,7 @@ package com.example.sort_it_json
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +41,8 @@ class LoadingFragment : Fragment() {
     private lateinit var progressText: TextView
     private var progressJob: Job? = null
 
+    private var isPaused = false
+    private var pendingResponse: PredictResponse? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +57,6 @@ class LoadingFragment : Fragment() {
         progressBar = view.findViewById(R.id.progressBarCircular)
         progressText = view.findViewById(R.id.progressText)
 
-        // Start fake loading animation
         startFakeProgress()
 
         filePath = arguments?.getString("file_path")
@@ -62,26 +64,38 @@ class LoadingFragment : Fragment() {
         val cancelButton = view.findViewById<Button>(R.id.CancelButon)
 
         cancelButton.backgroundTintList = ColorStateList.valueOf(
-            ContextCompat.getColor(requireContext(), R.color.darkgreen)
+            Color.parseColor("#467750")
         )
 
         cancelButton.setOnClickListener {
+            pauseProcessing()
             showExitDialog()
         }
 
-        // START ANALYSIS AUTOMATICALLY
         filePath?.let { file ->
             analyzePhoto(File(file))
             startTimeoutWarning()
         }
     }
 
+    fun pauseProcessing() {
+        isPaused = true
+        timeoutJob?.cancel()
+    }
+
+    fun resumeProcessing() {
+        isPaused = false
+        startTimeoutWarning()
+
+        pendingResponse?.let {
+            navigateToResult(it)
+            pendingResponse = null
+        }
+    }
+
     private fun analyzePhoto(file: File) {
-
         analysisJob = lifecycleScope.launch(Dispatchers.IO) {
-
             try {
-                // Decode image
                 val bitmap = BitmapFactory.decodeFile(file.absolutePath)
                 val resized = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
 
@@ -99,42 +113,25 @@ class LoadingFragment : Fragment() {
                     requestFile
                 )
 
-                // Optional loading delay (UX)
                 delay(1500)
 
-                // API CALL
                 val response = ApiClient.service.predict(body)
 
                 bitmap.recycle()
                 resized.recycle()
                 stream.close()
 
-                Log.d("LoadingFragment", "Response: $response")
-
                 withContext(Dispatchers.Main) {
-
-                    progressJob?.cancel()
-                    progressBar.progress = 100
-                    progressText.text = "100%"
-
-                    //Response
-                    //Log.d("API_RESPONSE", response.toString())
-
-                    val resultFragment = RecyclableresultFragment().apply {
-                        arguments = Bundle().apply {
-                            putParcelable("predict_response", response)
-                        }
+                    if (isPaused) {
+                        pendingResponse = response
+                    } else {
+                        navigateToResult(response)
                     }
-
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, resultFragment)
-                        .commit()
                 }
 
                 if (file.exists()) file.delete()
 
             } catch (e: Exception) {
-
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
                         requireContext(),
@@ -142,41 +139,58 @@ class LoadingFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 }
+            }
+        }
+    }
 
-                Log.e("LoadingFragment", "Error", e)
+    private fun navigateToResult(response: PredictResponse) {
+        progressJob?.cancel()
+        progressBar.progress = 100
+        progressText.text = "100%"
+
+        val resultFragment = RecyclableresultFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable("predict_response", response)
+            }
+        }
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, resultFragment)
+            .commit()
+    }
+
+    private fun startFakeProgress() {
+        progressJob = lifecycleScope.launch {
+            var progress = 0
+            while (progress < 95) {
+                delay(300)
+                if (!isPaused) {
+                    progress += (1..3).random()
+                    if (progress > 95) progress = 95
+                    progressBar.progress = progress
+                    progressText.text = "$progress%"
+                }
             }
         }
     }
 
     private fun startTimeoutWarning() {
-
         timeoutJob = lifecycleScope.launch {
-
-            delay(30000) // 30 seconds
-
+            delay(30000)
             if (!isAdded) return@launch
 
+            pauseProcessing()
             showTimeoutDialog()
         }
     }
 
     private fun showTimeoutDialog() {
         val title = SpannableString("This is taking longer than expected...").apply {
-            setSpan(
-                ForegroundColorSpan(resources.getColor(R.color.darkgreen, null)),
-                0,
-                length,
-                0
-            )
+            setSpan(ForegroundColorSpan(Color.parseColor("#467750")), 0, length, 0)
         }
 
         val message = SpannableString("Would you like to take another picture?").apply {
-            setSpan(
-                ForegroundColorSpan(resources.getColor(R.color.black, null)),
-                0,
-                length,
-                0
-            )
+            setSpan(ForegroundColorSpan(Color.parseColor("#000000")), 0, length, 0)
         }
 
         val dialog = AlertDialog.Builder(requireContext())
@@ -187,82 +201,54 @@ class LoadingFragment : Fragment() {
                 parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 startActivity(Intent(requireContext(), CameraActivity::class.java))
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton("No") { _, _ ->
+                resumeProcessing()
+            }
+            .setOnCancelListener {
+                resumeProcessing()
+            }
             .create()
 
         dialog.show()
 
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(resources.getColor(R.color.black, null))
-
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-            .setTextColor(resources.getColor(R.color.black, null))
-
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#000000"))
         dialog.window?.setBackgroundDrawableResource(R.color.white)
     }
 
     private fun showExitDialog() {
-
-        val title = SpannableString("Cancel Process").apply {
-            setSpan(
-                ForegroundColorSpan(resources.getColor(R.color.darkgreen, null)),
-                0,
-                length,
-                0
-            )
+        // DARK GREEN TITLE
+        val title = SpannableString("Cancel Process?").apply {
+            setSpan(ForegroundColorSpan(Color.parseColor("#467750")), 0, length, 0)
         }
 
-        val message = SpannableString(
-            "Are you sure you want to cancel the process? Your progress will be lost."
-        ).apply {
-            setSpan(
-                ForegroundColorSpan(resources.getColor(R.color.black, null)),
-                0,
-                length,
-                0
-            )
+        // EXACT REQUESTED MESSAGE
+        val message = SpannableString("Are you sure you want to cancel the process? Your progress will be lost.").apply {
+            setSpan(ForegroundColorSpan(Color.parseColor("#000000")), 0, length, 0)
         }
 
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("Yes") { _, _ ->
-
                 progressJob?.cancel()
                 analysisJob?.cancel()
-
                 parentFragmentManager.popBackStack()
-                startActivity(Intent(requireContext(), CameraActivity::class.java))
+                (activity as? MainActivity)?.setNav(R.id.nav_home)
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton("No") { _, _ ->
+                resumeProcessing()
+            }
+            .setOnCancelListener {
+                resumeProcessing()
+            }
             .create()
 
         dialog.show()
 
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(resources.getColor(R.color.black, null))
-
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-            .setTextColor(resources.getColor(R.color.black, null))
-
+        // BLACK BUTTONS
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#000000"))
         dialog.window?.setBackgroundDrawableResource(R.color.white)
-    }
-
-    private fun startFakeProgress() {
-        progressJob = lifecycleScope.launch {
-
-            var progress = 0
-
-            while (progress < 95) { // stop before 100 (wait for real result)
-                delay(300)
-
-                progress += (1..3).random()
-
-                if (progress > 95) progress = 95
-
-                progressBar.progress = progress
-                progressText.text = "$progress%"
-            }
-        }
     }
 }

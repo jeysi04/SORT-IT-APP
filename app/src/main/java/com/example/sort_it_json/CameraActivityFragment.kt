@@ -8,6 +8,7 @@ import android.util.Size
 import android.view.ScaleGestureDetector
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback // <-- NEW IMPORT ADDED HERE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -40,7 +41,6 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.fragment_camera)
 
         btnBack = findViewById(R.id.btnBack)
@@ -60,6 +60,20 @@ class CameraActivity : AppCompatActivity() {
             )
             insets
         }
+
+        // =========================
+        // MODERN BACK BUTTON HANDLING
+        // =========================
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@CameraActivity, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    putExtra("go_home", true)
+                }
+                startActivity(intent)
+                finish()
+            }
+        })
 
         // Permission check
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -99,12 +113,8 @@ class CameraActivity : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                putExtra("go_home", true)
-            }
-            startActivity(intent)
-            finish()
+            // We can just trigger the official back press dispatcher here too!
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
@@ -145,7 +155,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
-
         if (!isInternetAvailable()) {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
             return
@@ -165,8 +174,6 @@ class CameraActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    //Toast.makeText(this@CameraActivity, "Image captured!", Toast.LENGTH_SHORT).show()
-
                     val intent = Intent(this@CameraActivity, MainActivity::class.java).apply {
                         putExtra("file_path", photoFile.absolutePath)
                         addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -204,7 +211,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun isInternetAvailable(): Boolean {
-
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
