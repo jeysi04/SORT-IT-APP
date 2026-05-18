@@ -68,13 +68,16 @@ class LoadingFragment : Fragment() {
         )
 
         cancelButton.setOnClickListener {
-            pauseProcessing()
-            showExitDialog()
+            val intent = Intent(requireContext(), CameraActivity::class.java)
+            startActivity(intent)
         }
 
         filePath?.let { file ->
-            analyzePhoto(File(file))
-            startTimeoutWarning()
+            lifecycleScope.launch {
+                delay(300) // allow loading UI to render first
+                analyzePhoto(File(file))
+                startTimeoutWarning()
+            }
         }
     }
 

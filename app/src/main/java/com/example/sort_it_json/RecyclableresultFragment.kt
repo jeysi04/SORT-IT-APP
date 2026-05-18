@@ -26,6 +26,12 @@ class RecyclableresultFragment : Fragment() {
         super.onCreate(savedInstanceState)
         // Safe retrieval of Parcelable
         predictResponse = arguments?.getParcelable("predict_response")
+
+        Toast.makeText(
+            requireContext(),
+            "DEBUG: response = $predictResponse",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onCreateView(
@@ -48,7 +54,30 @@ class RecyclableresultFragment : Fragment() {
 
         val response = predictResponse
         if (response == null) {
-            classText.text = "Error: No prediction result available"
+            classText.text = "Your waste could not be identified!"
+            classText.textSize = 27f
+            classText.setTextColor(android.graphics.Color.parseColor("#D89B2B"))
+            catText.text = "Please make sure the object is centered and clearly visible."
+            typeText.visibility = View.GONE
+            illustbg.setImageResource(R.drawable.unknown_illus)
+            illustclass.setImageResource(R.drawable.unknown)
+            questbot.text = "Would you like to take a new picture?"
+
+            val dpHeight = 537
+            val scale = resources.displayMetrics.density
+            layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
+
+            btnYes.setOnClickListener {
+
+                parentFragmentManager.popBackStack(
+                    null,
+                    androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+                )
+
+                val intent = Intent(requireContext(), CameraActivity::class.java)
+                startActivity(intent)
+
+            }
             return view
         }
 
@@ -88,7 +117,7 @@ class RecyclableresultFragment : Fragment() {
 
         }
 
-        if (stage1Label == "recyclable" && categoryLabel != "Unknown" && categoryLabel != "uncertain" && subcategoryLabel != "Unknown" && subcategoryLabel != "uncertain") {
+        if (stage1Label == "recyclable" && categoryLabel != "Unknown" && categoryLabel != "uncertain" && subcategoryLabel != "Unknown" && subcategoryLabel != "uncertain" && categoryLabel != "null" && subcategoryLabel != "null") {
             // Recyclable UI
             classText.text = "Your waste is recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#007700"))
@@ -146,9 +175,7 @@ class RecyclableresultFragment : Fragment() {
                         .commit()
                 }
             }
-        }
-
-        if (categoryLabel == "Unknown" || categoryLabel == "uncertain" || subcategoryLabel == "Unknown")
+        } else if (categoryLabel == "Unknown" || categoryLabel == "uncertain" || subcategoryLabel == "Unknown" || categoryLabel == "null" || subcategoryLabel == "null")
         {
             // Unknown UI
             classText.text = "Your waste could not be identified!"

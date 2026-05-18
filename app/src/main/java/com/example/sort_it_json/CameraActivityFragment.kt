@@ -67,11 +67,9 @@ class CameraActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val intent = Intent(this@CameraActivity, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    putExtra("go_home", true)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
                 startActivity(intent)
-                finish()
             }
         })
 
@@ -229,4 +227,6 @@ class CameraActivity : AppCompatActivity() {
         super.onDestroy()
         cameraExecutor.shutdown()
     }
+
+
 }

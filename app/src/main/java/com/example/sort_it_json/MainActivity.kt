@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity() {
     // ==========================================
 
     private fun showExitResultDialog(targetNavId: Int) {
-        val title = SpannableString("Exit Result Page").apply {
+        val title = SpannableString("Exit Page").apply {
             setSpan(ForegroundColorSpan(Color.parseColor("#467750")), 0, length, 0)
         }
 
@@ -252,14 +252,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showLoadingFragment(filePath: String) {
+
+        supportFragmentManager.popBackStack(
+            null,
+            androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
+
         val fragment = LoadingFragment().apply {
             arguments = Bundle().apply {
                 putString("file_path", filePath)
             }
         }
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .commitNow()
+            .commit()
     }
 
     override fun onResume() {
@@ -280,6 +287,9 @@ class MainActivity : AppCompatActivity() {
         } else if (goHome) {
             setNav(R.id.nav_home)
         }
+
+        intent.removeExtra("file_path")
+        intent.removeExtra("go_home")
     }
 
     private fun setupFeedbackLogic(bottomNav: BottomNavigationView) {
