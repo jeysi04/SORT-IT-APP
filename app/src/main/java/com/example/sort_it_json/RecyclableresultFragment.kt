@@ -15,8 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
-
-
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class RecyclableresultFragment : Fragment() {
 
@@ -68,15 +67,10 @@ class RecyclableresultFragment : Fragment() {
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
-
-                parentFragmentManager.popBackStack(
-                    null,
-                    androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-                )
-
+                // FIX: Clear the result page and set background to Home BEFORE opening camera
+                clearAndGoHome()
                 val intent = Intent(requireContext(), CameraActivity::class.java)
                 startActivity(intent)
-
             }
             return view
         }
@@ -89,7 +83,7 @@ class RecyclableresultFragment : Fragment() {
         //TEST
         Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
 
-        if (stage1Label == "non_recyclable") {
+        if (stage1Label == "non-recyclable") {
             // Non-recyclable UI
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
@@ -104,15 +98,10 @@ class RecyclableresultFragment : Fragment() {
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
-
-                parentFragmentManager.popBackStack(
-                    null,
-                    androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-                )
-
+                // FIX: Clear the result page and set background to Home BEFORE opening camera
+                clearAndGoHome()
                 val intent = Intent(requireContext(), CameraActivity::class.java)
                 startActivity(intent)
-
             }
 
         }
@@ -133,30 +122,12 @@ class RecyclableresultFragment : Fragment() {
             // Illustrations
             illustclass.setImageResource(
                 when (categoryLabel) {
-
-                    "metal" -> {
-                        R.drawable.metal_illus
-                    }
-
-                    "paper" -> {
-                        R.drawable.paper_illus
-                    }
-
-                    "plastic" -> {
-                            R.drawable.plastic_illus
-                    }
-
-                    "glass" -> {
-                        R.drawable.glass_illus
-                    }
-
-                    "residual" -> {
-                        R.drawable.residual_illus
-                    }
-
-                    else -> {
-                        R.drawable.unknown
-                    }
+                    "metal" -> { R.drawable.metal_illus }
+                    "paper" -> { R.drawable.paper_illus }
+                    "plastic" -> { R.drawable.plastic_illus }
+                    "glass" -> { R.drawable.glass_illus }
+                    "residual" -> { R.drawable.residual_illus }
+                    else -> { R.drawable.unknown }
                 }
             )
 
@@ -164,7 +135,6 @@ class RecyclableresultFragment : Fragment() {
             questbot.text = "Would you like to see recycling guides?"
 
             btnYes.setOnClickListener {
-
                 val fragment = GuideListFragment().apply {
                     arguments = Bundle().apply { putString("subcategory", subcategoryLabel) }
                 }
@@ -192,15 +162,10 @@ class RecyclableresultFragment : Fragment() {
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
-
-                parentFragmentManager.popBackStack(
-                    null,
-                    androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-                )
-
+                // FIX: Clear the result page and set background to Home BEFORE opening camera
+                clearAndGoHome()
                 val intent = Intent(requireContext(), CameraActivity::class.java)
                 startActivity(intent)
-
             }
         }
 
@@ -209,10 +174,24 @@ class RecyclableresultFragment : Fragment() {
         }
 
         btnTopLeft.setOnClickListener {
-            showExitDialog()
+            (activity as? MainActivity)?.setNav(R.id.nav_home)
         }
 
         return view
+    }
+
+    // ==========================================
+    // CLEAN NAVIGATION HELPER
+    // ==========================================
+    private fun clearAndGoHome() {
+        // Force the fragment to switch to Home immediately, bypassing the MainActivity interceptor
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, NewHomeFragment())
+            .commit()
+
+        // Visually update the Bottom Navigation icon to Home
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.menu.findItem(R.id.nav_home)?.isChecked = true
     }
 
     private fun mapSubcategoryToText(subcategory: String): String {
@@ -279,52 +258,6 @@ class RecyclableresultFragment : Fragment() {
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.darkgreen, null))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.black, null))
-        dialog.window?.setBackgroundDrawableResource(R.color.white)
-    }
-
-    private fun showExitDialog() {
-
-        val title = SpannableString("Exit Result Page").apply {
-            setSpan(
-                ForegroundColorSpan(resources.getColor(R.color.darkgreen, null)),
-                0,
-                length,
-                0
-            )
-        }
-
-        val message = SpannableString(
-            "Are you sure you want to exit? Your progress will be lost."
-        ).apply {
-            setSpan(
-                ForegroundColorSpan(resources.getColor(R.color.black, null)),
-                0,
-                length,
-                0
-            )
-        }
-
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton("Yes") { _, _ ->
-                parentFragmentManager.popBackStack(
-                    null,
-                    androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-                )
-                startActivity(Intent(requireContext(), CameraActivity::class.java))
-            }
-            .setNegativeButton("No", null)
-            .create()
-
-        dialog.show()
-
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(resources.getColor(R.color.black, null))
-
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-            .setTextColor(resources.getColor(R.color.black, null))
-
         dialog.window?.setBackgroundDrawableResource(R.color.white)
     }
 

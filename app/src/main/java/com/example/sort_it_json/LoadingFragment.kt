@@ -23,7 +23,9 @@ import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Job
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -54,6 +56,15 @@ class LoadingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // --- FIX: SYSTEM BACK BUTTON HANDLER ---
+        // Ensures swiping back on the phone triggers the pop-up properly
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                pauseProcessing()
+                showExitDialog()
+            }
+        })
+
         progressBar = view.findViewById(R.id.progressBarCircular)
         progressText = view.findViewById(R.id.progressText)
 
@@ -68,8 +79,8 @@ class LoadingFragment : Fragment() {
         )
 
         cancelButton.setOnClickListener {
-            val intent = Intent(requireContext(), CameraActivity::class.java)
-            startActivity(intent)
+            pauseProcessing()
+            showExitDialog()
         }
 
         filePath?.let { file ->
@@ -220,12 +231,10 @@ class LoadingFragment : Fragment() {
     }
 
     private fun showExitDialog() {
-        // DARK GREEN TITLE
         val title = SpannableString("Cancel Process?").apply {
             setSpan(ForegroundColorSpan(Color.parseColor("#467750")), 0, length, 0)
         }
 
-        // EXACT REQUESTED MESSAGE
         val message = SpannableString("Are you sure you want to cancel the process? Your progress will be lost.").apply {
             setSpan(ForegroundColorSpan(Color.parseColor("#000000")), 0, length, 0)
         }
@@ -236,8 +245,14 @@ class LoadingFragment : Fragment() {
             .setPositiveButton("Yes") { _, _ ->
                 progressJob?.cancel()
                 analysisJob?.cancel()
-                parentFragmentManager.popBackStack()
-                (activity as? MainActivity)?.setNav(R.id.nav_home)
+
+                // FIX: Swap directly to NewHomeFragment to bypass the MainActivity loop
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, NewHomeFragment())
+                    .commit()
+
+                val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+                bottomNav.menu.findItem(R.id.nav_home)?.isChecked = true
             }
             .setNegativeButton("No") { _, _ ->
                 resumeProcessing()
@@ -249,7 +264,6 @@ class LoadingFragment : Fragment() {
 
         dialog.show()
 
-        // BLACK BUTTONS
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#000000"))
         dialog.window?.setBackgroundDrawableResource(R.color.white)

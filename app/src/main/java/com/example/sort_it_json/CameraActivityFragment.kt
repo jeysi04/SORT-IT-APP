@@ -8,7 +8,7 @@ import android.util.Size
 import android.view.ScaleGestureDetector
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback // <-- NEW IMPORT ADDED HERE
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -66,10 +66,9 @@ class CameraActivity : AppCompatActivity() {
         // =========================
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val intent = Intent(this@CameraActivity, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                }
-                startActivity(intent)
+                // FIXED: Just finish the activity to return to the previous screen (Home)
+                // instead of restarting the entire app task.
+                finish()
             }
         })
 
