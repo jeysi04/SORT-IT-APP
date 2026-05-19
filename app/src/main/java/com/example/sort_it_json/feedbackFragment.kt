@@ -73,7 +73,7 @@ class feedbackFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (isFeedbackInProgress()) {
-                    showExitDialog() // Replaced XML overlay with Dialog
+                    showExitDialog(null) // null defaults to home
                 } else {
                     isEnabled = false
                     requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -191,7 +191,7 @@ class feedbackFragment : Fragment() {
         // Top Header Back Button Logic
         btnBack.setOnClickListener {
             if (isFeedbackInProgress()) {
-                showExitDialog() // Replaced XML overlay with Dialog
+                showExitDialog(null) // null defaults to home
             } else {
                 (activity as? MainActivity)?.setNav(R.id.nav_home)
             }
@@ -202,8 +202,8 @@ class feedbackFragment : Fragment() {
     // PROGRAMMATIC POP-UP DIALOGS
     // ==========================================
 
-    private fun showExitDialog() {
-        // CHANGED COLOR TO RED
+    // FIX: Added targetNavId parameter
+    private fun showExitDialog(targetNavId: Int?) {
         val title = SpannableString("Discard Feedback?").apply {
             setSpan(ForegroundColorSpan(Color.parseColor("#E64155")), 0, length, 0)
         }
@@ -217,14 +217,19 @@ class feedbackFragment : Fragment() {
             .setMessage(message)
             .setPositiveButton("Leave") { _, _ ->
                 isFeedbackDirty = false
-                (activity as? MainActivity)?.setNav(R.id.nav_home)
+
+                // FIX: Navigate to the clicked icon, or fallback to Home
+                if (targetNavId != null) {
+                    (activity as? MainActivity)?.setNav(targetNavId)
+                } else {
+                    (activity as? MainActivity)?.setNav(R.id.nav_home)
+                }
             }
             .setNegativeButton("Cancel", null)
             .create()
 
         dialog.show()
 
-        // CHANGED LEAVE BUTTON COLOR TO RED
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#E64155"))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#434343"))
         dialog.window?.setBackgroundDrawableResource(R.color.white)
@@ -261,12 +266,10 @@ class feedbackFragment : Fragment() {
 
         dialog.show()
 
-        // Apply flat text button colors
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#467750"))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#434343"))
         dialog.window?.setBackgroundDrawableResource(R.color.white)
     }
-
 
     // --- UTILITY FUNCTIONS ---
 
@@ -340,9 +343,9 @@ class feedbackFragment : Fragment() {
         return isFeedbackDirty || isSending
     }
 
-    // Public function for MainActivity to trigger the exit dialog
-    fun showExitOverlay() {
-        showExitDialog()
+    // FIX: Accept a target Nav ID from MainActivity
+    fun showExitOverlay(targetNavId: Int? = null) {
+        showExitDialog(targetNavId)
     }
 
     private fun hideKeyboard(view: View) {

@@ -76,13 +76,84 @@
             android:imeOptions="actionSearch"/>
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBookmarked"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:padding="10dp"/>
+        android:layout_marginTop="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewBookmarked"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/initialEmptyStateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bookmarkillus" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="No Bookmarks Yet"
+                android:textColor="#467750"
+                android:textSize="25sp"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Save recycling guides here for quick access."
+                android:textColor="#2B2F33"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/searchEmptyStateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Bookmark Found"
+                android:textColor="#434343"
+                android:textSize="22sp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="We couldn't find anything for your search."
+                android:textColor="#919191"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

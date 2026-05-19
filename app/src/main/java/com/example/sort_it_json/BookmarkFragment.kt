@@ -24,6 +24,10 @@ class BookmarkFragment : Fragment() {
 
     private var recyclerView: RecyclerView? = null
 
+    // Variables for the empty states
+    private var initialEmptyState: View? = null
+    private var searchEmptyState: View? = null
+
     // Hold the full list of bookmarks and the current search term
     private var allBookmarkedGuides: List<GuideItem> = emptyList()
     private var currentSearchQuery: String = ""
@@ -48,6 +52,10 @@ class BookmarkFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewBookmarked)
         recyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
+        // Bind the empty state layouts from XML
+        initialEmptyState = view.findViewById(R.id.initialEmptyStateLayout)
+        searchEmptyState = view.findViewById(R.id.searchEmptyStateLayout)
+
         val searchEditText = view.findViewById<EditText>(R.id.searchEditText)
         val searchIcon = view.findViewById<ImageView>(R.id.searchIcon)
 
@@ -66,7 +74,7 @@ class BookmarkFragment : Fragment() {
                 if (currentSearchQuery.isNotEmpty()) {
                     searchIcon.setColorFilter(Color.parseColor("#F0CD6E")) // Yellow
                 } else {
-                    searchIcon.setColorFilter(Color.parseColor("#A0A0A0")) // Grey
+                    searchIcon.setColorFilter(Color.parseColor("#919191")) // Grey
                 }
 
                 // Filter the list
@@ -107,10 +115,34 @@ class BookmarkFragment : Fragment() {
             }
         }
 
-        // Update the adapter with the filtered list AND THE SEARCH QUERY!
+        // ==========================================
+        // SMART EMPTY STATE LOGIC (UPDATED)
+        // ==========================================
+        if (currentSearchQuery.isNotEmpty() && filteredList.isEmpty()) {
+            // Case 1: The user typed something, but there are no results.
+            // We prioritize this! Even if they have 0 total bookmarks,
+            // if they try to search, we show the search error.
+            recyclerView?.visibility = View.GONE
+            initialEmptyState?.visibility = View.GONE
+            searchEmptyState?.visibility = View.VISIBLE
+
+        } else if (allBookmarkedGuides.isEmpty()) {
+            // Case 2: The search bar is empty, and they have 0 bookmarks saved.
+            recyclerView?.visibility = View.GONE
+            searchEmptyState?.visibility = View.GONE
+            initialEmptyState?.visibility = View.VISIBLE
+
+        } else {
+            // Case 3: We have results! Show the list.
+            recyclerView?.visibility = View.VISIBLE
+            searchEmptyState?.visibility = View.GONE
+            initialEmptyState?.visibility = View.GONE
+        }
+
+        // Update the adapter with the filtered list AND THE SEARCH QUERY
         recyclerView?.adapter = GuideAdapter(
             guides = filteredList,
-            searchQuery = currentSearchQuery, // <--- THIS MAKES THE TEXT HIGHLIGHT YELLOW
+            searchQuery = currentSearchQuery,
             onClick = { item ->
                 val fragment = WebViewFragment().apply {
                     arguments = Bundle().apply {
@@ -125,16 +157,17 @@ class BookmarkFragment : Fragment() {
             },
             onBookmarkChanged = { item, wasRemoved ->
                 if (wasRemoved) {
-                    refreshBookmarks() // This will reload data but keep the search query active!
+                    refreshBookmarks()
 
                     val snackbar = Snackbar.make(
-                        recyclerView!!,
+                        requireView(),
                         "Removed from bookmarks",
                         Snackbar.LENGTH_LONG
                     )
 
                     val snackbarView = snackbar.view
                     snackbarView.background = ContextCompat.getDrawable(requireContext(), R.drawable.snackbar_bg)
+                    snackbarView.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#F5F5F5"))
 
                     val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
                     textView.setTextColor(Color.parseColor("#000000"))
@@ -156,7 +189,7 @@ class BookmarkFragment : Fragment() {
                             .putStringSet("bookmark_titles", bookmarkedTitles)
                             .apply()
 
-                        refreshBookmarks() // Reload again, maintaining search filter
+                        refreshBookmarks()
                     }
 
                     snackbar.setActionTextColor(Color.parseColor("#467750"))

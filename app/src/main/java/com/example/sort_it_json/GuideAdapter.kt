@@ -167,10 +167,15 @@ class GuideAdapter(
 
         newList.put(newItem)
 
-        // 4. Add old items (limit to 1 more since max = 2)
+        // 4. Add old items, BUT skip it if it's the duplicate we just added!
         for (i in 0 until oldList.length()) {
             if (newList.length() == 2) break
-            newList.put(oldList.getJSONObject(i))
+
+            val oldItem = oldList.getJSONObject(i)
+            // THIS IS THE FIX: Only add old items if the title doesn't match the new one
+            if (oldItem.optString("title") != item.title) {
+                newList.put(oldItem)
+            }
         }
 
         // 5. Save back
