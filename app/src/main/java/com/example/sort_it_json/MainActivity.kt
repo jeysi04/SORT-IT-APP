@@ -83,7 +83,8 @@ class MainActivity : AppCompatActivity() {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
             if (currentFragment is feedbackFragment && currentFragment.isFeedbackInProgress()) {
-                currentFragment.showExitOverlay()
+                // FIX: Tell the feedback fragment the user wants to open the Camera (nav_recycle)
+                currentFragment.showExitOverlay(R.id.nav_recycle)
                 return@setOnClickListener
             }
 
@@ -118,7 +119,8 @@ class MainActivity : AppCompatActivity() {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
             if (currentFragment is feedbackFragment && currentFragment.isFeedbackInProgress()) {
-                currentFragment.showExitOverlay()
+                // FIX: Pass the clicked icon's ID to the popup!
+                currentFragment.showExitOverlay(item.itemId)
                 return@setOnItemSelectedListener false
             }
 
@@ -312,10 +314,11 @@ class MainActivity : AppCompatActivity() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
         // Same prevention logic here for programmatic navigation
-        if (itemId == bottomNav.selectedItemId) return
+        if (itemId == bottomNav.selectedItemId && itemId != R.id.nav_recycle) return
 
         if (currentFragment is feedbackFragment && currentFragment.isFeedbackInProgress()) {
-            currentFragment.showExitOverlay()
+            // FIX: Pass the programmatic ID to the popup
+            currentFragment.showExitOverlay(itemId)
             return
         }
 
@@ -327,6 +330,14 @@ class MainActivity : AppCompatActivity() {
 
         if (currentFragment is RecyclableresultFragment || currentFragment is GuideListFragment) {
             showExitResultDialog(itemId)
+            return
+        }
+
+        // FIX: Ensure that if feedback fragment passes nav_recycle, we actually launch the camera!
+        if (itemId == R.id.nav_recycle) {
+            isCameraFlowActive = true
+            val intent = Intent(this, CameraActivity::class.java)
+            cameraLauncher.launch(intent)
             return
         }
 

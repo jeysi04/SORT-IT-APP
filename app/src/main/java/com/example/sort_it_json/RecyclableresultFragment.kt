@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,16 +22,12 @@ class RecyclableresultFragment : Fragment() {
 
     private var predictResponse: PredictResponse? = null
 
+    // NEW: A flag to track when the camera is opening
+    private var isNavigatingToCamera = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Safe retrieval of Parcelable
         predictResponse = arguments?.getParcelable("predict_response")
-
-        Toast.makeText(
-            requireContext(),
-            "DEBUG: response = $predictResponse",
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     override fun onCreateView(
@@ -39,6 +36,12 @@ class RecyclableresultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_recyclableresult, container, false)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                returnToCamera()
+            }
+        })
 
         val btnYes = view.findViewById<Button>(R.id.buttonYes)
         val btnNo = view.findViewById<Button>(R.id.buttonNo)
@@ -67,24 +70,21 @@ class RecyclableresultFragment : Fragment() {
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
-                // FIX: Clear the result page and set background to Home BEFORE opening camera
-                clearAndGoHome()
-                val intent = Intent(requireContext(), CameraActivity::class.java)
-                startActivity(intent)
+                returnToCamera()
             }
+
+            btnTopLeft.setOnClickListener {
+                returnToCamera()
+            }
+
             return view
         }
-
 
         val stage1Label = response.stage1.label
         val categoryLabel = response.stage2?.label ?: "Unknown"
         val subcategoryLabel = response.stage3?.label ?: "Unknown"
 
-        //TEST
-        Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT).show()
-
         if (stage1Label == "non-recyclable") {
-            // Non-recyclable UI
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
             catText.text = "Please dispose this item in the general waste bin."
@@ -98,28 +98,18 @@ class RecyclableresultFragment : Fragment() {
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
-                // FIX: Clear the result page and set background to Home BEFORE opening camera
-                clearAndGoHome()
-                val intent = Intent(requireContext(), CameraActivity::class.java)
-                startActivity(intent)
+                returnToCamera()
             }
-
         }
 
         if (stage1Label == "recyclable" && categoryLabel != "Unknown" && categoryLabel != "uncertain" && subcategoryLabel != "Unknown" && subcategoryLabel != "uncertain" && categoryLabel != "null" && subcategoryLabel != "null") {
-            // Recyclable UI
             classText.text = "Your waste is recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#007700"))
-
-            //TEST
-            Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
-            Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT).show()
 
             catText.text = "It's $categoryLabel!"
             typeText.visibility = View.VISIBLE
             typeText.text = "Type: ${mapSubcategoryToText(subcategoryLabel)}"
 
-            // Illustrations
             illustclass.setImageResource(
                 when (categoryLabel) {
                     "metal" -> { R.drawable.metal_illus }
@@ -145,9 +135,7 @@ class RecyclableresultFragment : Fragment() {
                         .commit()
                 }
             }
-        } else if (categoryLabel == "Unknown" || categoryLabel == "uncertain" || subcategoryLabel == "Unknown" || categoryLabel == "null" || subcategoryLabel == "null")
-        {
-            // Unknown UI
+        } else if (categoryLabel == "Unknown" || categoryLabel == "uncertain" || subcategoryLabel == "Unknown" || categoryLabel == "null" || subcategoryLabel == "null") {
             classText.text = "Your waste could not be identified!"
             classText.textSize = 27f
             classText.setTextColor(android.graphics.Color.parseColor("#D89B2B"))
@@ -162,10 +150,7 @@ class RecyclableresultFragment : Fragment() {
             layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
-                // FIX: Clear the result page and set background to Home BEFORE opening camera
-                clearAndGoHome()
-                val intent = Intent(requireContext(), CameraActivity::class.java)
-                startActivity(intent)
+                returnToCamera()
             }
         }
 
@@ -174,24 +159,41 @@ class RecyclableresultFragment : Fragment() {
         }
 
         btnTopLeft.setOnClickListener {
-            (activity as? MainActivity)?.setNav(R.id.nav_home)
+            returnToCamera()
         }
 
         return view
     }
 
     // ==========================================
-    // CLEAN NAVIGATION HELPER
+    // RETURN TO CAMERA HELPER (FIXED FOR FLASHING)
     // ==========================================
-    private fun clearAndGoHome() {
-        // Force the fragment to switch to Home immediately, bypassing the MainActivity interceptor
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, NewHomeFragment())
-            .commit()
+    private fun returnToCamera() {
+        // Set the flag so we know we are leaving for the camera
+        isNavigatingToCamera = true
 
-        // Visually update the Bottom Navigation icon to Home
-        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.menu.findItem(R.id.nav_home)?.isChecked = true
+        // Launch the Camera immediately (NO visual flash!)
+        val intent = Intent(requireContext(), CameraActivity::class.java)
+        startActivity(intent)
+    }
+
+    // ==========================================
+    // SILENT BACKGROUND SWAP
+    // ==========================================
+    override fun onStop() {
+        super.onStop()
+        // Once the camera has fully covered the screen, THIS is called.
+        // Now we can safely swap the background to Home while the user can't see it!
+        if (isNavigatingToCamera) {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, NewHomeFragment())
+                .commitAllowingStateLoss() // Allows this to happen in the background safely
+
+            val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+            bottomNav.menu.findItem(R.id.nav_home)?.isChecked = true
+
+            isNavigatingToCamera = false
+        }
     }
 
     private fun mapSubcategoryToText(subcategory: String): String {
@@ -234,16 +236,11 @@ class RecyclableresultFragment : Fragment() {
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("Give Feedback") { _, _ ->
-
                 view?.post {
-                    (requireActivity() as MainActivity)
-                        .setNav(R.id.nav_feedback)
+                    (requireActivity() as MainActivity).setNav(R.id.nav_feedback)
                 }
-
                 if (isAdded) {
-
                     val fragment = feedbackFragment()
-
                     parentFragmentManager.beginTransaction()
                         .add(R.id.fragment_container, fragment)
                         .hide(this@RecyclableresultFragment)
@@ -251,8 +248,7 @@ class RecyclableresultFragment : Fragment() {
                         .commit()
                 }
             }
-            .setNegativeButton("Maybe Later") { _, _ ->
-            }
+            .setNegativeButton("Maybe Later") { _, _ -> }
             .create()
 
         dialog.show()
@@ -264,5 +260,4 @@ class RecyclableresultFragment : Fragment() {
     override fun onResume() {
         super.onResume()
     }
-
 }
