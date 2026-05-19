@@ -17,9 +17,11 @@ class PrivacyPolicyActivity : AppCompatActivity() {
         val btnReject = findViewById<Button>(R.id.btnReject)
 
         btnAccept.isEnabled = false
+        btnAccept.alpha = 0.5f
 
         checkBox.setOnCheckedChangeListener { _, isChecked ->
             btnAccept.isEnabled = isChecked
+            btnAccept.alpha = if (isChecked) 1f else 0.5f
         }
 
         btnAccept.setOnClickListener {

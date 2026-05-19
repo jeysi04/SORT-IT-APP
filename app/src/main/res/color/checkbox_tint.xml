@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- when checked -->
+    <item android:color="#467750" android:state_checked="true"/>
+
+    <!-- when unchecked -->
+    <item android:color="#9E9E9E"/>
+
+</selector>
