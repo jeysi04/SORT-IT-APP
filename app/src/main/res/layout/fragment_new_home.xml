@@ -232,12 +232,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="85dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/difficulty_easy_bg"
                             android:layout_marginLeft="5dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="2dp"
+                            android:padding="3dp"
                             android:gravity="center_vertical">
 
                             <TextView
@@ -363,12 +364,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="85dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/difficulty_easy_bg"
                             android:layout_marginLeft="5dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="2dp"
+                            android:padding="3dp"
                             android:gravity="center_vertical">
 
                             <TextView

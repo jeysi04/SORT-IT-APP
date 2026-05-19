@@ -1,6 +1,401 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy for SORT-IT"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="23sp"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Effective: May 16, 2026"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SORT-IT values the privacy of its users and is committed to protecting user information. This Privacy Policy explains how the application collects, uses, stores, and protects information when users access and use the SORT-IT mobile application."
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Information We Collect"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="18sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SORT-IT collects only limited information necessary for application improvement and functionality."
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Information Collected"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u2022 User feedback voluntarily submitted through the feedback section of the application."
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="2dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u2022 Basic technical information necessary for app operation and troubleshooting."
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Information Not Collected"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u2022 Captured camera images.
+                    \n\u2022 Personal photos.
+                    \n\u2022 User gallery images.
+                    \n\u2022 Personal identification information such as full name, address, or government IDs."
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="16sp"
+            android:paddingBottom="2dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Images captured during waste recognition are processed temporarily for classification purposes only and are not stored or retained by the application or developers."
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. How We Use the Information"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="18sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The information collected is used solely for the following purposes:"
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u2022 Improving application functionality and user experience.
+                           \n\u2022 Fixing bugs and technical issues.
+                            \n\u2022 Evaluating system accuracy and performance.
+                         \n\u2022 Enhancing recycling recommendations and educational content.
+                        \n\u2022 Improving application functionality and user experience.
+            \n\u2022 Supporting research and development related to the SORT-IT project."
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="16sp"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User feedback is used only for internal analysis and application improvement."
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. How Information is Shared"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="18sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SORT-IT does not sell, trade, or rent user information to third parties.
+            \n\nInformation may only be shared when necessary with service providers that support application operations, such as:"
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u2022 Cloud database providers
+                \n\u2022 Backend hosting services
+                \n\u2022 Machine learning infrastructure services
+                "
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="These services are used strictly for operational purposes and are expected to maintain appropriate data protection measures."
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. Data Storage and Security"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="18sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User feedback submitted through the application may be stored in a secure cloud-based database.
+                    \n\nThe development team implements reasonable administrative and technical measures to help protect submitted information from:
+                   "
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u2022Unauthorized access
+                    \n\u2022Misuse
+                    \n\u2022Loss
+                    \n\u2022Disclosure"
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="5dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Although reasonable security measures are applied, no internet-based system can guarantee complete security.
+                    "
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5. User Rights and Choices"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="18sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Users have control over their interaction with the application.
+                            \n\nUsers may:
+                            "
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u2022 Choose not to submit feedback
+                        \n\u2022 Deny camera permission at any time through device settings
+                        "
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="5dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please note that denying camera access may limit or disable the image recognition features of the application.
+                        \n\nSince SORT-IT does not store captured images, users are not required to request image deletion.
+                        "
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6. Children's Privacy"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="18sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SORT-IT is intended for general audiences and does not knowingly collect personal information from children under applicable age requirements.
+                        \n\nIf any information believed to belong to a child is unintentionally collected through user feedback, reasonable steps will be taken to remove the information when identified.
+                        "
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7. Changes to This Privacy Policy"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="18sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This Privacy Policy may be updated periodically to reflect changes in the application, legal requirements, or operational improvements.
+                        \n\nUsers are encouraged to review this Privacy Policy regularly for updates. Continued use of the application after updates constitutes acknowledgment of the revised policy.
+                        "
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Information"
+            android:fontFamily="@font/montserrat_semibold"
+            android:justificationMode="inter_word"
+            android:textSize="18sp"
+            android:paddingBottom="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="For questions, concerns, or requests related to this Privacy Policy or the SORT-IT application, users may contact the SORT-IT Development Team"
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"/>
+
+        <!-- DIVIDER -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="#CCCCCC"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="By using SORT-IT, users acknowledge that they have read and understood this Privacy Policy and agree to the practices described herein."
+            android:fontFamily="@font/montserrat_regular"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
+            android:paddingBottom="3dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I agree to the Privacy Policy"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnReject"
+                android:layout_width="0dp"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:background="@drawable/result_button"
+                app:backgroundTint="#F0CD6E"
+                android:text="Reject"
+                android:textAllCaps="false"
+                android:textColor="#467750"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnAccept"
+                android:layout_width="0dp"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:background="@drawable/result_button"
+                app:backgroundTint="#F0CD6E"
+                android:text="Proceed"
+                android:textAllCaps="false"
+                android:textColor="#467750"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

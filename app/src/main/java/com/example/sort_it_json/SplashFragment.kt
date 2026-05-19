@@ -1,10 +1,12 @@
 package com.example.sort_it_json
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
@@ -25,19 +27,34 @@ class SplashFragment : Fragment() {
 
         val progressBar = view.findViewById<ProgressBar>(R.id.splashProgressBar)
 
-        // Animate progress bar from 0 to 100
         lifecycleScope.launch {
-            var progress = 0
-            while (progress <= 100) {
-                progressBar.progress = progress
 
-                // ADJUSTED FOR SLOWER, SMOOTHER SPEED
-                progress += 1 // Increment by 1 instead of 2
-                delay(30)     // 100 steps * 30ms = 3 seconds total loading time
+            var progress = 0
+
+            while (progress <= 100) {
+                if (!isAdded) return@launch
+                progressBar.progress = progress
+                progress += 1
+                delay(30)
             }
 
-            // After loading is done, switch to Home
-            (activity as? MainActivity)?.onSplashFinished()
+            val prefs = requireActivity()
+                .getSharedPreferences("app_prefs", AppCompatActivity.MODE_PRIVATE)
+
+            val accepted = prefs.getBoolean("privacy_accepted", false)
+
+            if (accepted) {
+
+                (activity as? MainActivity)?.onSplashFinished()
+
+            } else {
+
+                val intent = Intent(requireContext(), PrivacyPolicyActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
+                requireActivity().finish()
+            }
         }
     }
 }

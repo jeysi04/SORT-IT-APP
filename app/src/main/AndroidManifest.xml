@@ -16,6 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SortItJSON">
+
+        <activity android:name=".PrivacyPolicyActivity" />
+
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.SortItJSON"
