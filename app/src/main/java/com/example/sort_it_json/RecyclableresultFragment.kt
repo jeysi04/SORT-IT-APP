@@ -152,6 +152,23 @@ class RecyclableresultFragment : Fragment() {
             btnYes.setOnClickListener {
                 returnToCamera()
             }
+        } else {
+            classText.text = "Your waste could not be identified!"
+            classText.textSize = 27f
+            classText.setTextColor(android.graphics.Color.parseColor("#D89B2B"))
+            catText.text = "Please make sure the object is centered and clearly visible."
+            typeText.visibility = View.GONE
+            illustbg.setImageResource(R.drawable.unknown_illus)
+            illustclass.setImageResource(R.drawable.unknown)
+            questbot.text = "Would you like to take a new picture?"
+
+            val dpHeight = 537
+            val scale = resources.displayMetrics.density
+            layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
+
+            btnYes.setOnClickListener {
+                returnToCamera()
+            }
         }
 
         btnNo.setOnClickListener {
