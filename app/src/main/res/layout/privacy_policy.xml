@@ -388,7 +388,7 @@
             android:textColor="#000000"
             android:paddingBottom="3dp"/>
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
