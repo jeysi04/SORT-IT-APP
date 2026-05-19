@@ -37,13 +37,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val fromPrivacy = intent.getBooleanExtra("from_privacy", false)
+        val openHome = intent.getBooleanExtra("open_home", false)
+
         fabCenter = findViewById(R.id.fab_center)
         bottomNav = findViewById(R.id.bottomNav)
-
-        val goHome = intent.getBooleanExtra("go_home", false)
-        if (goHome) {
-            bottomNav.selectedItemId = R.id.nav_home
-        }
 
         // --- UNIVERSAL FIX ---
         supportFragmentManager.registerFragmentLifecycleCallbacks(
@@ -73,6 +71,9 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, SplashFragment())
                 .commit()
+        } else if (openHome) {
+            // safety fallback (handles return from Privacy)
+            onSplashFinished()
         }
 
         handleIncomingIntent(intent)
@@ -244,6 +245,9 @@ class MainActivity : AppCompatActivity() {
 
     fun onSplashFinished() {
         switchFragment(NewHomeFragment())
+
+        bottomNav.visibility = View.VISIBLE
+        fabCenter.visibility = View.VISIBLE
     }
 
     private fun switchFragment(fragment: Fragment) {
