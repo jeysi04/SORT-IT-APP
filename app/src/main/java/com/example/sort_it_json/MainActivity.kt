@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fromPrivacy = intent.getBooleanExtra("from_privacy", false)
         val openHome = intent.getBooleanExtra("open_home", false)
 
         fabCenter = findViewById(R.id.fab_center)
@@ -68,12 +67,14 @@ class MainActivity : AppCompatActivity() {
         setupFeedbackLogic(bottomNav)
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, SplashFragment())
-                .commit()
-        } else if (openHome) {
-            // safety fallback (handles return from Privacy)
-            onSplashFinished()
+            if (openHome) {
+                // FIXED: Direct to Home if coming from Privacy Policy
+                onSplashFinished()
+            } else {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, SplashFragment())
+                    .commit()
+            }
         }
 
         handleIncomingIntent(intent)
@@ -84,7 +85,6 @@ class MainActivity : AppCompatActivity() {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
             if (currentFragment is feedbackFragment && currentFragment.isFeedbackInProgress()) {
-                // FIX: Tell the feedback fragment the user wants to open the Camera (nav_recycle)
                 currentFragment.showExitOverlay(R.id.nav_recycle)
                 return@setOnClickListener
             }
@@ -95,7 +95,6 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // ONLY intercept if they are actively navigating AWAY via the FAB
             if (currentFragment is RecyclableresultFragment || currentFragment is GuideListFragment) {
                 showExitResultDialog(R.id.nav_recycle)
                 return@setOnClickListener
@@ -109,10 +108,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBottomNavListener() {
         bottomNav.setOnItemSelectedListener { item ->
-
-            // PREVENT RE-TRIGGERING: If the selected item matches the current icon tint,
-            // the user didn't actually navigate anywhere new (they probably just returned from Camera).
-            // Do not fire the interceptor.
             if (item.itemId == bottomNav.selectedItemId) {
                 return@setOnItemSelectedListener true
             }
@@ -120,7 +115,6 @@ class MainActivity : AppCompatActivity() {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
             if (currentFragment is feedbackFragment && currentFragment.isFeedbackInProgress()) {
-                // FIX: Pass the clicked icon's ID to the popup!
                 currentFragment.showExitOverlay(item.itemId)
                 return@setOnItemSelectedListener false
             }
@@ -131,7 +125,6 @@ class MainActivity : AppCompatActivity() {
                 return@setOnItemSelectedListener false
             }
 
-            // ONLY intercept if they tapped a DIFFERENT tab icon
             if (currentFragment is RecyclableresultFragment || currentFragment is GuideListFragment) {
                 showExitResultDialog(item.itemId)
                 return@setOnItemSelectedListener false
@@ -156,10 +149,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // ==========================================
-    // CANCEL PROCESS POP-UP
-    // ==========================================
-
     private fun showCancelLoadingDialog(targetNavId: Int) {
         val title = SpannableString("Cancel Process?").apply {
             setSpan(ForegroundColorSpan(Color.parseColor("#467750")), 0, length, 0)
@@ -179,8 +168,6 @@ class MainActivity : AppCompatActivity() {
                     cameraLauncher.launch(intent)
                 } else {
                     performNavigation(targetNavId)
-
-                    // Temporarily remove listener to avoid triggering itself
                     bottomNav.setOnItemSelectedListener(null)
                     bottomNav.selectedItemId = targetNavId
                     setupBottomNavListener()
@@ -197,15 +184,10 @@ class MainActivity : AppCompatActivity() {
             .create()
 
         dialog.show()
-
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#000000"))
         dialog.window?.setBackgroundDrawableResource(R.color.white)
     }
-
-    // ==========================================
-    // EXIT RESULT POP-UP
-    // ==========================================
 
     private fun showExitResultDialog(targetNavId: Int) {
         val title = SpannableString("Exit Page").apply {
@@ -226,8 +208,6 @@ class MainActivity : AppCompatActivity() {
                     cameraLauncher.launch(intent)
                 } else {
                     performNavigation(targetNavId)
-
-                    // Temporarily remove listener to avoid triggering itself
                     bottomNav.setOnItemSelectedListener(null)
                     bottomNav.selectedItemId = targetNavId
                     setupBottomNavListener()
@@ -237,7 +217,6 @@ class MainActivity : AppCompatActivity() {
             .create()
 
         dialog.show()
-
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#000000"))
         dialog.window?.setBackgroundDrawableResource(R.color.white)
@@ -245,7 +224,6 @@ class MainActivity : AppCompatActivity() {
 
     fun onSplashFinished() {
         switchFragment(NewHomeFragment())
-
         bottomNav.visibility = View.VISIBLE
         fabCenter.visibility = View.VISIBLE
     }
@@ -258,7 +236,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showLoadingFragment(filePath: String) {
-
         supportFragmentManager.popBackStack(
             null,
             androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
@@ -273,10 +250,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -317,11 +290,9 @@ class MainActivity : AppCompatActivity() {
     fun setNav(itemId: Int) {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
-        // Same prevention logic here for programmatic navigation
         if (itemId == bottomNav.selectedItemId && itemId != R.id.nav_recycle) return
 
         if (currentFragment is feedbackFragment && currentFragment.isFeedbackInProgress()) {
-            // FIX: Pass the programmatic ID to the popup
             currentFragment.showExitOverlay(itemId)
             return
         }
@@ -337,7 +308,6 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // FIX: Ensure that if feedback fragment passes nav_recycle, we actually launch the camera!
         if (itemId == R.id.nav_recycle) {
             isCameraFlowActive = true
             val intent = Intent(this, CameraActivity::class.java)

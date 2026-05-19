@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class AboutFragment : Fragment() {
@@ -27,12 +28,26 @@ class AboutFragment : Fragment() {
         val viewPager = view.findViewById<ViewPager2>(R.id.aboutViewPager)
         val dotsIndicator = view.findViewById<DotsIndicator>(R.id.dots_indicator)
 
-        // Back button navigation
+        // ----------------------------
+        // BACK BUTTON LOGIC
+        // ----------------------------
         btnBack.setOnClickListener {
-            (activity as? MainActivity)?.setNav(R.id.nav_home)
+            // 1. Pop the fragment to return to the previous screen
+            if (parentFragmentManager.backStackEntryCount > 0) {
+                parentFragmentManager.popBackStack()
+            } else {
+                // Fallback: If no backstack, manually navigate to Home
+                (activity as? MainActivity)?.setNav(R.id.nav_home)
+            }
+
+            // 2. Sync the Bottom Navigation icon back to Home
+            val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+            bottomNav?.menu?.findItem(R.id.nav_home)?.isChecked = true
         }
 
-        // List of layouts for each swipeable page
+        // ----------------------------
+        // SWIPE PAGE SETUP
+        // ----------------------------
         val layouts = listOf(
             R.layout.item_about_page1,
             R.layout.item_about_page2,

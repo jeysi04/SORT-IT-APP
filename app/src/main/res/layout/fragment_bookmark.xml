@@ -139,8 +139,8 @@
                 android:layout_height="wrap_content"
                 android:text="No Bookmark Found"
                 android:textColor="#434343"
-                android:textSize="22sp"
-                android:fontFamily="@font/montserrat_bold"
+                android:textSize="25sp"
+                android:fontFamily="@font/montserrat_extrabold"
                 android:textAlignment="center"/>
 
             <TextView
@@ -148,8 +148,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="We couldn't find anything for your search."
-                android:textColor="#919191"
-                android:textSize="14sp"
+                android:textColor="#2B2F33"
+                android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"
                 android:textAlignment="center"/>
         </LinearLayout>
