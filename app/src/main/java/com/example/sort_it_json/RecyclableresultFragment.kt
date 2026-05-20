@@ -37,11 +37,13 @@ class RecyclableresultFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_recyclableresult, container, false)
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                returnToCamera()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    returnToCamera()
+                }
+            })
 
         val btnYes = view.findViewById<Button>(R.id.buttonYes)
         val btnNo = view.findViewById<Button>(R.id.buttonNo)
@@ -84,25 +86,40 @@ class RecyclableresultFragment : Fragment() {
         val categoryLabel = response.stage2?.label ?: "Unknown"
         val subcategoryLabel = response.stage3?.label ?: "Unknown"
 
+        Toast.makeText(requireContext(), "Classification: ${stage1Label}", Toast.LENGTH_SHORT)
+            .show()
+        Toast.makeText(requireContext(), "Category: ${categoryLabel}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Subcategory: ${subcategoryLabel}", Toast.LENGTH_SHORT)
+            .show()
+
         if (stage1Label == "non-recyclable") {
+
             classText.text = "Your waste is non-recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#AA0000"))
+
             catText.text = "Please dispose this item in the general waste bin."
             typeText.visibility = View.GONE
+
             illustbg.setImageResource(R.drawable.nonrec_illus)
             illustclass.setImageResource(R.drawable.nonrecyclable)
+
             questbot.text = "Would you like to take a new picture?"
 
-            val dpHeight = 537
-            val scale = resources.displayMetrics.density
-            layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
 
             btnYes.setOnClickListener {
                 returnToCamera()
             }
-        }
 
-        if (stage1Label == "recyclable" && categoryLabel != "Unknown" && categoryLabel != "uncertain" && subcategoryLabel != "Unknown" && subcategoryLabel != "uncertain" && categoryLabel != "null" && subcategoryLabel != "null") {
+        } else if (
+            stage1Label == "recyclable" &&
+            categoryLabel != "Unknown" &&
+            categoryLabel != "uncertain" &&
+            subcategoryLabel != "Unknown" &&
+            subcategoryLabel != "uncertain" &&
+            categoryLabel != "null" &&
+            subcategoryLabel != "null"
+        ) {
+
             classText.text = "Your waste is recyclable!"
             classText.setTextColor(android.graphics.Color.parseColor("#007700"))
 
@@ -112,12 +129,12 @@ class RecyclableresultFragment : Fragment() {
 
             illustclass.setImageResource(
                 when (categoryLabel) {
-                    "metal" -> { R.drawable.metal_illus }
-                    "paper" -> { R.drawable.paper_illus }
-                    "plastic" -> { R.drawable.plastic_illus }
-                    "glass" -> { R.drawable.glass_illus }
-                    "residual" -> { R.drawable.residual_illus }
-                    else -> { R.drawable.unknown }
+                    "metal" -> R.drawable.metal_illus
+                    "paper" -> R.drawable.paper_illus
+                    "plastic" -> R.drawable.plastic_illus
+                    "glass" -> R.drawable.glass_illus
+                    "residual" -> R.drawable.residual_illus
+                    else -> R.drawable.unknown
                 }
             )
 
@@ -126,8 +143,11 @@ class RecyclableresultFragment : Fragment() {
 
             btnYes.setOnClickListener {
                 val fragment = GuideListFragment().apply {
-                    arguments = Bundle().apply { putString("subcategory", subcategoryLabel) }
+                    arguments = Bundle().apply {
+                        putString("subcategory", subcategoryLabel)
+                    }
                 }
+
                 if (isAdded) {
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, fragment)
@@ -135,48 +155,27 @@ class RecyclableresultFragment : Fragment() {
                         .commit()
                 }
             }
-        } else if (categoryLabel == "Unknown" || categoryLabel == "uncertain" || subcategoryLabel == "Unknown" || categoryLabel == "null" || subcategoryLabel == "null") {
-            classText.text = "Your waste could not be identified!"
-            classText.textSize = 27f
-            classText.setTextColor(android.graphics.Color.parseColor("#D89B2B"))
-            catText.text = "Please make sure the object is centered and clearly visible."
-            typeText.visibility = View.GONE
-            illustbg.setImageResource(R.drawable.unknown_illus)
-            illustclass.setImageResource(R.drawable.unknown)
-            questbot.text = "Would you like to take a new picture?"
 
-            val dpHeight = 537
-            val scale = resources.displayMetrics.density
-            layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
-
-            btnYes.setOnClickListener {
-                returnToCamera()
-            }
         } else {
+
             classText.text = "Your waste could not be identified!"
             classText.textSize = 27f
             classText.setTextColor(android.graphics.Color.parseColor("#D89B2B"))
-            catText.text = "Please make sure the object is centered and clearly visible."
+
+            catText.text =
+                "Please make sure the object is centered and clearly visible."
+
             typeText.visibility = View.GONE
+
             illustbg.setImageResource(R.drawable.unknown_illus)
             illustclass.setImageResource(R.drawable.unknown)
-            questbot.text = "Would you like to take a new picture?"
 
-            val dpHeight = 537
-            val scale = resources.displayMetrics.density
-            layoutwhitebg.layoutParams.height = (dpHeight * scale).toInt()
+            questbot.text = "Would you like to take a new picture?"
+            
 
             btnYes.setOnClickListener {
                 returnToCamera()
             }
-        }
-
-        btnNo.setOnClickListener {
-            (activity as? MainActivity)?.setNav(R.id.nav_home)
-        }
-
-        btnTopLeft.setOnClickListener {
-            returnToCamera()
         }
 
         return view

@@ -34,15 +34,14 @@
     <LinearLayout
         android:id="@+id/whitebg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/rectangle_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="16dp"
-        android:orientation="vertical"
         android:gravity="top|center_horizontal"
+        android:orientation="vertical"
         android:paddingTop="50dp"
-        android:paddingBottom="170dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/resultLayout"
@@ -55,8 +54,8 @@
                 android:id="@+id/illust_classification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/glass_illus"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:src="@drawable/glass_illus" />
 
             <TextView
                 android:id="@+id/classification"
@@ -64,33 +63,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_extrabold"
+                android:gravity="center"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:gravity="center"
                 android:text="@string/recyclable_result"
                 android:textColor="#467750"
                 android:textSize="32sp" />
 
             <TextView
                 android:id="@+id/category"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semibold"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:text="@string/glass_result"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/typeText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/glasstype_glassbotlle"
-                android:textSize="15sp"
-                android:textColor="@color/black"/>
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>
